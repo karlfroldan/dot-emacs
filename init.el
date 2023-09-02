@@ -29,5 +29,5 @@
   (load (concat "~/.emacs.d/elisp/" name ".el")))
 
 ;; Install vterm later!!!
-(setq my-config-files '("haskell" "neotree" "zig" "lsp"))
+(setq my-config-files '("haskell" "neotree" "zig" "lsp" "latex"))
 (mapc 'my-load-file my-config-files)
