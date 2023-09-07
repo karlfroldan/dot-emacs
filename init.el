@@ -14,8 +14,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("4b026ac68a1aa4d1a91879b64f54c2490b4ecad8b64de5b1865bca0addd053d9" "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "f149d9986497e8877e0bd1981d1bef8c8a6d35be7d82cba193ad7e46f0989f6a" default))
+ '(ispell-dictionary nil)
  '(package-selected-packages
-   '(darcula-theme xcscope scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-guile geiser-chicken geiser ghci-completion yaml-mode auctex lsp-haskell company lsp-mode zig-mode vterm-toggle use-package vterm neotree haskell-mode cmake-mode)))
+   '(modus-themes material-theme darcula-theme xcscope scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-guile geiser-chicken geiser ghci-completion yaml-mode auctex lsp-haskell company lsp-mode zig-mode vterm-toggle use-package vterm neotree haskell-mode cmake-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -50,3 +53,6 @@
   (find-if (lambda (f) (find-font (font-spec :name f))) fonts))
 
 (set-face-attribute 'default nil :font (font-candidate '"Inconsolata-12" "Consolas-12"))
+
+(load-theme 'modus-operandi-tinted t)
+
