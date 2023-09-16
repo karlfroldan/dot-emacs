@@ -18,7 +18,7 @@
    '("4b026ac68a1aa4d1a91879b64f54c2490b4ecad8b64de5b1865bca0addd053d9" "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "f149d9986497e8877e0bd1981d1bef8c8a6d35be7d82cba193ad7e46f0989f6a" default))
  '(ispell-dictionary nil)
  '(package-selected-packages
-   '(modus-themes material-theme darcula-theme xcscope scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-guile geiser-chicken geiser ghci-completion yaml-mode auctex lsp-haskell company lsp-mode zig-mode vterm-toggle use-package vterm neotree haskell-mode cmake-mode)))
+   '(magit modus-themes material-theme darcula-theme xcscope scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-guile geiser-chicken geiser ghci-completion yaml-mode auctex lsp-haskell company lsp-mode zig-mode vterm-toggle use-package vterm haskell-mode cmake-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -35,7 +35,7 @@
   (load (concat "~/.emacs.d/elisp/" name ".el")))
 
 ;; Install vterm later!!!
-(setq my-config-files '("haskell" "neotree" "zig" "lsp" "latex" "scheme" "org"))
+(setq my-config-files '("haskell" "zig" "lsp" "latex" "scheme" "org"))
 (mapc 'my-load-file my-config-files)
 
 ;; Config file formats
@@ -47,10 +47,10 @@
 (setq frog-jump-buffer-use-all-the-icons-ivy t)
 
 ;; Check if font exists
-(require 'cl)
+(require 'cl-lib)
 (defun font-candidate (&rest fonts)
   "Return existing font which first match."
-  (find-if (lambda (f) (find-font (font-spec :name f))) fonts))
+  (cl-find-if (lambda (f) (find-font (font-spec :name f))) fonts))
 
 (set-face-attribute 'default nil :font (font-candidate '"Inconsolata-12" "Consolas-12"))
 
