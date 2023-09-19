@@ -4,3 +4,4 @@ elpa
 **/*.elc
 .lsp-session*
 transient
+tramp

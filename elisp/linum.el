@@ -5,6 +5,8 @@
 
 ;; Enable linum-mode for all those derived from prog-mode
 (linum-mode-on prog)
+(linum-mode-on text)
+
 ;;(setq with-linum-mode
 ;;      '(emacs-lisp
 ;;	zig
