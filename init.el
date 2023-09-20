@@ -6,6 +6,16 @@
 			 ("nongnu" . "https://elpa.nongnu.org/nongnu")
 			 ("melpa" . "https://melpa.org/packages/")))
 
+(defun all-true (lst)
+  "Check if all items in the list are true"
+  (if (null lst)
+      t
+    (and (car lst) (all-true (cdr lst)))))
+
+(defun is-package-installed (pkg)
+  "Check if the package is installed in the PC"
+  (require pkg nil 'noerror))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -79,3 +89,8 @@
 ;; smart mode line
 ;; (setq sml/theme 'powerline-light)
 (sml/setup)
+
+;; Function to recompile all packages
+(defun package-recompile-all ()
+  "Refresh and reinstall all activated packages."
+  (byte-recompile-directory package-user-dir nil))

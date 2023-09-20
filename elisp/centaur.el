@@ -6,6 +6,7 @@
   ("C-," . centaur-tabs-backward)
   ("C-." . centaur-tabs-forward)
   ("C-c t n" . centaur-tabs--create-new-tab)
+  ("C-c t k" . centaur-tabs--kill-this-buffer-dont-ask)
   :hook
   ;; Disable centaur in these modes
   (dired-mode . centaur-tabs-local-mode)
@@ -17,8 +18,7 @@
 (setq centaur-tabs-height 32)
 (setq centaur-tabs-set-icons t)
 (setq centaur-tabs-plain-icons t)
-(setq centaur-tabs-style "bar")
-;;(setq centaur-tabs-enable-key-bindings t)
+(setq centaur-tabs-style "wave")
 
 ;; Prevent access to some buffers
 (defun centaur-tabs-hide-tab (x)
@@ -31,7 +31,7 @@
      (string-prefix-p "*epc" name)
      (string-prefix-p "*helm" name)
      (string-prefix-p "*Helm" name)
-     (string-prefix-p "*Compile=Log*" name)
+     (string-prefix-p "*Compile-Log*" name)
      (string-prefix-p "*lsp" name)
      (string-prefix-p "*company" name)
      (string-prefix-p "*Flycheck" name)
@@ -42,6 +42,7 @@
      (string-prefix-p "*straight" name)
      (string-prefix-p "*Help" name)
      (string-prefix-p "*mybuf" name)
+     (string-prefix-p "*Message" name)
 
      ;; Is not a magit buffer
      (and (string-prefix-p "magit" name)
