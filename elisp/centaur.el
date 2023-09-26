@@ -3,8 +3,8 @@
   :config
   (centaur-tabs-mode t)
   :bind
-  ("C-," . centaur-tabs-backward)
-  ("C-." . centaur-tabs-forward)
+  ("C-<" . centaur-tabs-backward)
+  ("C->" . centaur-tabs-forward)
   ("C-c t n" . centaur-tabs--create-new-tab)
   ("C-c t k" . centaur-tabs--kill-this-buffer-dont-ask)
   :hook
