@@ -7,6 +7,8 @@
 (linum-mode-on prog)
 (linum-mode-on text)
 
+;;(add-hook 'org-mode-hook '(linum-mode nil))
+
 ;;(setq with-linum-mode
 ;;      '(emacs-lisp
 ;;	zig

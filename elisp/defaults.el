@@ -32,9 +32,10 @@
 (set-charset-priority 'unicode)
 (prefer-coding-system 'utf-8-unix)
 
-(require 'hl-line)
-(add-hook 'prog-mode-hook #'hl-line-mode)
-(add-hook 'text-mode-hook #'hl-line-mode)
+(when (display-graphic-p)
+  (require 'hl-line)
+  (add-hook 'prog-mode-hook #'hl-line-mode)
+  (add-hook 'text-mode-hook #'hl-line-mode))
 
 ;;(setq
 ;; make-backup-files nil
