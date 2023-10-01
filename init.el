@@ -6,6 +6,13 @@
   `(unless (display-graphic-p)
      ,@body))
 
+(defun get-environment-variable (name)
+  "Get the value of an environment variable by NAME."
+  (let ((value (getenv name)))
+    (if value
+        value
+      nil)))
+
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 			 ("nongnu" . "https://elpa.nongnu.org/nongnu")
@@ -61,6 +68,7 @@
 	"lua"
 	"magit"
 	"ssh"
+        "maxima"
 	;; Should always be the last
 	"linum"))
 (mapc 'my-load-file my-config-files)

@@ -33,3 +33,9 @@
 ;; Treat clipboard input as UTF-8 string first
 (setq x-select-request-type '(UTF8_STRING COMPOUNT_TEXT TEXT STRING))
 
+;; Set color of code blocks
+(require 'color)
+(when (display-graphic-p)
+  (set-face-attribute 'org-block nil :background
+                      (color-darken-name
+                       (face-attribute 'default  :background) 3)))
