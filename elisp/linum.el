@@ -1,30 +1,8 @@
-(defmacro linum-mode-on (mode)
-  "Enable linum-mode for a specific MODE."
-  `(add-hook ',(intern (concat (symbol-name mode) "-mode-hook"))
-	     (lambda () (linum-mode 1))))
+;; In emacs 29.1, linum mode is deprecated so we use
+;; 'nlinum instead.
 
-;; Enable linum-mode for all those derived from prog-mode
-(linum-mode-on prog)
-(linum-mode-on text)
-
-(add-hook 'org-mode-hook '(lambda () (linum-mode -1)))
-
-;;(add-hook 'org-mode-hook '(linum-mode nil))
-
-;;(setq with-linum-mode
-;;      '(emacs-lisp
-;;	zig
-;;	c
-;;	sh
-;;	julia
-;;	scheme
-;;	haskell))
-
-;; We cannot directly operate on lists using mapc so
-;; we use this instead.
-;;(dolist (m with-linum-mode)
-;;  (eval `(linum-mode-on ,m)))
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+;; (add-hook 'org-mode-hook '(nlinum-mode nil))
 
 ;; relative line numbers
-;;(setq display-line-numbers-type 'relative)
-(linum-relative-mode)
+(setq display-line-numbers-type 'relative)

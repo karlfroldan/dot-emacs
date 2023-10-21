@@ -2,7 +2,6 @@
 (global-set-key (kbd "C-c C-o a") #'org-agenda)
 (global-set-key (kbd "C-c C-o c") #'org-capture)
 
-
 (require 'org-bullets)
 
 ;; Org mode will startup with all unfolded
