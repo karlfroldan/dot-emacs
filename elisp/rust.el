@@ -1,2 +1,1 @@
 (use-package rust)
-

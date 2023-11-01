@@ -6,6 +6,7 @@
 
 (add-hook 'zig-mode-hook #'lsp)
 (add-hook 'haskell-mode-hook #'lsp)
+(add-hook 'rust-mode-hook #'lsp)
 
 (use-package company)
 
