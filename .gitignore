@@ -8,3 +8,4 @@ tramp
 .cache/
 tree-sitter
 load-elisp-files
+url/
