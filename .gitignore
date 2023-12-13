@@ -7,3 +7,4 @@ transient
 tramp
 .cache/
 tree-sitter
+load-elisp-files

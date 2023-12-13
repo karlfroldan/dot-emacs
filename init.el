@@ -6,6 +6,12 @@
   `(unless (display-graphic-p)
      ,@body))
 
+(defun read-file-into-list (fname)
+  "Read the contents of FNAME into a list of lines"
+  (with-temp-buffer
+    (insert-file-contents fname)
+    (split-string (buffer-string) "\n" t)))
+
 (defun get-environment-variable (name)
   "Get the value of an environment variable by NAME."
   (let ((value (getenv name)))
@@ -57,30 +63,21 @@
 (defun my-load-file (name)
   (load (concat "~/.emacs.d/elisp/" name ".el")))
 
-;; Install vterm later!!!
+(setq my-config-file-list "~/.emacs.d/load-elisp-files")
+
+;; Get the config files that we will load into emacs.
 (setq my-config-files
-      '("defaults"
-        "c"
-        "haskell"
-        ;; "zig"
-        "lsp"
-        "latex"
-        "lisp"
-        ;; "scheme"
-        "org"
-        ;; "julia"
-        ;; "lua"
-        "magit"
-        "ssh"
-        "maxima"
-        ;; "purescript"
-        "yasnippet"
-        ;; "erlang"
-        "js"
-        ))
+      (if (file-exists-p my-config-file-list)
+          (read-file-into-list my-config-file-list)
+        (mapcar #'file-name-sans-extension
+                (directory-files "~/.emacs.d/elisp" nil "\\.el$"))))
+
 (mapc 'my-load-file my-config-files)
 
-(my-load-file "linum")
+;; Setup Linum mode for line numbers
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+;; Relative line numbers
+(setq display-line-numbers-type 'relative)
 
 ;; Config file formats
 (use-package yaml-mode)
@@ -125,7 +122,3 @@
 ;; Enable tree sitter for all supported major modes
 (global-tree-sitter-mode)
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
-
-;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
-(require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
-;; ## end of OPAM user-setup addition for emacs / base ## keep this line
