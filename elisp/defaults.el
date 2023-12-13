@@ -21,6 +21,10 @@
  compilation-read-command nil
  ;; scroll to first error
  compilation-scroll-output 'first-error
+ ;; Indent using spaces instead of tabs
+ indent-tabs-mode nil
+ ;; Set tab as 4 spaces
+ tab-width 4
  ;; Unicode ellipses are better
  truncate-string-ellipsis "…")
 ;; Remove the toolbar and menubars
@@ -36,6 +40,14 @@
   (require 'hl-line)
   (add-hook 'prog-mode-hook #'hl-line-mode)
   (add-hook 'text-mode-hook #'hl-line-mode))
+
+;; Setup smart mode line
+(sml/setup)
+(setq sml/extra-filler -6)
+
+;; Keybindings for single-line scrolling
+(global-set-key (kbd "C-.") 'scroll-up-line)
+(global-set-key (kbd "C-,") 'scroll-down-line)
 
 ;;(setq
 ;; make-backup-files nil
