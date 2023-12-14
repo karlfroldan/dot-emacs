@@ -9,3 +9,4 @@ tramp
 tree-sitter
 load-elisp-files
 url/
+.bootstrapped
