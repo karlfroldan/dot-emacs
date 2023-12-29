@@ -7,7 +7,7 @@
   (set-face-attribute 'default nil
                       :font
                       (font-candidate
-                       '"Source Code Pro:size=16"
+                       '"Source Code Pro:size=14"
                        "Inconsolata-12"
                        "Consolas-12"))
   (load-theme 'flucui-light))

@@ -10,3 +10,4 @@ tree-sitter
 load-elisp-files
 url/
 .bootstrapped
+session.*

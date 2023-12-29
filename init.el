@@ -88,7 +88,6 @@
 
 (defun bootstrap-emacs ()
   "Call on first emacs compile. This will install all packages"
-  (package-refresh-contents)
   (mapc #'package-install package-selected-packages)
   (all-the-icons-install-fonts)
   (write-region "" nil "~/.emacs.d/.bootstrapped"))
