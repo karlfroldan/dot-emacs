@@ -11,4 +11,7 @@ load-elisp-files
 url/
 .bootstrapped
 session.*
-
+.last-package-update-day
+opam-user-setup.el
+projectile-bootmarks.eld
+recentf
