@@ -11,13 +11,17 @@
         ;; org-roam-directory
         org-roam-dailies-directory "daily/"
         org-roam-dailies-captures-templates
-        '(("w" "Work" entry
+        '(("d" "default" entry
               "* %?"
-              :target (file+head "%<%m-%d-%Y>.org"
+              :target (file+head "%<%m-%d-%Y>.org.gpg"
+                          "#+title: %<%m-%d-%Y>\n"))
+             ("w" "Work" entry
+              "* %?"
+              :target (file+head "%<%m-%d-%Y>-work.org.gpg"
                           "#+title: %<%m-%d-%Y>\n"))
              ("j" "Journal" entry
                  "* %?"
-                 :target (file+head "%<%m-%d-%Y>.org"
+                 :target (file+head "%<%m-%d-%Y>-journal.org.gpg"
                              "#+title: %<%m-%d-%Y>\n"))))
     :custom
     (org-roam-directory "~/RoamNotes")
