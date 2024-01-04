@@ -16,13 +16,15 @@
               :target (file+head "%<%m-%d-%Y>.org.gpg"
                           "#+title: %<%m-%d-%Y>\n"))
              ("w" "Work" entry
-              "* %?"
-              :target (file+head "%<%m-%d-%Y>-work.org.gpg"
-                          "#+title: %<%m-%d-%Y>\n"))
+                 "* %?"
+                 :target (file+head "%<%m-%d-%Y>-work.org.gpg"
+                          "#+title: %<%m-%d-%Y>\n")
+                 :unarrowed t)
              ("j" "Journal" entry
                  "* %?"
                  :target (file+head "%<%m-%d-%Y>-journal.org.gpg"
-                             "#+title: %<%m-%d-%Y>\n"))))
+                             "#+title: %<%m-%d-%Y>\n")
+                 :unarrowed t)))
     :custom
     (org-roam-directory "~/RoamNotes")
     :bind (("C-c n l" . org-roam-buffer-toggle)
@@ -34,3 +36,4 @@
               ("C-c n d n" . org-roam-dailies-goto-next-note))
     :config
     (org-roam-setup))
+
