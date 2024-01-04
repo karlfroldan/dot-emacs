@@ -15,3 +15,7 @@ session.*
 opam-user-setup.el
 projectile-bootmarks.eld
 recentf
+eshell/
+org-roam.db
+.org-id-locations
+bookmarks
