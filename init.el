@@ -1,11 +1,13 @@
 (setq inhibit-startup-screen t)
 (setq backup-directory-alist '(("." . "~/.bak.emacs")))
 
-;; Encryption stuff.
+(setq lisp-indent-offset 4)
+
+(require 'epa)
+
 (setenv "GPG_AGENT_INFO" nil)
 (setq-default epa-file-select-keys '("karlfroldan@proton.me"))
-
-(setq lisp-indent-offset 4)
+(setq epa-file-encrypt-to "karlfroldan@proton.me")
 
 (defmacro if-window (&rest, body)
     "Execute BODY only if emacs is running on window mode"
