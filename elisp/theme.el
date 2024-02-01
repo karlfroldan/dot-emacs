@@ -10,7 +10,7 @@
             '"Source Code Pro:size=14"
             "Inconsolata-12"
             "Consolas-12"))
-    (load-theme 'flucui-light))
+    (load-theme 'material))
 
 (use-package all-the-icons
     :if (display-graphic-p))
