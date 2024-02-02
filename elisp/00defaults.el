@@ -49,7 +49,4 @@
 (global-set-key (kbd "C-.") 'scroll-up-line)
 (global-set-key (kbd "C-,") 'scroll-down-line)
 
-;;(setq
-;; make-backup-files nil
-;; auto-save-default nil
-;; create-lockfiles nil)
+

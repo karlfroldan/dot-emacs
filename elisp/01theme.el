@@ -17,3 +17,4 @@
 
 ;; Add icons to dired mode
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
