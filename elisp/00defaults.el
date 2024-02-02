@@ -1,6 +1,6 @@
 (setq
  ;; No need to see GNU agitprop
- ;; inhibit-startup-screen t 
+ inhibit-startup-screen nil
  ;; No need to remind me what a scratch buffer is
  initial-scratch-message nil
  ;; Double spaces after periods is wrong
@@ -26,10 +26,15 @@
  ;; Set tab as 4 spaces
  tab-width 4
  ;; Unicode ellipses are better
- truncate-string-ellipsis "…")
+ truncate-string-ellipsis "…"
+ ;; Linum-mode line numbers should be relative.
+ display-line-numbers-type 'relative)
+
+;; Set linum-mode for line numbers. Note that for newer versions of emacs,
+;; we no longer use linum-mode.
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+
 ;; Remove the toolbar and menubars
-;;(menu-bar-mode -1)
-;;(tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq-default indent-tabs-mode nil)
 
