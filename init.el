@@ -56,7 +56,7 @@
  '(ispell-dictionary nil)
  '(org-agenda-files '("~/notes/contents.org"))
  '(package-selected-packages
-   '(material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired slime pest-mode yasnippet-snippets auto-package-update rjsx-mode js2-mode yasnippet org-bullets rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog lua-mode magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-guile geiser-chicken geiser ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
+   '(material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired slime pest-mode yasnippet-snippets auto-package-update yasnippet org-bullets rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-guile geiser-chicken geiser ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
 
 
 (package-initialize)
@@ -100,9 +100,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-level-1 ((t (:inherit outline-1 :height 1.8 :foreground "#333333"))))
- '(org-level-2 ((t (:inherit outline-2 :height 1.6 :foreground "#33333"))))
- '(org-level-3 ((t (:inherit outline-3 :height 1.4 :foreground "#33333"))))
- '(org-level-4 ((t (:inherit outline-4 :height 1.2 :foreground "#33333")))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.6 :foreground "#333333"))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.4 :foreground "#333333"))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.2 :foreground "#333333")))))
 
 ;; Load org-mode stuff
 (mapc 'load (file-expand-wildcards "~/.emacs.d/org/*.el"))
