@@ -1,6 +1,6 @@
 (setq
  ;; No need to see GNU agitprop
- inhibit-startup-screen t
+ ;; inhibit-startup-screen t 
  ;; No need to remind me what a scratch buffer is
  initial-scratch-message nil
  ;; Double spaces after periods is wrong

@@ -1,4 +1,3 @@
-(setq inhibit-startup-screen t)
 (setq backup-directory-alist '(("." . "~/.bak.emacs")))
 
 ;; (setq lisp-indent-offset 4)
