@@ -6,15 +6,15 @@
         ;; Encrypted notes
         org-roam-capture-templates
         '(("d" "default" plain "%?"
-              :target (file+head "${slug}.org.gpg" "#+title: ${title}\n"))
+              :target (file+head "${slug}.org" "#+title: ${title}\n"))
              ("w" "Work" entry
                  "* %?"
-                 :target (file+head "%<%m-%d-%Y>-work.org.gpg"
+                 :target (file+head "%<%m-%d-%Y>-work.org"
                              "#+title: %<%m-%d-%Y> - Work\n")
                  :unarrowed t)
              ("j" "Journal" entry
                  "* %?"
-                 :target (file+head "%<%m-%d-%Y>-journal.org.gpg"
+                 :target (file+head "%<%m-%d-%Y>-journal.org"
                              "#+title: %<%m-%d-%Y> - Journal\n")
                  :unarrowed t))
         ;; Path to daily-notes. The path is relative to
@@ -23,7 +23,7 @@
         org-roam-dailies-capture-templates
         '(("d" "default" entry
               "* %?"
-              :target (file+head "%<%m-%d-%Y>.org.gpg"
+              :target (file+head "%<%m-%d-%Y>.org"
                           "#+title: %<%m-%d-%Y>\n"))))
 
     :custom

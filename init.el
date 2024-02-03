@@ -3,8 +3,8 @@
 (require 'epa)
 
 (setenv "GPG_AGENT_INFO" nil)
-(setq-default epa-file-select-keys '("karlfroldan@proton.me"))
-(setq epa-file-encrypt-to "karlfroldan@proton.me")
+(setq-default epa-file-select-keys '("karlfroldan@gmail.com"))
+(setq epa-file-encrypt-to "karlfroldan@gmail.com")
 
 (defmacro if-window (&rest, body)
   "Execute BODY only if emacs is running on window mode"
