@@ -1,4 +1,4 @@
 (use-package tex
-    :ensure auctex)
+  :ensure auctex)
 
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)

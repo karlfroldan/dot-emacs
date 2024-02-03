@@ -1,8 +1,8 @@
 (use-package lsp-mode
-    :init
-    ;; Set prefix for lsp-command-keymap
-    (setq lsp-keymap-prefix "C-c l")
-    :commands lsp)
+  :init
+  ;; Set prefix for lsp-command-keymap
+  (setq lsp-keymap-prefix "C-c l")
+  :commands lsp)
 
 (add-hook 'c-mode-hook #'lsp)
 (add-hook 'c++-mode-hook #'lsp)
