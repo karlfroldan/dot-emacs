@@ -62,7 +62,7 @@
 (package-initialize)
 
 (defun my-load-file (name)
-  (load (concat "~/.emacs.d/elisp/" name ".el")))
+  (load (concat "~/.emacs.d/packages/" name ".el")))
 
 (setq my-config-file-list "~/.emacs.d/load-elisp-files")
 
@@ -71,7 +71,7 @@
       (if (file-exists-p my-config-file-list)
           (read-file-into-list my-config-file-list)
         (mapcar #'file-name-sans-extension
-                (directory-files "~/.emacs.d/elisp" nil "\\.el$"))))
+                (directory-files "~/.emacs.d/packages" nil "\\.el$"))))
 
 ;; If the file ~/.emacs.d/.bootstrapped exists, then don't continue the initialization.
 (if (file-exists-p "~/.emacs.d/.bootstrapped")
