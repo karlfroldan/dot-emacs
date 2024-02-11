@@ -14,12 +14,6 @@
 
 (mapc-load-lsp (c c++ haskell rust shell-script))
 
-;; (add-hook 'c-mode-hook #'lsp)
-;; (add-hook 'c++-mode-hook #'lsp)
-;; (add-hook 'haskell-mode-hook #'lsp)
-;; (add-hook 'rust-mode-hook #'lsp)
-;; (add-hook 'shell-script-mode-hook #'lsp)
-
 (use-package company)
 
 
