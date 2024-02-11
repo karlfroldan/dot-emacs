@@ -7,13 +7,18 @@
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
   :hook (lsp-mode . lsp-enable-which-key-integration))
 
-(add-hook 'c-mode-hook #'lsp)
-(add-hook 'c++-mode-hook #'lsp)
-(add-hook 'zig-mode-hook #'lsp)
-(add-hook 'haskell-mode-hook #'lsp)
-(add-hook 'rust-mode-hook #'lsp)
-(add-hook 'js2-mode-hook #'lsp)
-(add-hook 'rjsx-mode-hook #'lsp)
+(defmacro mapc-load-lsp (modes)
+  `(mapc (lambda (mode)
+           (add-hook (intern (concat (symbol-name mode) "-mode-hook")) #'lsp))
+         ',modes))
+
+(mapc-load-lsp (c c++ haskell rust shell-script))
+
+;; (add-hook 'c-mode-hook #'lsp)
+;; (add-hook 'c++-mode-hook #'lsp)
+;; (add-hook 'haskell-mode-hook #'lsp)
+;; (add-hook 'rust-mode-hook #'lsp)
+;; (add-hook 'shell-script-mode-hook #'lsp)
 
 (use-package company)
 
