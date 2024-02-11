@@ -27,7 +27,7 @@
                          "#+title: %<%m-%d-%Y>\n"))))
 
   :custom
-  (org-roam-directory "~/notes/roam")
+  (org-roam-directory (relative-org-dir "roam"))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
