@@ -1,3 +1,10 @@
+(defun karl/org-roam-capture-template (key name title)
+  '(key name entry
+       "* %?"
+       :target (file+head (concat "%<%m-%d-%Y>-" name ".org")
+                          (concat "#+title: " title))
+       :unarrowed t))
+
 (use-package org-roam
   :ensure t
   :init
@@ -7,6 +14,11 @@
    org-roam-capture-templates
    '(("d" "default" plain "%?"
       :target (file+head "${slug}.org" "#+title: ${title}\n"))
+     ("c" "Cryptology" entry
+      "* %?"
+      :target (file+head "crypto/${title}.org"
+                         "#+title: ${title}\n")
+      :unarrowed t)
      ("w" "Work" entry
       "* %?"
       :target (file+head "%<%m-%d-%Y>-work.org"

@@ -61,7 +61,7 @@
  '(ispell-dictionary nil)
  '(org-agenda-files '(concat (getenv "HOME") "/notes/contents.org"))
  '(package-selected-packages
-   '(which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired slime pest-mode yasnippet-snippets auto-package-update yasnippet org-bullets rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-guile geiser-chicken geiser ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
+   '(helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired slime pest-mode yasnippet-snippets auto-package-update yasnippet org-bullets rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-guile geiser-chicken geiser ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
 
 (package-initialize)
 
@@ -97,11 +97,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-level-1 ((t (:inherit outline-1 :height 1.8 :foreground "#333333"))))
- '(org-level-2 ((t (:inherit outline-2 :height 1.6 :foreground "#333333"))))
- '(org-level-3 ((t (:inherit outline-3 :height 1.4 :foreground "#333333"))))
- '(org-level-4 ((t (:inherit outline-4 :height 1.2 :foreground "#333333")))))
+ '(org-level-1 ((t (:inherit outline-1 :box nil :height 1.8 :foreground "#e6e6e6"))))
+ '(org-level-2 ((t (:inherit outline-2 :box nil :height 1.6 :foreground "#e6e6e6"))))
+ '(org-level-3 ((t (:inherit outline-3 :box nil :height 1.4 :foreground "#e6e6e6"))))
+ '(org-level-4 ((t (:inherit outline-4 :box nil :height 1.2 :foreground "#e6e6e6")))))
 
 ;; Load org-mode stuff
 (mapc 'load (file-expand-wildcards (relative-emacs-dir "org/main.el")))
 
+;; https://stackoverflow.com/questions/17473478/how-to-enter-a-space-in-the-minibuffer-instead-of-completing-a-word
+;; I need to use this for org-mode
+(define-key minibuffer-local-completion-map "\M- "
+            (lambda () (interactive) (insert " ")))
