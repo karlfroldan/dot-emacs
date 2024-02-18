@@ -145,6 +145,9 @@
 ;; instead of individual files (like vim)
 (use-package projectile
   :ensure t
+  :init
+  (setq projectile-keymap-prefix (kbd "C-c C-p"))
   :config
-  (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+  (setq projectile-project-search-path '("~/projects/"
+                                         "~/sources/"))
+  (projectile-global-mode))
