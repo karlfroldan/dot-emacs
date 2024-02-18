@@ -1,9 +1,44 @@
+(defun relative-org-dir (name)
+  "Return a string that's supposed to be a file
+   relative to the org-mode notes directory"
+  (concat (getenv "HOME") "/notes/" name))
+
 (defun karl/org-roam-capture-template (key name title)
   '(key name entry
        "* %?"
        :target (file+head (concat "%<%m-%d-%Y>-" name ".org")
                           (concat "#+title: " title))
        :unarrowed t))
+
+;; General org-mode settings
+(setq
+ ;; Use RET on keyboard to go to a pecified link
+ org-return-follows-link t
+ ;; I want to see everything unfolded
+ org-startup-folded nil
+ ;; Use indentation for all org files
+ org-startup-indented t
+
+ ;; default notes file for org-mode
+ org-default-notes-file (relative-org-dir "tasks/default.org")
+
+ org-capture-templates '(("w" "Work-related Task" entry
+                          (file (relative-org-dir "tasks/work.org"))
+                          "* TODO %?" :empty-lines 1)
+                         ("j" "Journal" entry
+                          (file+datetree (relative-org-dir "tasks/journal.org"))
+                          "* %?\nEntered on %U\n %i\n %a")
+                         ("t" "Personal Task" entry
+                          (file org-default-notes-file)
+                          "* TODO %?" :empty-lines 1)))
+
+;; Make sure that every line in org-mode does not go over 80 characters.
+(add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
+(add-hook 'org-mode-hook 'auto-fill-mode)
+
+(global-set-key (kbd "C-c o l") #'org-store-link)
+(global-set-key (kbd "C-c o a") #'org-agenda)
+(global-set-key (kbd "C-c o c") #'org-capture)
 
 (use-package org-roam
   :ensure t

@@ -96,7 +96,7 @@
  '(org-level-4 ((t (:inherit outline-4 :box nil :height 1.2 :foreground "#e6e6e6")))))
 
 ;; Load org-mode stuff
-(mapc 'load (file-expand-wildcards (relative-emacs-dir "org/main.el")))
+(load-elisp-file "org.el")
 
 ;; https://stackoverflow.com/questions/17473478/how-to-enter-a-space-in-the-minibuffer-instead-of-completing-a-word
 ;; I need to use this for org-mode
