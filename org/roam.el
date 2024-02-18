@@ -44,6 +44,7 @@
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
          ("C-c n t" . org-roam-tag-add)
+         ("C-c n d c" . org-roam-dailies-capture-today)
          ("C-c n d t" . org-roam-dailies-goto-today)
          ("C-c n d g" . org-roam-dailies-goto-date)
          ("C-c n d p" . org-roam-dailies-goto-previous-note)

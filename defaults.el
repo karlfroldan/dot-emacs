@@ -45,21 +45,3 @@
   (require 'hl-line)
   (add-hook 'prog-mode-hook #'hl-line-mode)
   (add-hook 'text-mode-hook #'hl-line-mode))
-
-;; Setup smart mode line
-(sml/setup)
-(setq sml/extra-filler -6)
-
-;; Keybindings for single-line scrolling
-(global-set-key (kbd "C-.") 'scroll-up-line)
-(global-set-key (kbd "C-,") 'scroll-down-line)
-
-;; Keybinding for switching buffers
-(use-package frog-jump-buffer
-  :ensure t
-  :bind ("C-x C-b" . frog-jump-buffer)
-  :config
-  (setq frog-jump-buffer-use-all-the-icons-ivy t
-        frog-jump-buffer-posframe-parameters
-        '((foreground-color . "#e3e3e3")
-          (background-color . "#30302e"))))

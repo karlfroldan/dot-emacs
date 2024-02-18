@@ -61,28 +61,12 @@
  '(ispell-dictionary nil)
  '(org-agenda-files '(concat (getenv "HOME") "/notes/contents.org"))
  '(package-selected-packages
-   '(helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired slime pest-mode yasnippet-snippets auto-package-update yasnippet org-bullets rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-guile geiser-chicken geiser ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
+   '(rg material helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired pest-mode yasnippet-snippets auto-package-update yasnippet org-bullets rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-guile geiser-chicken geiser ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
 
 (package-initialize)
 
 (defun load-elisp-file (file-name)
   (load (concat (relative-emacs-dir file-name))))
-
-(defun load-package (file-name)
-  (load-elisp-file (concat "packages/" file-name ".el")))
-
-(setq my-config-file-list (relative-emacs-dir "load-elisp-files"))
-
-;; Get the config files that we will load into emacs.
-(setq my-config-files
-      (if (file-exists-p my-config-file-list)
-          (read-file-into-list my-config-file-list)
-        (mapcar #'file-name-sans-extension
-                (directory-files (relative-emacs-dir "packages") nil "\\.el$"))))
-
-;; If the file ~/.emacs.d/.bootstrapped exists, then don't continue the initialization.
-(if (file-exists-p (relative-emacs-dir ".bootstrapped"))
-    (mapc 'load-package my-config-files))
 
 (defun bootstrap-emacs ()
   "Call on first emacs compile. This will install all packages"
@@ -90,6 +74,15 @@
   (mapc #'package-install package-selected-packages)
   (all-the-icons-install-fonts)
   (write-region "" nil (relative-emacs-dir ".bootstrapped")))
+
+;; Get the default settings for emacs.
+(load-elisp-file "defaults.el")
+
+;; Load all download packages from GNU elpa and melpa
+(load-elisp-file "packages.el")
+
+;; Load custom global keybindings
+(load-elisp-file "keybindings.el")
 
 ;; Setting org-mode font
 (custom-set-faces
