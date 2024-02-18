@@ -13,7 +13,7 @@ url/
 session.*
 .last-package-update-day
 opam-user-setup.el
-projectile-bootmarks.eld
+projectile-bookmarks.eld
 recentf
 eshell/
 org-roam.db
