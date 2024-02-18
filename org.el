@@ -10,6 +10,11 @@
                           (concat "#+title: " title))
        :unarrowed t))
 
+;; https://stackoverflow.com/questions/17473478/how-to-enter-a-space-in-the-minibuffer-instead-of-completing-a-word
+;; I need to use this for org-mode
+(define-key minibuffer-local-completion-map "\M- "
+            (lambda () (interactive) (insert " ")))
+
 ;; General org-mode settings
 (setq
  ;; Use RET on keyboard to go to a pecified link
@@ -35,6 +40,9 @@
 ;; Make sure that every line in org-mode does not go over 80 characters.
 (add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
 (add-hook 'org-mode-hook 'auto-fill-mode)
+
+;; easily insert latex environment template
+(add-hook 'org-mode-hook #'turn-on-org-cdlatex)
 
 (global-set-key (kbd "C-c o l") #'org-store-link)
 (global-set-key (kbd "C-c o a") #'org-agenda)
