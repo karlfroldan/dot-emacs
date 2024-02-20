@@ -27,6 +27,8 @@
  tab-width 4
  ;; Unicode ellipses are better
  truncate-string-ellipsis "…"
+ ;; Backup directory but I think we remove this anyways
+ backup-directory-alist '(("." . "~/.bak.emacs"))
  ;; Linum-mode line numbers should be relative.
  display-line-numbers-type 'relative)
 
@@ -45,3 +47,10 @@
   (require 'hl-line)
   (add-hook 'prog-mode-hook #'hl-line-mode)
   (add-hook 'text-mode-hook #'hl-line-mode))
+
+;;; Add different binary directories for exec-path
+;; Haskell
+(add-to-list 'exec-path "~/.ghcup/bin")
+(add-to-list 'exec-path "~/.cabal/bin")
+;; Rust
+(add-to-list 'exec-path "~/.cargo/bin")

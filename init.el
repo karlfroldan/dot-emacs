@@ -1,19 +1,3 @@
-(setq backup-directory-alist '(("." . "~/.bak.emacs")))
-
-(require 'epa)
-
-(setenv "GPG_AGENT_INFO" nil)
-
-(setq my-gpg-key-email-address "karlfroldan@gmail.com")
-
-(setq-default epa-file-select-keys '(my-gpg-key-email-address))
-(setq epa-file-encrypt-to my-gpg-key-email-address)
-
-(defmacro if-window (&rest, body)
-  "Execute BODY only if emacs is running on window mode"
-  `(unless (display-graphic-p)
-     ,@body))
-
 (defun relative-emacs-dir (rel-dir)
   "Gets the absolute directory from a path relative to emacs.d"
   (concat (getenv "HOME") "/.emacs.d/" rel-dir))
@@ -23,33 +7,10 @@
   (interactive)
   (byte-recompile-directory package-user-dir nil))
 
-(defun read-file-into-list (fname)
-  "Read the contents of FNAME into a list of lines"
-  (with-temp-buffer
-    (insert-file-contents fname)
-    (split-string (buffer-string) "\n" t)))
-
-(defun get-environment-variable (name)
-  "Get the value of an environment variable by NAME."
-  (let ((value (getenv name)))
-    (if value
-        value
-      nil)))
-
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("nongnu" . "https://elpa.nongnu.org/nongnu")
                          ("melpa" . "https://melpa.org/packages/")))
-
-(defun all-true (lst)
-  "Check if all items in the list are true"
-  (if (null lst)
-      t
-    (and (car lst) (all-true (cdr lst)))))
-
-(defun is-package-installed (pkg)
-  "Check if the package is installed in the PC"
-  (require pkg nil 'noerror))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -64,7 +25,7 @@
    '(:foreground default :background default :scale 1.3 :html-foreground "Black" :html-background "Transparent" :html-scale 1.3 :matchers
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(org-roam-bibtex rg material helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired pest-mode yasnippet-snippets auto-package-update yasnippet org-bullets rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-guile geiser-chicken geiser ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
+   '(org-roam-bibtex rg material helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired yasnippet-snippets auto-package-update yasnippet rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-chicken geiser ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
 
 (package-initialize)
 
@@ -80,6 +41,9 @@
 
 ;; Get the default settings for emacs.
 (load-elisp-file "defaults.el")
+
+;; GPG related stuff
+(load-elisp-file "encryption.el")
 
 ;; Load all download packages from GNU elpa and melpa
 (load-elisp-file "packages.el")
