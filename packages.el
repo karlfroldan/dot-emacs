@@ -113,8 +113,13 @@
   :config
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
 
-  ;; Load LSP for the following programming languages.
-  (mapc-load-lsp (c c++ haskell rust shell-script))
+  ;; Load LSP automatically for the following programming languages.
+  (mapc-load-lsp (haskell rust shell-script))
+
+  ;; If I'm using my work PC where I sometimes need to use docker for
+  ;; building stuff, then I use ctags. If not, then use lsp-mode instead.
+  (if (not (file-exists-p (relative-emacs-dir ".workpc")))
+      (mapc-load-lsp (c c++)))
   
   :hook
   (lsp-mode . lsp-enable-which-key-integration))

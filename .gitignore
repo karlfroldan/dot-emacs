@@ -19,3 +19,5 @@ eshell/
 org-roam.db
 .org-id-locations
 bookmarks
+.workpc
+projects

@@ -51,6 +51,11 @@
 ;; Load custom global keybindings
 (load-elisp-file "keybindings.el")
 
+;; On some machines, I need to SSH but the IP addresses needed
+;; to SSH may be different depending on the purpose of the machine.
+(if (file-exists-p (relative-emacs-dir "ssh.el"))
+    (load-elisp-file "ssh.el"))
+
 ;; Setting org-mode font
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
