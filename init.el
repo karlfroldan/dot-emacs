@@ -1,12 +1,3 @@
-(defun relative-emacs-dir (rel-dir)
-  "Gets the absolute directory from a path relative to emacs.d"
-  (concat (getenv "HOME") "/.emacs.d/" rel-dir))
-
-(defun package-recompile-all ()
-  "Refresh and reinstall all activated packages."
-  (interactive)
-  (byte-recompile-directory package-user-dir nil))
-
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("nongnu" . "https://elpa.nongnu.org/nongnu")
@@ -25,19 +16,11 @@
    '(:foreground default :background default :scale 1.3 :html-foreground "Black" :html-background "Transparent" :html-scale 1.3 :matchers
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(org-roam-bibtex rg material helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired yasnippet-snippets auto-package-update yasnippet rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-chicken geiser ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
+   '(bibtex-completion org-roam-bibtex rg material helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired yasnippet-snippets auto-package-update yasnippet rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-chicken geiser ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
 
 (package-initialize)
 
-(defun load-elisp-file (file-name)
-  (load (concat (relative-emacs-dir file-name))))
-
-(defun bootstrap-emacs ()
-  "Call on first emacs compile. This will install all packages"
-  (interactive)
-  (mapc #'package-install package-selected-packages)
-  (all-the-icons-install-fonts)
-  (write-region "" nil (relative-emacs-dir ".bootstrapped")))
+(load (concat (getenv "HOME") "/.emacs.d/auxiliary_functions.el"))
 
 ;; Get the default settings for emacs.
 (load-elisp-file "defaults.el")

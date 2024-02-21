@@ -141,7 +141,8 @@
 
 ;; Ripgrep is a search tool like grep written in Rust
 (use-package rg
-  :ensure-system-package rg
+  :ensure t
+  ;; :ensure-system-package rg
   :config
   (rg-enable-default-bindings))
 
