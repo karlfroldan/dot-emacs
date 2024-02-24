@@ -38,7 +38,7 @@
                           "* TODO %?" :empty-lines 1)))
 
 ;; Make sure that every line in org-mode does not go over 80 characters.
-(add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
+(add-hook 'org-mode-hook 'visual-line-mode)
 (add-hook 'org-mode-hook 'auto-fill-mode)
 
 ;; easily insert latex environment template
