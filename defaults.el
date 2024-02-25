@@ -25,6 +25,10 @@
  indent-tabs-mode nil
  ;; Set tab as 4 spaces
  tab-width 4
+ ;; C programming style
+ c-default-style '((c-mode . "k&r") (c++-mode "k&r"))
+ ;; C programming should have 4 spaces
+ c-basic-offset 4
  ;; Unicode ellipses are better
  truncate-string-ellipsis "…"
  ;; Backup directory but I think we remove this anyways
@@ -50,10 +54,15 @@
 
 ;;; Add different binary directories for exec-path
 ;; Haskell
-(add-to-list 'exec-path "~/.ghcup/bin")
-(add-to-list 'exec-path "~/.cabal/bin")
+(defun add-to-exec-path (path)
+  (add-to-list 'exec-path (concat (getenv "HOME") "/" path)))
+(add-to-exec-path ".ghcup/bin")
+(add-to-exec-path ".cabal/bin")
+(add-to-exec-path ".cargo/bin")
+;; (add-to-list 'exec-path "~/.ghcup/bin")
+;; (add-to-list 'exec-path "~/.cabal/bin")
 ;; Rust
-(add-to-list 'exec-path "~/.cargo/bin")
+;; (add-to-list 'exec-path "~/.cargo/bin")
 
 
 ;; etags

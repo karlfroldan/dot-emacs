@@ -87,7 +87,9 @@
              :port "6697")))
 
 ;; Haskell programminglanguage
-(use-package haskell-mode)
+(use-package haskell-mode
+  :config
+  (custom-set-variables '(haskell-stylish-on-save t)))
 (use-package lsp-haskell
   :after haskell-mode)
 
