@@ -99,13 +99,6 @@
   :config
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode))
 
-;; Scheme programming language
-;; TODO: Active scheme-mode when opening a scheme file.
-(use-package geiser
-  :config
-  (setq geiser-active-implementations '(chicken))
-  (add-hook 'scheme-mode-hook 'geiser-mode))
-
 (use-package lsp-mode
   :commands lsp
   :ensure t
@@ -159,3 +152,17 @@
   (setq projectile-project-search-path '("~/projects/"
                                          "~/sources/"))
   (projectile-global-mode))
+
+(use-package slime
+  :init
+  ;; Variable to check if a slime session has been started.
+  ;; If it has been started, then there's no need to create a new slime session
+  ;; when opening another elisp file.
+  (defvar *my/slime-started* nil)
+  :config
+  (setq inferior-lisp-program "sbcl")
+  (add-hook 'lisp-mode-hook
+            (lambda ()
+              (unless *my/slime-started*
+                (setq *my/slime-started* t)
+                (slime)))))
