@@ -154,15 +154,5 @@
   (projectile-global-mode))
 
 (use-package slime
-  :init
-  ;; Variable to check if a slime session has been started.
-  ;; If it has been started, then there's no need to create a new slime session
-  ;; when opening another elisp file.
-  (defvar *my/slime-started* nil)
   :config
-  (setq inferior-lisp-program "sbcl")
-  (add-hook 'lisp-mode-hook
-            (lambda ()
-              (unless *my/slime-started*
-                (setq *my/slime-started* t)
-                (slime)))))
+  (setq inferior-lisp-program "sbcl"))
