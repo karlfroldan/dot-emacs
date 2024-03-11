@@ -58,17 +58,17 @@
    '(("d" "default" plain "%?"
       :target (file+head "${slug}.org" "#+title: ${title}\n"))
      ("c" "Cryptology" entry
-      "* %?"
+      "%?"
       :target (file+head "crypto/${title}.org"
                          "#+title: ${title}\n")
       :unarrowed t)
      ("w" "Work" entry
-      "* %?"
+      "* Work - %?"
       :target (file+head "%<%m-%d-%Y>-work.org"
                          "#+title: %<%m-%d-%Y> - Work\n")
       :unarrowed t)
      ("j" "Journal" entry
-      "* %?"
+      "* Journal Entry - %?"
       :target (file+head "%<%m-%d-%Y>-journal.org"
                          "#+title: %<%m-%d-%Y> - Journal\n")
       :unarrowed t))
