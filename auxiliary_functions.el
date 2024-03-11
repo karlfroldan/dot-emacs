@@ -24,6 +24,9 @@
                              host
                              &optional (port "22")
                              &optional (directory "~"))
-  `(defun ,(intern (format "ssh-%s" name)) ()
-     (interactive)
-     (dired ,(format "/ssh:%s@%s#%s:%s" username host port directory))))
+  (let ((proto (if (eq system-type 'windows-nt)
+                   "plink"
+                 "ssh")))
+    `(defun ,(intern (format "ssh-%s" name)) ()
+       (interactive)
+       (dired ,(format "/%s:%s@%s#%s:%s" proto username host port directory)))))
