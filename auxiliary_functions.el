@@ -19,7 +19,7 @@
   (all-the-icons-install-fonts)
   (write-region "" nil (relative-emacs-dir ".bootstrapped")))
 
-(cl-defmacro add-ssh-server (name
+(cl-defmacro defsshserver (name
                              username
                              host
                              &optional (port "22")
