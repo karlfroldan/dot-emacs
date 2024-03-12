@@ -57,8 +57,7 @@
    org-roam-capture-templates
    '(("d" "default" plain "%?"
       :target (file+head "${slug}.org" "#+title: ${title}\n"))
-     ("c" "Cryptology" entry
-      "%?"
+     ("c" "Cryptology" plain "%?"
       :target (file+head "crypto/${title}.org"
                          "#+title: ${title}\n")
       :unarrowed t)
