@@ -38,7 +38,8 @@
 ;; we no longer use linum-mode.
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
-;; Remove the toolbar and menubars
+;; Remove the toolbar and scrollsbars because I don't use them anyways.
+(tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq-default indent-tabs-mode nil)
 
@@ -54,10 +55,11 @@
 (defun add-to-exec-path (path)
   (add-to-list 'exec-path (concat (getenv "HOME") "/" path)))
 
-(add-to-exec-path ".ghcup/bin")
-(add-to-exec-path ".cabal/bin")
-(add-to-exec-path ".cargo/bin")
+(setq exec-path-list '(".ghcup/bin"
+                       ".cabal/bin"
+                       ".cargi/bin"))
 
+(mapc #'add-to-exec-path exec-path-list)
 
 ;; etags
 ;; Do not load etags related stuff if it's not needed. For example, I don't really need
