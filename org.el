@@ -1,7 +1,7 @@
 (defun relative-org-dir (name)
   "Return a string that's supposed to be a file
    relative to the org-mode notes directory"
-  (concat (getenv "HOME") "/notes/" name))
+  (concat (getenv "HOME") "/Documents/notes/" name))
 
 (defun karl/org-roam-capture-template (key name title)
   '(key name entry

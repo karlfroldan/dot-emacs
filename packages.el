@@ -21,6 +21,7 @@
   :if (display-graphic-p))
 
 (use-package all-the-icons-dired
+  :ensure t
   :after all-the-icons
   :if (display-graphic-p)
   :config
@@ -88,9 +89,11 @@
 
 ;; Haskell programminglanguage
 (use-package haskell-mode
+  :ensure t
   :config
   (custom-set-variables '(haskell-stylish-on-save t)))
 (use-package lsp-haskell
+  :ensure t
   :after haskell-mode)
 
 ;; LaTeX typesetting
@@ -154,5 +157,6 @@
   (projectile-global-mode))
 
 (use-package slime
+  :ensure t
   :config
   (setq inferior-lisp-program "sbcl"))
