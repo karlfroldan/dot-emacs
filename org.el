@@ -37,12 +37,9 @@
                           (file org-default-notes-file)
                           "* TODO %?" :empty-lines 1)))
 
-;; Make sure that every line in org-mode does not go over 80 characters.
-(add-hook 'org-mode-hook 'visual-line-mode)
-(add-hook 'org-mode-hook 'auto-fill-mode)
-
 ;; easily insert latex environment template
 (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
+(add-hook 'org-mode-hook #'visual-line-mode)
 
 (global-set-key (kbd "C-c o l") #'org-store-link)
 (global-set-key (kbd "C-c o a") #'org-agenda)

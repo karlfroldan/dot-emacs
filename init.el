@@ -17,7 +17,7 @@
    '(:foreground default :background default :scale 1.3 :html-foreground "Black" :html-background "Transparent" :html-scale 1.3 :matchers
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(slime org-ref org-ql bibtex-completion org-roam-bibtex rg helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired yasnippet-snippets auto-package-update yasnippet rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-chicken ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
+   '(slint-mode slime org-ref org-ql bibtex-completion org-roam-bibtex rg helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired yasnippet-snippets auto-package-update yasnippet rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-chicken ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
 
 (package-initialize)
 

@@ -1,5 +1,4 @@
 (setq
- ;; No need to see GNU agitprop
  inhibit-startup-screen t
  ;; No need to remind me what a scratch buffer is
  initial-scratch-message nil
@@ -57,7 +56,7 @@
 
 (setq exec-path-list '(".ghcup/bin"
                        ".cabal/bin"
-                       ".cargi/bin"))
+                       ".cargo/bin"))
 
 (mapc #'add-to-exec-path exec-path-list)
 
