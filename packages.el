@@ -44,7 +44,16 @@
    ;; Enable icons in our frog-jump buffer
    frog-jump-buffer-use-all-the-icons-ivy t
    frog-jump-buffer-posframe-parameters '((foreground-color . "#e3e3e3")
-                                          (background-color . "#30302e"))))
+                                          (background-color . "#30302e")))
+  ;; Ignore some buffers that I'm not interested in. For reference, instead
+  ;; of C-x C-b, I can open these buffers using C-x b.
+  (dolist (regexp '("TAGS" "^\\*Compile-log" "-debug\\*$"
+                    "errors\\*$" "^\\*Backtrace" "-ls\\*$"
+                    "stderr\\*$" "^\\*Flymake" "^\\*vc"
+                    "^\\*Warnings" "^\\*eldoc" "\\^*Shell Command"
+                    "\\*lsp-log\\*" "\\*Completions\\*"
+                    "-compile-Log\\*$" "\\*clangd\\*"))
+    (push regexp frog-jump-buffer-ignore-buffers)))
 
 ;; Load theme
 (use-package material-theme
@@ -160,3 +169,26 @@
   :ensure t
   :config
   (setq inferior-lisp-program "sbcl"))
+
+(use-package maxima
+  :ensure t
+  :init
+  (setq imaxima-use-maxima-mode-flag nil
+        maxima-display-maxima-buffer nil)
+  (add-to-list 'auto-mode-alist '("\\.ma[cx]\\'" . maxima-mode))
+  (add-to-list 'interpreter-mode-alist
+               '("maxima" . 'maxima-mode)))
+
+
+;;;; LSP UI Stuff
+(use-package lsp-ui
+  :ensure t
+  :config
+  (setq lsp-ui-sideline-show-diagnostics t
+        lsp-ui-doc-enable t
+        ;; Where to display the doc (top, bottom, at-point)
+        lsp-ui-doc-position 'top
+        ;; Where to display the doc (left or right)
+        lsp-ui-doc-side 'right
+        ;; Number of seconds before showing the doc
+        lsp-ui-doc-delay 2))
