@@ -25,7 +25,9 @@
  ;; Set tab as 4 spaces
  tab-width 4
  ;; C programming style
- c-default-style '((c-mode . "k&r") (c++-mode "k&r"))
+ c-default-style '((java-mode . "java")
+                   (awk-mode . "awk")
+                   (otther . "k&r"))
  ;; C programming should have 4 spaces
  c-basic-offset 4
  ;; Unicode ellipses are better

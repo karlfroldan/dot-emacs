@@ -187,8 +187,10 @@
   (setq lsp-ui-sideline-show-diagnostics t
         lsp-ui-doc-enable t
         ;; Where to display the doc (top, bottom, at-point)
-        lsp-ui-doc-position 'top
+        lsp-ui-doc-position 'at-point
         ;; Where to display the doc (left or right)
         lsp-ui-doc-side 'right
         ;; Number of seconds before showing the doc
-        lsp-ui-doc-delay 2))
+        lsp-ui-doc-delay 1
+        ;; Show the documentation under the cursor
+        lsp-ui-doc-show-with-cursor t))
