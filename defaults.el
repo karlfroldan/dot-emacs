@@ -94,3 +94,23 @@
         (shell-command (format "etags *.%s" (or extension "el")))
         (let ((tags-revert-without-query t))  ; don't query, revert silently          
           (visit-tags-table default-directory nil)))))
+
+;;; TAB BAR MODE stuff
+(global-set-key (kbd "s-[") 'tab-bar-switch-to-prev-tab)
+(global-set-key (kbd "s-]") 'tab-bar-switch-to-next-tab)
+(global-set-key (kbd "s-t") 'tab-bar-new-tab)
+(global-set-key (kbd "s-w") 'tab-bar-close-tab)
+
+;; Enable tab-bar-mode (Currently WIP so disable for now)
+(tab-bar-mode -1)
+(setq
+ ;; hide tab close/X button
+ tab-bar-close-button-show nil
+ ;; Buffer to show in new tabs
+ tab-bar-new-tab-choice "*scratch*"
+ ;; Show tab numbers
+ tab-bar-tab-hints t
+ ;; Elements to include in bar
+ tab-bar-format '(tab-bar-format-tabs tab-bar-separator)
+ ;; Hide bar if less than 2 tabs are open
+ tab-bar-show 1)
