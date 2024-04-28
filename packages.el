@@ -165,11 +165,6 @@
                                          "~/sources/"))
   (projectile-global-mode))
 
-(use-package slime
-  :ensure t
-  :config
-  (setq inferior-lisp-program "sbcl"))
-
 (use-package maxima
   :ensure t
   :init
