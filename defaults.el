@@ -39,9 +39,10 @@
 ;; we no longer use linum-mode.
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
-;; Remove the toolbar and scrollsbars because I don't use them anyways.
+;; Remove the toolbar and scrollbars because I don't use them anyways.
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(menu-bar-mode -1)
 (setq-default indent-tabs-mode nil)
 
 (set-charset-priority 'unicode)
@@ -54,7 +55,10 @@
 
 ;;; Add different binary directories for exec-path
 (defun add-to-exec-path (path)
-  (add-to-list 'exec-path (concat (getenv "HOME") "/" path)))
+  (let ((path-name (concat (getenv "HOME") "/" path)))
+    (when (file-directory-p path-name)
+      (message (concat "Adding \'" path-name "\' to exec-path"))
+      (add-to-list 'exec-path path-name))))
 
 (setq exec-path-list '(".ghcup/bin"
                        ".cabal/bin"
