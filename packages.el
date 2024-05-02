@@ -9,6 +9,16 @@
            (add-hook (intern (concat (symbol-name mode) "-mode-hook")) #'lsp))
          ',modes))
 
+
+(defmacro my/load-make-after-frame (&body fns)
+  "Load a function during after-make-frame"
+  `(if (daemonp)
+       (add-hook 'after-make-frame-functions
+                 (lambda (frame)
+                   (with-selected-frame frame
+                     (progn ,@fns))))
+     (progn ,@fns)))
+
 (setq karl/emacs-theme 'material)
 
 ;; ---- LOADING PACKAGES START ----
@@ -17,22 +27,31 @@
 (use-package cl-lib
   :ensure t)
 
-(use-package all-the-icons
-  :if (display-graphic-p))
+(use-package all-the-icons)
+
+(defun my/load-all-the-icons-dired ()
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 
 (use-package all-the-icons-dired
   :ensure t
   :after all-the-icons
-  :if (display-graphic-p)
   :config
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (with-selected-frame frame
+                    (my/load-all-the-icons-dired))))
+    (my/load-all-the-icons-dired)))
 
 ;; smart-mode line
 (use-package smart-mode-line
   :ensure t
   :config
-  (sml/setup)
-  (setq sml/extra-filler -6))
+  (setq sml/extra-filler -6
+        sml/theme 'atom-one-dark)
+  
+  (sml/setup))
+
 
 ;; Frog-jump buffer will let us jump between multiple
 ;; buffers flawlessly using C-x C-b
@@ -55,11 +74,7 @@
                     "-compile-Log\\*$" "\\*clangd\\*"))
     (push regexp frog-jump-buffer-ignore-buffers)))
 
-;; Load theme
-(use-package material-theme
-  :ensure t
-  :if (display-graphic-p)
-  :config
+(defun my/load-theme ()
   (set-face-attribute 'default nil
                       :font
                       (font-candidate
@@ -67,6 +82,18 @@
                        "Inconsolata-12"
                        "Consolas-12"))
   (load-theme 'material))
+
+;; Load theme
+(use-package material-theme
+  :ensure t
+  :config
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (with-selected-frame frame
+                    (my/load-theme))))
+    (my/load-theme)))
+
 
 ;; Quick browsing, filtering, searching, and indexing of plain text files.
 ;; We use this for our own org-mode notes.
@@ -80,21 +107,6 @@
   (deft-use-filter-string-for-filename t)
   (deft-default-extension "org")
   (deft-directory org-roam-directory))
-
-;; ERC is a basic IRC chat client.
-(use-package erc-services
-  :config
-  (erc-services-mode 1)
-  (setq
-   ;; We use the stored password. This password is encrypted.
-   erc-prompt-for-nickserv-password nil
-   erc-nick "fireking04"
-   erc-user-full-name "fireking04")
-  (erc-services-mode 1)
-  (defun libera-chat-serv ()
-    (interactive)
-    (erc-tls :server "irc.libera.chat"
-             :port "6697")))
 
 ;; Haskell programminglanguage
 (use-package haskell-mode
