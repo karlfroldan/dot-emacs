@@ -19,6 +19,7 @@
  '(package-selected-packages
    '(smart-mode-line-atom-one-dark-theme docker-compose-mode docker lsp-ui maxima cargo slint-mode slime org-ref org-ql bibtex-completion org-roam-bibtex rg helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired yasnippet-snippets auto-package-update yasnippet rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-chicken ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
 
+
 (package-initialize)
 
 (load (concat (getenv "HOME") "/.emacs.d/auxiliary_functions.el"))
@@ -53,3 +54,5 @@
 
 ;; Load org-mode stuff
 (load-elisp-file "org.el")
+(load-elisp-file "irc.el")
+(load-elisp-file "launcher.el")

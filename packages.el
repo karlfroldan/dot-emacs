@@ -9,39 +9,17 @@
            (add-hook (intern (concat (symbol-name mode) "-mode-hook")) #'lsp))
          ',modes))
 
-
-(defmacro my/load-make-after-frame (&body fns)
-  "Load a function during after-make-frame"
-  `(if (daemonp)
-       (add-hook 'after-make-frame-functions
-                 (lambda (frame)
-                   (with-selected-frame frame
-                     (progn ,@fns))))
-     (progn ,@fns)))
-
-(setq karl/emacs-theme 'material)
-
 ;; ---- LOADING PACKAGES START ----
 
 ;; Compatibility library for emacs < 24.3
 (use-package cl-lib
   :ensure t)
 
-(use-package all-the-icons)
-
-(defun my/load-all-the-icons-dired ()
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
-
 (use-package all-the-icons-dired
   :ensure t
   :after all-the-icons
-  :config
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (with-selected-frame frame
-                    (my/load-all-the-icons-dired))))
-    (my/load-all-the-icons-dired)))
+  (my/load-make-after-frame
+   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)))
 
 ;; smart-mode line
 (use-package smart-mode-line
@@ -49,9 +27,7 @@
   :config
   (setq sml/extra-filler -6
         sml/theme 'atom-one-dark)
-  
   (sml/setup))
-
 
 ;; Frog-jump buffer will let us jump between multiple
 ;; buffers flawlessly using C-x C-b
@@ -74,25 +50,18 @@
                     "-compile-Log\\*$" "\\*clangd\\*"))
     (push regexp frog-jump-buffer-ignore-buffers)))
 
-(defun my/load-theme ()
-  (set-face-attribute 'default nil
-                      :font
-                      (font-candidate
-                       '"Fira Code:size=14"
-                       "Inconsolata-12"
-                       "Consolas-12"))
-  (load-theme 'material))
-
 ;; Load theme
 (use-package material-theme
   :ensure t
   :config
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (with-selected-frame frame
-                    (my/load-theme))))
-    (my/load-theme)))
+  (my/load-make-after-frame
+   (set-face-attribute 'default nil
+                       :font
+                       (font-candidate
+                        '"Fira Code:size=14"
+                        "Inconsolata-12"
+                        "Consolas-12"))
+   (load-theme 'material)))
 
 
 ;; Quick browsing, filtering, searching, and indexing of plain text files.

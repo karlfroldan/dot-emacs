@@ -30,3 +30,14 @@
     `(defun ,(intern (format "ssh-%s" name)) ()
        (interactive)
        (dired ,(format "/%s:%s@%s#%s:%s" proto username host port directory)))))
+
+(defmacro my/load-make-after-frame (&rest fns)
+  "Load a function during after-make-frame"
+  `(if (daemonp)
+       (add-hook 'after-make-frame-functions
+                 (lambda (frame)
+                   (with-selected-frame frame
+                     (when (display-graphic-p)
+                       (progn ,@fns)))))
+     (when (display-graphic-p)
+       (progn ,@fns))))

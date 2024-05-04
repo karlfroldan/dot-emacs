@@ -94,4 +94,5 @@
 
 (use-package org-roam-bibtex
   :after org-roam
+  :ensure t
   :config)
