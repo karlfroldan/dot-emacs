@@ -15,11 +15,14 @@
 (use-package cl-lib
   :ensure t)
 
+(use-package all-the-icons
+  :ensure t)
+
 (use-package all-the-icons-dired
   :ensure t
   :after all-the-icons
-  (my/load-make-after-frame
-   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)))
+  :config
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 
 ;; smart-mode line
 (use-package smart-mode-line
