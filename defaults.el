@@ -35,6 +35,10 @@
  ;; Backup directory but I think we remove this anyways
  backup-directory-alist '(("." . "~/.bak.emacs")))
 
+;; Before loading any packages, I want to disable suspending emacs
+(global-unset-key (kbd "C-x C-z"))
+(global-unset-key (kbd "C-z"))
+
 ;; Set linum-mode for line numbers. Note that for newer versions of emacs,
 ;; we no longer use linum-mode.
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
