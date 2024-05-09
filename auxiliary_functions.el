@@ -41,3 +41,6 @@
                        (progn ,@fns)))))
      (when (display-graphic-p)
        (progn ,@fns))))
+
+(defun disable-flymake ()
+  (flymake-mode))

@@ -80,11 +80,18 @@
   (deft-default-extension "org")
   (deft-directory org-roam-directory))
 
+
+;;; Flycheck
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
 ;; Haskell programminglanguage
 (use-package haskell-mode
   :ensure t
   :config
   (custom-set-variables '(haskell-stylish-on-save t)))
+
 (use-package lsp-haskell
   :ensure t
   :after haskell-mode)
@@ -164,6 +171,8 @@
   :ensure t
   :config
   (setq lsp-ui-sideline-show-diagnostics t
+        lsp-ui-sideline-delay 1
+        lsp-ui-sideline-show-hover t
         lsp-ui-doc-enable t
         ;; Where to display the doc (top, bottom, at-point)
         lsp-ui-doc-position 'at-point
@@ -173,3 +182,4 @@
         lsp-ui-doc-delay 1
         ;; Show the documentation under the cursor
         lsp-ui-doc-show-with-cursor t))
+
