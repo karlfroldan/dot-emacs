@@ -27,7 +27,7 @@
  ;; C programming style
  c-default-style '((java-mode . "java")
                    (awk-mode . "awk")
-                   (otther . "k&r"))
+                   (other . "k&r"))
  ;; C programming should have 4 spaces
  c-basic-offset 4
  ;; Unicode ellipses are better
