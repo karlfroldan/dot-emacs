@@ -183,3 +183,11 @@
         ;; Show the documentation under the cursor
         lsp-ui-doc-show-with-cursor t))
 
+(use-package yasnippet
+  :ensure t
+  :config
+  (setq yas-snippet-dirs
+        '("~/.emacs.d/snippets"))
+  (yas-reload-all)
+  (add-hook 'prog-mode-hook #'yas-minor-mode))
+  
