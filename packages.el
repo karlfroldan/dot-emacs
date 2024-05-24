@@ -1,6 +1,7 @@
-;; ---- SOME UTILITY FUNCTIONS FOR LOADING PACKAGES ----
+;;; PACKAGES --- SOME UTILITY FUNCTIONS FOR LOADING PACKAGES ---
+
 (defun font-candidate (&rest fonts)
-  "Return existing font which first matches."
+  "Return existing FONTS which first matches."
   (cl-find-if (lambda (f)
                 (find-font (font-spec :name f))) fonts))
 
@@ -61,9 +62,7 @@
    (set-face-attribute 'default nil
                        :font
                        (font-candidate
-                        '"Fira Code:size=14"
-                        "Inconsolata-12"
-                        "Consolas-12"))
+                        '"Fira Code:size=14"))
    (load-theme 'material)))
 
 

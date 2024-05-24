@@ -24,6 +24,13 @@
  indent-tabs-mode nil
  ;; Set tab as 4 spaces
  tab-width 4
+
+ ;;; LSP-mode
+ ;; Increase GC Threshold for LSP. It generates a lot of memory (LSP)
+ gc-cons-threshold 100000000
+ ;; Increase the amount of data whihc emacs reads from the process (LSP)
+ read-process-output-max (* 1024 1024) ; 1 mb
+ 
  ;; C programming style
  c-default-style '((java-mode . "java")
                    (awk-mode . "awk")
