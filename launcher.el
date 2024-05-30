@@ -8,11 +8,16 @@ only of a minibuffer and has specific dimensions. Run counsel-linux-app
 on that frame, which is an emacs command that prompts you to select an app and
 open it in a dmenu like behavior. Delete the frame after that command has exited"
   (interactive)
-  (with-selected-frame
-      (make-frame '((name . "emacs-app-launcher")
-                    (minibuffer . only)
-                    (width . 120)
-                    (height . 11)))
-    (unwind-protect
-        (counsel-linux-app)
-      (delete-frame))))
+  (if (fboundp 'counsel-linux-app)
+      (with-selected-frame
+          (make-frame '((name . "emacs-app-launcher")
+                        (minibuffer . only)
+                        (width . 120)
+                        (height . 11)))
+        (unwind-protect
+            (counsel-linux-app)
+          (delete-frame)))
+    (message "Emacs launcher will not launch. Make sure to install the package counsel")))
+
+(provide 'launcher)
+
