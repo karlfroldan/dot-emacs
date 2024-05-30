@@ -113,3 +113,10 @@
 
 ;; DIRED BEHAVIOR
 (put 'dired-find-alternate-file 'disabled nil)
+
+(defun my/dired-maps ()
+  "My keybindings for dired"
+  (define-key dired-mode-map (kbd "a") 'dired-find-file)
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+
+(add-hook 'dired-mode-hook 'my/dired-maps)
