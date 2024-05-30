@@ -2,7 +2,7 @@
 
 (defun relative-emacs-dir (dir)
   "Return the absolute directory from a path relative to emacs.d"
-  (concat (getenv "HOME") "/.emacs.d/" dir))
+  (concat user-emacs-directory dir))
 
 (defun package-recompile-all ()
   "Refresh and reinstall all activated packages."
