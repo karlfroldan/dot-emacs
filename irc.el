@@ -28,10 +28,9 @@ A function to convert SERVER such as
 
 (setq
  ;;; BASIC IRC SETUP
- ;; IRC Nickname
  erc-nick "fireking04"
- ;; /whois name
- erc-user-full-name "fireking04"
+ 
+ erc-prompt-for-nickserv-password nil
  
  ;;; IRC LOGGING
  ;; IRC log file format is #channel@server.txt
