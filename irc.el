@@ -53,4 +53,7 @@ A function to convert SERVER such as
 
 (defirc "libera-chat" "irc.libera.chat")
 
+(setq erc-autojoin-channels-alist
+      '(("libera.chat" "#emacs" "#gentoo" "#gentoo-chat")))
+
 (provide 'irc)
