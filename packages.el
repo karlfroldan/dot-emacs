@@ -191,3 +191,10 @@
         '("~/.emacs.d/snippets"))
   (yas-reload-all)
   (add-hook 'prog-mode-hook #'yas-minor-mode))
+
+;;; EAT Terminal Emulator
+(use-package eat
+  :ensure t
+  :config
+  (add-hook 'eshell-load-hook #'eat-eshell-mode)
+  (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
