@@ -1,9 +1,10 @@
 # -*- mode: snippet -*-
 # name: scaffold
-# key: sca
+# key: scaffold
 # --
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 
 int main(int argc, char **argv)

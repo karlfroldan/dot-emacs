@@ -1,7 +1,5 @@
-(require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-                         ("melpa" . "https://melpa.org/packages/")))
+;; Compatibility library for emacs < 24.3
+(require 'cl-lib)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -17,15 +15,19 @@
    '(:foreground default :background default :scale 1.3 :html-foreground "Black" :html-background "Transparent" :html-scale 1.3 :matchers
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(eat protobuf-mode counsel all-the-icons gameoflife flycheck smart-mode-line-atom-one-dark-theme docker-compose-mode docker lsp-ui maxima cargo slint-mode slime org-ref org-ql bibtex-completion org-roam-bibtex rg helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired yasnippet-snippets auto-package-update yasnippet rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-chicken ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
-
-
-(package-initialize)
+   '(eat protobuf-mode counsel all-the-icons flycheck smart-mode-line-atom-one-dark-theme docker-compose-mode docker lsp-ui maxima cargo slint-mode slime org-ref org-ql bibtex-completion org-roam-bibtex rg helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired yasnippet-snippets auto-package-update yasnippet rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-chicken ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
 
 (load (concat (getenv "HOME") "/.emacs.d/auxiliary_functions.el"))
 
+;; ELPACA Package Manager
+(load-elisp-file "elpaca.el")
+
 ;; Get the default settings for emacs.
 (load-elisp-file "defaults.el")
+
+;; This file can override defaults. For example, I may want to load some files for my work PC but not for my personal PC.
+(if (file-exists-p (relative-emacs-dir "override.el"))
+    (load-elisp-file "override.el"))
 
 ;; GPG related stuff
 (load-elisp-file "encryption.el")
@@ -56,3 +58,4 @@
 (load-elisp-file "org.el")
 (load-elisp-file "irc.el")
 (load-elisp-file "launcher.el")
+(load-elisp-file "my-funs.el")

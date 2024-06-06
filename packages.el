@@ -12,9 +12,7 @@
 
 ;; ---- LOADING PACKAGES START ----
 
-;; Compatibility library for emacs < 24.3
-(use-package cl-lib
-  :ensure t)
+(use-package transient :ensure t)
 
 (use-package all-the-icons
   :ensure t)
@@ -26,6 +24,9 @@
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 
 ;; smart-mode line
+(use-package smart-mode-line-atom-one-dark-theme
+  :ensure t)
+
 (use-package smart-mode-line
   :ensure t
   :config
@@ -79,7 +80,6 @@
   (deft-default-extension "org")
   (deft-directory org-roam-directory))
 
-
 ;;; Flycheck
 (use-package flycheck
   :ensure t
@@ -97,12 +97,6 @@
   :ensure t
   :after haskell-mode)
 
-;; LaTeX typesetting
-(use-package tex
-  :ensure auctex
-  :config
-  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode))
-
 (use-package lsp-mode
   :commands lsp
   :ensure t
@@ -119,7 +113,6 @@
   ;; building stuff, then I use ctags. If not, then use lsp-mode instead.
   (if (not (file-exists-p (relative-emacs-dir ".workpc")))
       (mapc-load-lsp (c c++)))
-  
   :hook
   (lsp-mode . lsp-enable-which-key-integration))
 
@@ -166,7 +159,6 @@
   (add-to-list 'interpreter-mode-alist
                '("maxima" . 'maxima-mode)))
 
-
 ;;;; LSP UI Stuff
 (use-package lsp-ui
   :ensure t
@@ -198,3 +190,12 @@
   :config
   (add-hook 'eshell-load-hook #'eat-eshell-mode)
   (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
+
+;;; GITHUB COPILOT STUFF
+(use-package copilot
+  :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+  :config
+  (add-hook 'c-mode-hook 'copilot-mode)
+  (define-key copilot-mode-map (kbd "M-RET") #'copilot-accept-completion)
+  (define-key copilot-mode-map (kbd "M-P") #'copilot-previous-completion)
+  (define-key copilot-mode-map (kbd "M-N") #'copilot-next-completion))

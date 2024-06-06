@@ -125,5 +125,8 @@
 
 ;; (add-hook 'dired-mode-hook 'my/dired-maps)
 
+;;; Allow colors in comint buffers:
+;;; https://stackoverflow.com/questions/13397737/ansi-coloring-in-compilation-mode
+
 (provide 'default)
 ;;; defaults.el ends here

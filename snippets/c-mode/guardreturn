@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: guardreturn
+# key: guardreturn
+# --
+if (!($1)) {
+   $2
+}
