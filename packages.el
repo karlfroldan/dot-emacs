@@ -199,3 +199,6 @@
   (define-key copilot-mode-map (kbd "M-RET") #'copilot-accept-completion)
   (define-key copilot-mode-map (kbd "M-P") #'copilot-previous-completion)
   (define-key copilot-mode-map (kbd "M-N") #'copilot-next-completion))
+
+;; BASIC modes for certain programming modes
+(use-package yaml-mode :ensure t)
