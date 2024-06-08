@@ -89,8 +89,10 @@
 (use-package haskell-mode
   :ensure t
   :config
+  (define-key haskell-mode-map (kbd "C-c C-c") #'haskell-compile)
   (custom-set-variables '(haskell-stylish-on-save t))
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+  
   (setq haskell-process-type 'stack-ghci))
 
 (use-package lsp-haskell
@@ -107,7 +109,7 @@
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
 
   ;; Load LSP automatically for the following programming languages.
-  (mapc-load-lsp (haskell rust shell-script))
+  (mapc-load-lsp (haskell rust shell-script zig))
 
   ;; If I'm using my work PC where I sometimes need to use docker for
   ;; building stuff, then I use ctags. If not, then use lsp-mode instead.
@@ -195,10 +197,23 @@
 (use-package copilot
   :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
   :config
-  (add-hook 'c-mode-hook 'copilot-mode)
+  (defun my/copilot-mode ()
+    (when my/enable-github-copilot
+      (copilot-mode)))
+        
+  (add-hook 'c-mode-hook 'my/copilot-mode)
   (define-key copilot-mode-map (kbd "M-RET") #'copilot-accept-completion)
   (define-key copilot-mode-map (kbd "M-P") #'copilot-previous-completion)
   (define-key copilot-mode-map (kbd "M-N") #'copilot-next-completion))
 
+(use-package counsel
+  :ensure t)
+
 ;; BASIC modes for certain programming modes
 (use-package yaml-mode :ensure t)
+(use-package zig-mode
+  :ensure (:host github :repo "ziglang/zig-mode" :files ("zig-mode.el")))
+
+(provide 'packages)
+;;; packages.el ends here
+

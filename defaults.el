@@ -128,5 +128,8 @@
 ;;; Allow colors in comint buffers:
 ;;; https://stackoverflow.com/questions/13397737/ansi-coloring-in-compilation-mode
 
+;; LOCAL VARIABLE TO ENABLE OR DISABLE GITHUB COPILOT
+(setq my/enable-github-copilot nil)
+
 (provide 'default)
 ;;; defaults.el ends here
