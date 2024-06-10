@@ -211,6 +211,8 @@
 
 ;; BASIC modes for certain programming modes
 (use-package yaml-mode :ensure t)
+(use-package yang-mode :ensure t)
+(use-package cmake-mode :ensure t)
 (use-package zig-mode
   :ensure (:host github :repo "ziglang/zig-mode" :files ("zig-mode.el")))
 
