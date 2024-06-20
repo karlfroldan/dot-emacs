@@ -194,17 +194,17 @@
   (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
 
 ;;; GITHUB COPILOT STUFF
-(use-package copilot
-  :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
-  :config
-  (defun my/copilot-mode ()
-    (when my/enable-github-copilot
-      (copilot-mode)))
+;; (use-package copilot
+;;   :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+;;   :config
+;;   (defun my/copilot-mode ()
+;;     (when my/enable-github-copilot
+;;       (copilot-mode)))
         
-  (add-hook 'c-mode-hook 'my/copilot-mode)
-  (define-key copilot-mode-map (kbd "M-RET") #'copilot-accept-completion)
-  (define-key copilot-mode-map (kbd "M-P") #'copilot-previous-completion)
-  (define-key copilot-mode-map (kbd "M-N") #'copilot-next-completion))
+;;   (add-hook 'c-mode-hook 'my/copilot-mode)
+;;   (define-key copilot-mode-map (kbd "M-RET") #'copilot-accept-completion)
+;;   (define-key copilot-mode-map (kbd "M-P") #'copilot-previous-completion)
+;;   (define-key copilot-mode-map (kbd "M-N") #'copilot-next-completion))
 
 (use-package counsel
   :ensure t)
@@ -213,8 +213,6 @@
 (use-package yaml-mode :ensure t)
 (use-package yang-mode :ensure t)
 (use-package cmake-mode :ensure t)
-(use-package zig-mode
-  :ensure (:host github :repo "ziglang/zig-mode" :files ("zig-mode.el")))
 
 (provide 'packages)
 ;;; packages.el ends here

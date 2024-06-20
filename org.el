@@ -48,6 +48,7 @@
 (use-package org-roam
   :ensure t
   :init
+  (use-package cdlatex :ensure t)
   (setq
    org-roam-v2-ack t
    ;; Encrypted notes
