@@ -7,7 +7,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("063c278e83aa631e230535f1be093fa57d0df4a2f5b7e781c6952e6145532976" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
+   '("db86c52e18460fe10e750759b9077333f9414ed456dc94473f9cf188b197bc74" "063c278e83aa631e230535f1be093fa57d0df4a2f5b7e781c6952e6145532976" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "90a6f96a4665a6a56e36dec873a15cbedf761c51ec08dd993d6604e32dd45940" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
  '(haskell-stylish-on-save t)
  '(ispell-dictionary nil)
  '(org-agenda-files '(concat (getenv "HOME") "/notes/contents.org"))
