@@ -15,17 +15,9 @@
    '(:foreground default :background default :scale 1.3 :html-foreground "Black" :html-background "Transparent" :html-scale 1.3 :matchers
                  ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(yang-mode eat protobuf-mode counsel all-the-icons flycheck smart-mode-line-atom-one-dark-theme docker-compose-mode docker lsp-ui maxima cargo slint-mode slime org-ref org-ql bibtex-completion org-roam-bibtex rg helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired yasnippet-snippets auto-package-update yasnippet rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit scheme-complete all-the-icons-ivy frog-jump-buffer projectile geiser-chicken ghci-completion yaml-mode lsp-haskell company lsp-mode use-package haskell-mode cmake-mode)))
+   '(yang-mode eat protobuf-mode counsel all-the-icons flycheck smart-mode-line-atom-one-dark-theme docker-compose-mode docker maxima cargo slint-mode slime org-ref org-ql bibtex-completion org-roam-bibtex rg helm-bibtex which-key material-theme deft emacsql-sqlite org-roam-ui org-roam cdlatex auctex all-the-icons-nerd-fonts all-the-icons-dired yasnippet-snippets auto-package-update yasnippet rust-mode dockerfile-mode smart-mode-line-powerline-theme smart-mode-line org-fragtog magit all-the-icons-ivy frog-jump-buffer projectile geiser-chicken ghci-completion yaml-mode lsp-haskell company use-package haskell-mode cmake-mode)))
 
 (load (concat (getenv "HOME") "/.emacs.d/auxiliary_functions.el"))
-
-;; ELPACA Package Manager
-(if (getenv "USE_ELPACA")
-    (load-elisp-file "elpaca.el")
-  (progn (require 'package)
-	 (add-to-list 'package-archives
-		      '("melpa" . "https://melpa.org/packages/") t)
-	 (package-initialize)))
 
 ;; Get the default settings for emacs.
 (load-elisp-file "defaults.el")
@@ -64,3 +56,5 @@
 (load-elisp-file "irc.el")
 (load-elisp-file "launcher.el")
 (load-elisp-file "my-funs.el")
+
+(load-elisp-file "lsp.el")

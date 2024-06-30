@@ -80,48 +80,6 @@
   (deft-default-extension "org")
   (deft-directory org-roam-directory))
 
-;;; Flycheck
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
-
-;; Haskell programminglanguage
-(use-package haskell-mode
-  :ensure t
-  :config
-  (define-key haskell-mode-map (kbd "C-c C-c") #'haskell-compile)
-  (custom-set-variables '(haskell-stylish-on-save t))
-  (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-  
-  (setq haskell-process-type 'stack-ghci))
-
-(use-package lsp-haskell
-  :ensure t
-  :after haskell-mode)
-
-(use-package lsp-mode
-  :commands lsp
-  :ensure t
-  :init
-  ;; All LSP related commands start with C-c l
-  (setq lsp-keymap-prefix "C-c l")
-  :config
-  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
-
-  ;; Load LSP automatically for the following programming languages.
-  (mapc-load-lsp (haskell rust shell-script zig))
-
-  ;; If I'm using my work PC where I sometimes need to use docker for
-  ;; building stuff, then I use ctags. If not, then use lsp-mode instead.
-  (if (not (file-exists-p (relative-emacs-dir ".workpc")))
-      (mapc-load-lsp (c c++)))
-  :hook
-  (lsp-mode . lsp-enable-which-key-integration))
-
-;; Text-completion framework that can integrate well with lsp-mode
-(use-package company
-  :ensure t)
-
 ;; Emacs git client
 (use-package magit
   :ensure t)
@@ -161,23 +119,6 @@
   (add-to-list 'interpreter-mode-alist
                '("maxima" . 'maxima-mode)))
 
-;;;; LSP UI Stuff
-(use-package lsp-ui
-  :ensure t
-  :config
-  (setq lsp-ui-sideline-show-diagnostics t
-        lsp-ui-sideline-delay 1
-        lsp-ui-sideline-show-hover t
-        lsp-ui-doc-enable t
-        ;; Where to display the doc (top, bottom, at-point)
-        lsp-ui-doc-position 'at-point
-        ;; Where to display the doc (left or right)
-        lsp-ui-doc-side 'right
-        ;; Number of seconds before showing the doc
-        lsp-ui-doc-delay 1
-        ;; Show the documentation under the cursor
-        lsp-ui-doc-show-with-cursor t))
-
 (use-package yasnippet
   :ensure t
   :config
@@ -192,19 +133,6 @@
   :config
   (add-hook 'eshell-load-hook #'eat-eshell-mode)
   (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
-
-;;; GITHUB COPILOT STUFF
-;; (use-package copilot
-;;   :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
-;;   :config
-;;   (defun my/copilot-mode ()
-;;     (when my/enable-github-copilot
-;;       (copilot-mode)))
-        
-;;   (add-hook 'c-mode-hook 'my/copilot-mode)
-;;   (define-key copilot-mode-map (kbd "M-RET") #'copilot-accept-completion)
-;;   (define-key copilot-mode-map (kbd "M-P") #'copilot-previous-completion)
-;;   (define-key copilot-mode-map (kbd "M-N") #'copilot-next-completion))
 
 (use-package counsel
   :ensure t)
