@@ -4,14 +4,15 @@
 ;;; Code:
 
 ;; Automatically enable eglot for these programming languages
-(defvar my/eglot-mode-list
-  '(haskell-mode
-    c-mode
-    c++-mode))
+(defmacro mode/eglot-ensure (mode)
+  """Ensure that eglot will start automatically for the given MODE"""
+  `(add-hook (quote ,(intern (concat (symbol-name mode) "-mode-hook"))) 'eglot-ensure))
 
 (use-package eglot
   :config
-  (add-hook 'haskell-mode-hook 'eglot-ensure))
+  (mode/eglot-ensure haskell)
+  (mode/eglot-ensure c)
+  (mode/eglot-ensure c++))
 
 (use-package company
   :ensure t
