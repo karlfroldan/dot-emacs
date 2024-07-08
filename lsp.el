@@ -11,7 +11,8 @@
 (use-package eglot
   :config
   (mode/eglot-ensure haskell)
-  (mode/eglot-ensure c)
+  ;; For c-mode, we want eglot to start on a per-project basis
+  ; (mode/eglot-ensure c)
   (mode/eglot-ensure c++))
 
 (use-package company
