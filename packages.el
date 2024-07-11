@@ -110,6 +110,12 @@
                                          "~/sources/"))
   (projectile-global-mode))
 
+(use-package haskell-mode
+  :ensure t
+  :config
+  (define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+  
+
 (use-package maxima
   :ensure t
   :init
