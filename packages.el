@@ -12,6 +12,7 @@
 
 ;; ---- LOADING PACKAGES START ----
 
+;; Used for magit keyboard commands.
 (use-package transient :ensure t)
 
 (use-package all-the-icons
@@ -143,10 +144,15 @@
 (use-package counsel
   :ensure t)
 
+(use-package tramp
+  :config
+  (add-to-list 'tramp-remote-path "~/.local/bin"))
+
 ;; BASIC modes for certain programming modes
 (use-package yaml-mode :ensure t)
 (use-package yang-mode :ensure t)
 (use-package cmake-mode :ensure t)
+(use-package rust-mode :ensure t)
 
 (provide 'packages)
 ;;; packages.el ends here

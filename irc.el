@@ -35,6 +35,8 @@ A function to convert SERVER such as
  ;;; IRC LOGGING
  ;; IRC log file format is #channel@server.txt
  erc-generate-log-file-name-function 'erc-generate-log-file-name-network
+ ;; Load the log file after opening the channel
+ erc-log-insert-log-on-open t
  ;; Always write to the log file after sending the message
  erc-log-write-after-send t
  ;; Write logs after quitting the channel

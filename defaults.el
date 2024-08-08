@@ -40,11 +40,11 @@
  ;; Unicode ellipses are better
  truncate-string-ellipsis "…"
  ;; Backup directory but I think we remove this anyways
- backup-directory-alist '(("." . "~/.bak.emacs"))
+ backup-directory-alist '(("." . "~/.bak.emacs")))
 
  ;; Add to authinfo sources
- auth-sources
- (list "~/.emacs.d/.authinfo.gpg"))
+ ; auth-sources
+ ; (list "~/.emacs.d/.authinfo.gpg"))
 
 ;; Before loading any packages, I want to disable suspending emacs
 (global-unset-key (kbd "C-x C-z"))
