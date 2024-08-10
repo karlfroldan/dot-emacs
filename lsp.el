@@ -30,15 +30,22 @@
                           ("C-c C-e c i" . eglot-code-actions-inline)
                           ("C-c C-e c r" . eglot-code-actions-rewrite)
                           ("C-c C-e c o" . eglot-code-actions-organize-imports)))
-  (mode/eglot-ensure haskell)
+  (mode/eglot-ensure haskell))
   ;; For c-mode, we want eglot to start on a per-project basis
   ; (mode/eglot-ensure c)
-  (mode/eglot-ensure c++))
+  ; (mode/eglot-ensure c++))
 
 (use-package company
   :ensure t
   :config
   (add-hook 'after-init-hook 'global-company-mode))
+
+;; Not LSP related but I want to put this here because it's related to something
+;; what LSP does anyways.
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+              (ggtags-mode 1))))
 
 (provide 'lsp)
 ;;; lsp.el ends here
