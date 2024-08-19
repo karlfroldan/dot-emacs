@@ -141,8 +141,41 @@
   (add-hook 'eshell-load-hook #'eat-eshell-mode)
   (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
 
+
+
 (use-package counsel
-  :ensure t)
+  :ensure t
+  :config
+  (defun my/counsel-linux-app-format (name comment exec)
+  "Simplified counsel format. This will remove the EXEC but show COMMENT
+and the NAME of the program along with \"(flatpak)\" is the given program
+is installed using flatpaks."
+
+  (let ((is-flatpak
+         ;; Find flatpak and it isn't found, this should return 0
+         ;; for everything.
+         (lambda (progname)
+           (let ((my/flatpak-bin (executable-find "flatpak")))
+             (if my/flatpak-bin
+                 (string-prefix-p my/flatpak-bin progname)
+               "")))))
+    (format "% -35s- %s"
+            ;; Make sure the name of the application is less than
+            ;; 35 characters long.
+            (ivy--truncate-string
+             (concat
+              ;; Colorize the name of the application
+              (propertize name
+                          'face 'counsel-application-name)
+              (if (funcall is-flatpak exec)
+                  " (flatpak)"
+                ""))
+            35)
+            comment)))
+
+  (setq counsel-linux-app-format-function
+        #'my/counsel-linux-app-format))
+  ;; (setq counsel-linux-app-format-function #'counsel-linux-app-format-function-default))
 
 (use-package tramp
   :config
