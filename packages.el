@@ -181,6 +181,26 @@ is installed using flatpaks."
   :config
   (add-to-list 'tramp-remote-path "~/.local/bin"))
 
+(use-package avy
+  :ensure t
+  :config
+  (setq
+   ;; Set the avy timeout for avy-goto-char-timer to 0.8 seconds
+   avy-timeout-seconds 0.8)
+  
+  (avy-setup-default)
+  ;; Input one char, jump to it with a tree.
+  (global-set-key (kbd "C-:") 'avy-goto-char)
+  ;; Input two consecutive chars, jump to the first one with a tree
+  (global-set-key (kbd "C-'") 'avy-goto-char-2)
+  ;; Input an arbitrary amount of consecutive chars and jump to the
+  ;; first one after some amount of characters.
+  (global-set-key (kbd "C-;") 'avy-goto-char-timer)
+  ;; Input zero chars, jump to a line start with a tree.
+  (global-set-key (kbd "M-g l") 'avy-goto-line)
+  ;; Input one char at character start, jump to a word start with a tree.
+  (global-set-key (kbd "M-g w") 'avy-goto-word-1))
+
 ;; BASIC modes for certain programming modes
 (use-package yaml-mode :ensure t)
 (use-package yang-mode :ensure t)
