@@ -114,7 +114,6 @@
         (let ((tags-revert-without-query t))  ; don't query, revert silently          
           (visit-tags-table default-directory nil)))))
 
-
 ;; DIRED BEHAVIOR
 (put 'dired-find-alternate-file 'disabled nil)
 

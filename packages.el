@@ -201,6 +201,9 @@ is installed using flatpaks."
   ;; Input one char at character start, jump to a word start with a tree.
   (global-set-key (kbd "M-g w") 'avy-goto-word-1))
 
+(use-package tramp)
+  (add-to-list 'tramp-remote-path "~/.local/bin"))
+
 ;; BASIC modes for certain programming modes
 (use-package yaml-mode :ensure t)
 (use-package yang-mode :ensure t)
