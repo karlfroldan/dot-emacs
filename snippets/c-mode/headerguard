@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: headerguard
+# key: headerguard
+# --
+
+#ifndef ${1:HEADERGUARD}
+#define $1
+
+$0
+
+#endif /* $1 */

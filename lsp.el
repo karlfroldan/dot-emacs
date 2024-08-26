@@ -33,12 +33,22 @@
   (mode/eglot-ensure haskell))
   ;; For c-mode, we want eglot to start on a per-project basis
   ; (mode/eglot-ensure c)
-  ; (mode/eglot-ensure c++))
+                                        ; (mode/eglot-ensure c++))
 
-(use-package company
-  :ensure t
-  :config
-  (add-hook 'after-init-hook 'global-company-mode))
+(use-package corfu
+  :custom
+  (corfu-auto t)
+  :hook
+  ((prog-mode . corfu-mode)
+   (shell-mode . corfu-mode)
+   (eshell-mode . (lambda ()
+                    (setq-local corfu-auto nil)
+                    (corfu-mode)))))
+
+; (use-package company
+;   :ensure t
+;   :config
+;   (add-hook 'after-init-hook 'global-company-mode))
 
 ;; Not LSP related but I want to put this here because it's related to something
 ;; what LSP does anyways.
