@@ -1,13 +1,6 @@
 ;; Start MELPA
 (require 'package)
 
-;; Load elpaca
-;; (load "~/.emacs.d/load-elpaca.el")
-
-;; (elpaca elpaca-use-package
-  ;; Enable use-package :ensure support for elpaca
-;;  (elpaca-use-package-mode))
-
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
 
@@ -39,18 +32,11 @@
 ;; Get the default settings for emacs.
 (load-elisp-file "defaults.el")
 
-;; This file can override defaults. For example, I may want to load some files for my work PC but not for my personal PC.
-(if (file-exists-p (relative-emacs-dir "override.el"))
-    (load-elisp-file "override.el"))
-
 ;; GPG related stuff
 (load-elisp-file "encryption.el")
 
 ;; Load all download packages from GNU elpa and melpa
 (load-elisp-file "packages.el")
-
-;; Load custom global keybindings
-(load-elisp-file "keybindings.el")
 
 ;; On some machines, I need to SSH but the IP addresses needed
 ;; to SSH may be different depending on the purpose of the machine.
@@ -73,11 +59,8 @@
 (load-elisp-file "irc.el")
 (load-elisp-file "launcher.el")
 (load-elisp-file "my-funs.el")
-
 (load-elisp-file "languages.el")
-
 (load-elisp-file "lsp.el")
-
 
 ;; Corfu support.
 (use-package emacs
