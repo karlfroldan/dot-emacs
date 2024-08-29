@@ -51,6 +51,10 @@
 (global-unset-key (kbd "C-x C-z"))
 (global-unset-key (kbd "C-z"))
 
+;; Single-line scrolling
+(global-set-key (kbd "C-.") 'scroll-up-line)
+(global-set-key (kbd "C-,") 'scroll-down-line)
+
 ;; Set linum-mode for line numbers. Note that for newer versions of emacs,
 ;; we no longer use linum-mode.
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
@@ -73,6 +77,7 @@
 
 (setq exec-path-list '(".ghcup/bin"
                        ".cabal/bin"
+                       ".local/nodejs/bin"
                        ".cargo/bin"))
 
 (mapc #'add-to-exec-path exec-path-list)
@@ -82,9 +87,6 @@
 
 ;;; Allow colors in comint buffers:
 ;;; https://stackoverflow.com/questions/13397737/ansi-coloring-in-compilation-mode
-
-;; LOCAL VARIABLE TO ENABLE OR DISABLE GITHUB COPILOT
-(setq my/enable-github-copilot nil)
 
 (provide 'default)
 ;;; defaults.el ends here

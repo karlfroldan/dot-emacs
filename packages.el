@@ -67,6 +67,8 @@
                         '"Fira Code:size=14"))
    (load-theme 'material)))
 
+(use-package auctex
+  :ensure t)
 
 ;; Quick browsing, filtering, searching, and indexing of plain text files.
 ;; We use this for our own org-mode notes.
@@ -111,26 +113,10 @@
                                          "~/sources/"))
   (projectile-global-mode))
 
-(use-package haskell-mode
-  :ensure t
-  :config
-  (define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
-  
-
-(use-package maxima
-  :ensure t
-  :init
-  (setq imaxima-use-maxima-mode-flag nil
-        maxima-display-maxima-buffer nil)
-  (add-to-list 'auto-mode-alist '("\\.ma[cx]\\'" . maxima-mode))
-  (add-to-list 'interpreter-mode-alist
-               '("maxima" . 'maxima-mode)))
-
 (use-package yasnippet
   :ensure t
+  :custom (yas-snippet-dirs '("~/.emacs.d/snippets"))
   :config
-  (setq yas-snippet-dirs
-        '("~/.emacs.d/snippets"))
   (yas-reload-all)
   (add-hook 'prog-mode-hook #'yas-minor-mode))
 
@@ -140,8 +126,6 @@
   :config
   (add-hook 'eshell-load-hook #'eat-eshell-mode)
   (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
-
-
 
 (use-package counsel
   :ensure t
@@ -175,7 +159,6 @@ is installed using flatpaks."
 
   (setq counsel-linux-app-format-function
         #'my/counsel-linux-app-format))
-  ;; (setq counsel-linux-app-format-function #'counsel-linux-app-format-function-default))
 
 (use-package tramp
   :config
@@ -183,33 +166,28 @@ is installed using flatpaks."
 
 (use-package avy
   :ensure t
+  :custom
+  ;; Set the avy timeout for avy-goto-char-timer to 0.8 seconds
+  (avy-timeout-seconds 0.8)
+  :bind
+  ;; Input 1 char, jump to it with a tree.
+  (("C-:" . avy-goto-char)
+   ;; Input 2 consecutive chars, jump to the first one with a tree.
+   ("C-'" . avy-goto-char-2)
+   ;; Input multiple chars and jump to the first one after some
+   ;; amount of time.
+   ("C-;" . avy-goto-char-timer)
+   ;; Input zero chars, jump to a line start with a tree
+   ("M-g l" . avy-goto-line)
+   ;; Input one char at a character start, jump to a word start with a tree
+   ("M-g w" . avy-goto-word-1))
   :config
-  (setq
-   ;; Set the avy timeout for avy-goto-char-timer to 0.8 seconds
-   avy-timeout-seconds 0.8)
-  
-  (avy-setup-default)
-  ;; Input one char, jump to it with a tree.
-  (global-set-key (kbd "C-:") 'avy-goto-char)
-  ;; Input two consecutive chars, jump to the first one with a tree
-  (global-set-key (kbd "C-'") 'avy-goto-char-2)
-  ;; Input an arbitrary amount of consecutive chars and jump to the
-  ;; first one after some amount of characters.
-  (global-set-key (kbd "C-;") 'avy-goto-char-timer)
-  ;; Input zero chars, jump to a line start with a tree.
-  (global-set-key (kbd "M-g l") 'avy-goto-line)
-  ;; Input one char at character start, jump to a word start with a tree.
-  (global-set-key (kbd "M-g w") 'avy-goto-word-1))
+  (avy-setup-default))
+
 
 (use-package tramp
   :config
   (add-to-list 'tramp-remote-path "~/.local/bin"))
-
-;; BASIC modes for certain programming modes
-(use-package yaml-mode :ensure t)
-(use-package yang-mode :ensure t)
-(use-package cmake-mode :ensure t)
-(use-package rust-mode :ensure t)
 
 (provide 'packages)
 ;;; packages.el ends here
