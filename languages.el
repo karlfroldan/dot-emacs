@@ -21,6 +21,6 @@
 ;; Tree sitter support
 (setq major-mode-remap-alist
       '((c-mode . c-ts-mode)
-        (c++-mode . c++-ts-mode)
+        ;(c++-mode . c++-ts-mode)
         (rust-mode . rust-ts-mode)))
 

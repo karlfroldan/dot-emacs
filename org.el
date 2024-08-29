@@ -39,7 +39,6 @@
 
 (use-package org-roam
   :ensure t
-  :after (cdlatex org)
   :custom
   ((org-roam-directory (relative-org-dir "roam"))
    (org-roam-v2-ack t)
