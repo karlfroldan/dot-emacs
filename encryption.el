@@ -1,8 +1,10 @@
-(require 'epa)
+(use-package epg
+  :custom ((epg-pinentry-mode 'loopback)))
 
-(setenv "GPA_AGENT_INFO" nil)
+(use-package epa
+  :after epg
+  :custom ((epa-file-encrypt-to user-mail-address))
+  :config
+  (setq-default epa-file-select-keys (list user-mail-address))
+  (setenv "GPA_AGENT_INFO" nil))
 
-(setq karl/gpg-key-email-address "karlfroldan@gmail.com")
-
-(setq-default epa-file-select-keys '(karl/gpg-key-email-address))
-(setq epa-file-encrypt-to karl/gpg-key-email-address)

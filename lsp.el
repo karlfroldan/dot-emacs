@@ -36,8 +36,6 @@
                                         ; (mode/eglot-ensure c++))
 
 (use-package corfu
-  :ensure t
-  ;; :ensure (:host github :repo "minad/corfu" :files ("*.el" "extensions/corfu-popupinfo.el"))
   :custom
   ((corfu-auto t))
    ;(corfu-popupinfo-mode nil)
@@ -52,7 +50,6 @@
 ;; Not LSP related but I want to put this here because it's related to something
 ;; what LSP does anyways.
 (use-package ggtags
-  :ensure t
   ; :ensure (:host github :repo "leoliu/ggtags" :files ("*.el"))
   :hook
   ((c-mode-common . (lambda ()
@@ -60,11 +57,11 @@
                         (ggtags-mode 1))))))
 
 ;; Need to be installed using `package-vc-install`.
-(use-package eglot-booster
-  :ensure t
-  :after eglot
-  :config
-  (eglot-booster-mode))
+;; (use-package eglot-booster
+;;   :ensure t
+;;   :after eglot
+;;   :config
+;;   (eglot-booster-mode))
 
 (provide 'lsp)
 ;;; lsp.el ends here

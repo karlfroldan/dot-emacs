@@ -9,7 +9,6 @@
             (lambda () (interactive) (insert " ")))
 
 (use-package org
-  :ensure t
   :hook ((org-mode . turn-on-org-cdlatex)
          (org-mode . visual-line-mode))
   :bind (("C-c o l" . org-store-link)
@@ -34,11 +33,9 @@
                             (file org-default-notes-file)
                             "* TODO %?" :empty-lines 1)))))
 
-(use-package cdlatex
-  :ensure auctex)
+(use-package cdlatex)
 
 (use-package org-roam
-  :ensure t
   :custom
   ((org-roam-directory (relative-org-dir "roam"))
    (org-roam-v2-ack t)
@@ -72,5 +69,4 @@
 
 (use-package org-roam-bibtex
   :after org-roam
-  :ensure t
   :config)

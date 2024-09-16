@@ -31,6 +31,16 @@ The default DIRECTORY is the user's home."
        (interactive)
        (dired ,(format "/%s:%s@%s#%s:%s" proto username host port directory)))))
 
+(defun my/fetch-password (&rest params)
+  (require 'auth-source)
+  (let ((match (car (apply 'auth-source-search params))))
+    (if (match
+         (let ((secret (plist-get match :secret)))
+           (if (functionp secret)
+               (funcall secret)
+             secret))
+         (error "Password not found for %S" params)))))
+
 (defmacro my/load-make-after-frame (&rest fns)
   "Load set of functions FNS during after-make-frame."
   `(if (daemonp)

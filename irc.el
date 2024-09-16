@@ -1,7 +1,9 @@
-
 (require 'erc-services)
 (erc-services-mode 1)
 (erc-log-mode)
+
+(defun my/nickserv-password (server)
+  (my/fetch-password :user "fireking04" :machine "irc.libera.chat"))
 
 (defun my/irc-buffer-name (server port)
   (concat server ":" port))
@@ -57,7 +59,10 @@ A function to convert SERVER such as
    (erc-notifications-mode t)
 
    ;;; AUTOJOIN
-   (erc-autojoin-channels-alist '(("libera.chat" "#emacs" "#gentoo" "#gentoo-chat"))))
+   (erc-autojoin-channels-alist '(("libera.chat"
+                                   "#emacs"
+                                   "#guix"
+                                   "#haskell"))))
   :config
   (defirc "libera-chat" "irc.libera.chat"))
 

@@ -30,6 +30,9 @@
  gc-cons-threshold 100000000
  ;; Increase the amount of data whihc emacs reads from the process (LSP)
  read-process-output-max (* 1024 1024) ; 1 mb
+
+ ;; Email address of the current user which is my email address
+ user-mail-address "karlfroldan@gmail.com"
  
  ;; C programming style
  c-default-style '((java-mode . "java")
@@ -42,6 +45,8 @@
  truncate-string-ellipsis "…"
  ;; Backup directory but I think we remove this anyways
  backup-directory-alist '(("." . "~/.bak.emacs")))
+
+(add-hook 'hack-local-variables-hook #'buffer-env-update)
 
  ;; Add to authinfo sources
  ; auth-sources
