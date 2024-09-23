@@ -35,17 +35,15 @@
   ; (mode/eglot-ensure c)
                                         ; (mode/eglot-ensure c++))
 
-(use-package corfu
-  :custom
-  ((corfu-auto t))
-   ;(corfu-popupinfo-mode nil)
-   ;(corfu-popupinfo-delay '(0.2 1.0)))
-  :hook
-  ((prog-mode . corfu-mode)
-   (shell-mode . corfu-mode)
-   (eshell-mode . (lambda ()
-                    (setq-local corfu-auto nil)
-                    (corfu-mode)))))
+(use-package company
+  :custom ((company-tooltip-align-annotations t)
+           (company-tooltip-limit 6)
+           (company-tooltip-maximum-width 60)
+           ;; Candidate icons will show a letter
+           ;; corresponding to the candidate type.
+           (company-format-margin-function 'company-text-icons-margin)
+           (company-text-icons-add-background t))
+  :config (global-company-mode))
 
 ;; Not LSP related but I want to put this here because it's related to something
 ;; what LSP does anyways.
@@ -56,12 +54,6 @@
                       (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
                         (ggtags-mode 1))))))
 
-;; Need to be installed using `package-vc-install`.
-;; (use-package eglot-booster
-;;   :ensure t
-;;   :after eglot
-;;   :config
-;;   (eglot-booster-mode))
 
 (provide 'lsp)
 ;;; lsp.el ends here

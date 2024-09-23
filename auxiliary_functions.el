@@ -16,20 +16,7 @@
   "Load an Emacs Lisp FILE-NAME that resides in the Emacs config directory."
   (load (relative-emacs-dir file-name)))
 
-(cl-defmacro defsshserver (name
-                             username
-                             host
-                             &optional (port "22")
-                             &optional (directory "~"))
-  "Define an SSH server that can be called using ssh-name as specified by NAME.
-The server will connect to USERNAME to HOST on the specified PORT.
-The default DIRECTORY is the user's home."
-  (let ((proto (if (eq system-type 'windows-nt)
-                   "plink"
-                 "ssh")))
-    `(defun ,(intern (format "ssh-%s" name)) ()
-       (interactive)
-       (dired ,(format "/%s:%s@%s#%s:%s" proto username host port directory)))))
+
 
 (defun my/fetch-password (&rest params)
   (require 'auth-source)
@@ -51,6 +38,21 @@ The default DIRECTORY is the user's home."
                        (progn ,@fns)))))
      (when (display-graphic-p)
        (progn ,@fns))))
+
+(cl-defmacro defsshserver (name
+                             username
+                             host
+                             ; &optional (port "22")
+                             &optional (directory "~"))
+  "Define an SSH server that can be called using ssh-name as specified by NAME.
+The server will connect to USERNAME to HOST on the specified PORT.
+The default DIRECTORY is the user's home."
+  (let ((proto (if (eq system-type 'windows-nt)
+                   "plink"
+                 "ssh")))
+    `(defun ,(intern (format "ssh-%s" name)) ()
+       (interactive)
+       (dired ,(format "/%s:%s@%s:%s" proto username host directory)))))
 
 (provide 'auxiliary_functions)
 ;;; auxiliary_functions.el ends here

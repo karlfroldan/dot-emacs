@@ -46,8 +46,6 @@
  ;; Backup directory but I think we remove this anyways
  backup-directory-alist '(("." . "~/.bak.emacs")))
 
-(add-hook 'hack-local-variables-hook #'buffer-env-update)
-
  ;; Add to authinfo sources
  ; auth-sources
  ; (list "~/.emacs.d/.authinfo.gpg"))

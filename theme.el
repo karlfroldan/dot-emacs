@@ -7,7 +7,7 @@
 
 (my/load-make-after-frame
  (set-face-attribute 'default nil
-                     :font (font-candidate '"Fira Code:size=14")))
+                     :font (font-candidate '"Fira Code:size=12")))
 
 (use-package modus-themes
   :config

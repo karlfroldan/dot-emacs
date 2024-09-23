@@ -12,18 +12,9 @@
 
 ;; BASIC modes for certain programming modes
 
-
 (use-package yaml-mode)
-(use-package yang-mode :ensure t)
 (use-package cmake-mode)
 (use-package rust-mode)
-(use-package erlang)
-
-;; Tree sitter support
-(setq major-mode-remap-alist
-      '((c-mode . c-ts-mode)
-        (c++-mode . c++-ts-mode)
-        (rust-mode . rust-ts-mode)))
 
 (use-package c-ts-mode
   :if (treesit-language-available-p 'c)
@@ -34,3 +25,10 @@
   (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
   (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
   (add-to-list 'major-mode-remap-alist '(c-or-c++-mode . c-or-c++-ts-mode)))
+
+;; Tree sitter support
+(setq major-mode-remap-alist
+      '((c-mode . c-ts-mode)
+        (c++-mode . c++-ts-mode)
+        (rust-mode . rust-ts-mode)))
+

@@ -15,7 +15,7 @@
 
 (use-package all-the-icons-dired
   :after all-the-icons
-  :hook ('dired-mode-hook . all-the-icons-dired-mode))
+  :hook ('dired-mode . all-the-icons-dired-mode))
 
 (use-package smart-mode-line
   :custom ((sml/extra-filler -6)
@@ -90,8 +90,8 @@
 
 ;;; EAT Terminal Emulator
 (use-package eat
-  :hook (('eshell-load-hook . eat-eshell-mode)
-         ('eshell-load-hook . eat-eshell-visual-command-mode)))
+  :hook (('eshell-load . eat-eshell-mode)
+         ('eshell-load . eat-eshell-visual-command-mode)))
 
 (use-package tramp
   :config
@@ -106,7 +106,9 @@
            (mu4e-use-fancy-chars t)
            (mu4e-compose-crypto-policy '(sign-all-messages))))
 
-
+(use-package bash-completion
+  :config
+  (bash-completion-setup))
 
 (use-package avy
   :custom
@@ -126,6 +128,14 @@
    ("M-g w" . avy-goto-word-1))
   :config
   (avy-setup-default))
+
+
+(use-package buffer-env
+  :hook ((comint-mode . hack-dir-local-variables-non-file-buffer)
+         (hack-local-variables . buffer-env-update))
+  :custom ((buffer-env-script-name '( ".env" "manifest.scm" "guix.scm"))))
+
+(use-package annotate)
 
 (provide 'packages)
 ;;; packages.el ends here
