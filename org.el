@@ -14,6 +14,10 @@
   :bind (("C-c o l" . org-store-link)
          ("C-c o a" . org-agenda)
          ("C-c o c" . org-capture))
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((scheme . t)))
   :custom
   ;; Use RET on keyboard to go to a specified link
   ((org-return-follows-link t)

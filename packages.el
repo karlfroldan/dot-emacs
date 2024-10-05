@@ -78,8 +78,8 @@
   :init
   (setq projectile-keymap-prefix (kbd "C-c C-p"))
   :config
-  (setq projectile-project-search-path '("~/projects/"
-                                         "~/sources/"))
+  ;; (setq projectile-project-search-path '("~/projects/"
+  ;;                                        "~/sources/"))
   (projectile-global-mode))
 
 (use-package yasnippet

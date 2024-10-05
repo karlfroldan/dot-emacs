@@ -32,3 +32,10 @@
         (c++-mode . c++-ts-mode)
         (rust-mode . rust-ts-mode)))
 
+;; Enable ggtags-mode for C mode and C++ mode
+(use-package ggtags
+  :hook
+  ((c-mode-common . (lambda ()
+                      (when (derived-mode-p 'c-mode 'c-ts-mode 'c++-mode 'c++-ts-mode 'java-mode)
+                        (ggtags-mode 1))))))
+

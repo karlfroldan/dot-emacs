@@ -25,3 +25,5 @@ ssh.el
 /server
 games/
 network-security.data
+custom.el
+annotations

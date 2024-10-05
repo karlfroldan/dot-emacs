@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: guix-module-use-mod
+# key: guix-module-use-mod
+# --
+#:use-module ($1)$0

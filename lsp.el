@@ -45,15 +45,5 @@
            (company-text-icons-add-background t))
   :config (global-company-mode))
 
-;; Not LSP related but I want to put this here because it's related to something
-;; what LSP does anyways.
-(use-package ggtags
-  ; :ensure (:host github :repo "leoliu/ggtags" :files ("*.el"))
-  :hook
-  ((c-mode-common . (lambda ()
-                      (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-                        (ggtags-mode 1))))))
-
-
 (provide 'lsp)
 ;;; lsp.el ends here
