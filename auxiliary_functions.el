@@ -50,9 +50,13 @@ The default DIRECTORY is the user's home."
   (let ((proto (if (eq system-type 'windows-nt)
                    "plink"
                  "ssh")))
-    `(defun ,(intern (format "ssh-%s" name)) ()
+    `(defun ,(intern (format "ssh-%s" name)) () ;(filename)
        (interactive)
-       (dired ,(format "/%s:%s@%s:%s" proto username host directory)))))
+             ;; (interactive "P\nFfile: ")
+       ;; (let ((selected-file (if filename
+       ;;                          filename
+       ;;                        ,directory)))
+         (dired (format "/%s:%s@%s:%s" ,proto ,username ,host ,directory)))))
 
 (provide 'auxiliary_functions)
 ;;; auxiliary_functions.el ends here

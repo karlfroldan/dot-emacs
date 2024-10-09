@@ -55,8 +55,8 @@
 (global-unset-key (kbd "C-z"))
 
 ;; Single-line scrolling
-(global-set-key (kbd "C-.") 'scroll-up-line)
-(global-set-key (kbd "C-,") 'scroll-down-line)
+(global-set-key (kbd "C->") 'scroll-up-line)
+(global-set-key (kbd "C-<") 'scroll-down-line)
 
 ;; Set linum-mode for line numbers. Note that for newer versions of emacs,
 ;; we no longer use linum-mode.

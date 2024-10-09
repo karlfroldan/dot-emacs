@@ -8,6 +8,7 @@
 (require 'cl-lib)
 
 (setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
 
 (load (concat (getenv "HOME") "/.emacs.d/auxiliary_functions.el"))
 
