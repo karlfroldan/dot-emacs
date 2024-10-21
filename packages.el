@@ -15,12 +15,22 @@
 
 (use-package all-the-icons-dired
   :after all-the-icons
-  :hook ('dired-mode . all-the-icons-dired-mode))
+  :hook (dired-mode . all-the-icons-dired-mode))
 
 (use-package smart-mode-line
   :custom ((sml/extra-filler -6)
            (sml/mode-width 'full))
   :config
+  (add-to-list 'sml/replacer-regexp-list
+               '("^/ssh:karl@10.1.2.84:" ":SPBG5:") t)
+  (add-to-list 'sml/replacer-regexp-list
+               '(":SPBG5:projects/dz3/sc-comp/" ":dz3:") t)
+  (add-to-list 'sml/replacer-regexp-list
+               '(":dz3:br-external/package/" ":dz3-ext:") t)
+  (add-to-list 'sml/replacer-regexp-list
+               '(":dz3-ext:sc-gnmid/" ":sc-gnmid:") t)
+  (add-to-list 'sml/replacer-regexp-list
+               '(":dz3-ext:sc-sysrepod/" ":sc-sysrepod:") t)
   (sml/setup))
 
 ;; Frog-jump buffer will let us jump between multiple
@@ -84,14 +94,14 @@
 
 (use-package yasnippet
   :custom (yas-snippet-dirs '("~/.emacs.d/snippets"))
-  :hook ('prog-mode . yas-minor-mode)
+  :hook (prog-mode . yas-minor-mode)
   :config
   (yas-reload-all))
 
 ;;; EAT Terminal Emulator
 (use-package eat
-  :hook (('eshell-load . eat-eshell-mode)
-         ('eshell-load . eat-eshell-visual-command-mode)))
+  :hook ((eshell-load . eat-eshell-mode)
+         (eshell-load . eat-eshell-visual-command-mode)))
 
 (use-package tramp
   :config
@@ -116,18 +126,24 @@
   (avy-timeout-seconds 0.8)
   :bind
   ;; Input 1 char, jump to it with a tree.
-  (("C-:" . avy-goto-char)
+  (("C-c a 1" . avy-goto-char)
    ;; Input 2 consecutive chars, jump to the first one with a tree.
-   ("C-'" . avy-goto-char-2)
+   ("C-c a 2" . avy-goto-char-2)
    ;; Input multiple chars and jump to the first one after some
    ;; amount of time.
-   ("C-;" . avy-goto-char-timer)
+   ("C-c a m" . avy-goto-char-timer)
    ;; Input zero chars, jump to a line start with a tree
-   ("M-g l" . avy-goto-line)
+   ("C-c a 0" . avy-goto-line)
    ;; Input one char at a character start, jump to a word start with a tree
-   ("M-g w" . avy-goto-word-1))
+   ("C-c a w" . avy-goto-word-1))
   :config
   (avy-setup-default))
+
+(use-package rich-minority
+  :config
+  (add-to-list 'rm-blacklist " yas")
+  (add-to-list 'rm-blacklist " company")
+  (add-to-list 'rm-blacklist " all-the-icons-dired-mode"))
 
 
 (use-package buffer-env
