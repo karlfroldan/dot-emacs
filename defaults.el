@@ -25,6 +25,9 @@
  ;; Set tab as 4 spaces
  tab-width 4
 
+ ;; Allow tramp to use .dir-locals.el
+ enable-remote-dir-locals t
+
  ;;; LSP-mode
  ;; Increase GC Threshold for LSP. It generates a lot of memory (LSP)
  gc-cons-threshold 100000000

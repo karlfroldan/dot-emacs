@@ -43,7 +43,8 @@
                              username
                              host
                              ; &optional (port "22")
-                             &optional (directory "~"))
+                             &optional (directory "~")
+                             &key (load-path '()))
   "Define an SSH server that can be called using ssh-name as specified by NAME.
 The server will connect to USERNAME to HOST on the specified PORT.
 The default DIRECTORY is the user's home."

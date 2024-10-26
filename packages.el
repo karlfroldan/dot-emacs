@@ -21,16 +21,6 @@
   :custom ((sml/extra-filler -6)
            (sml/mode-width 'full))
   :config
-  (add-to-list 'sml/replacer-regexp-list
-               '("^/ssh:karl@10.1.2.84:" ":SPBG5:") t)
-  (add-to-list 'sml/replacer-regexp-list
-               '(":SPBG5:projects/dz3/sc-comp/" ":dz3:") t)
-  (add-to-list 'sml/replacer-regexp-list
-               '(":dz3:br-external/package/" ":dz3-ext:") t)
-  (add-to-list 'sml/replacer-regexp-list
-               '(":dz3-ext:sc-gnmid/" ":sc-gnmid:") t)
-  (add-to-list 'sml/replacer-regexp-list
-               '(":dz3-ext:sc-sysrepod/" ":sc-sysrepod:") t)
   (sml/setup))
 
 ;; Frog-jump buffer will let us jump between multiple
@@ -105,7 +95,10 @@
 
 (use-package tramp
   :config
-  (add-to-list 'tramp-remote-path "~/.local/bin"))
+  (add-to-list 'tramp-remote-path "~/.local/bin")
+  ;; Haskell stuff
+  (add-to-list 'tramp-remote-path "~/.cabal/bin")
+  (add-to-list 'tramp-remote-path "~/.ghcup/bin"))
 
 (use-package mu4e
   :custom ((mu4e-sent-folder "/Sent")

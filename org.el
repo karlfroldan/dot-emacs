@@ -17,7 +17,8 @@
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((scheme . t)))
+   '((scheme . t)
+     (shell . t)))
   :custom
   ;; Use RET on keyboard to go to a specified link
   ((org-return-follows-link t)
