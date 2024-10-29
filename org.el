@@ -13,12 +13,18 @@
          (org-mode . visual-line-mode))
   :bind (("C-c o l" . org-store-link)
          ("C-c o a" . org-agenda)
-         ("C-c o c" . org-capture))
+         ("C-c o c" . org-capture)
+         ("C-c b x" . org-babel-execute-src-block)
+         ("C-c b h" . org-babel-hide-result-toggle))
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((scheme . t)
+     (python . t)
      (shell . t)))
+  (setq org-babel-python-command "python3")
+  (setq org-babel-default-header-args
+      '((:session . "my-session")))
   :custom
   ;; Use RET on keyboard to go to a specified link
   ((org-return-follows-link t)

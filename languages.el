@@ -29,8 +29,8 @@
 ;; Tree sitter support
 (setq major-mode-remap-alist
       '((c-mode . c-ts-mode)
-        (c++-mode . c++-ts-mode)
-        (rust-mode . rust-ts-mode)))
+        (c++-mode . c++-ts-mode)))
+        ;; (rust-mode . rust-ts-mode)))
 
 ;; Enable ggtags-mode for C mode and C++ mode
 (use-package ggtags
