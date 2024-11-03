@@ -88,6 +88,9 @@
 
 (mapc #'add-to-exec-path exec-path-list)
 
+;; Enable smooth scrolling
+(pixel-scroll-precision-mode)
+
 ;; DIRED BEHAVIOR
 (put 'dired-find-alternate-file 'disabled nil)
 
