@@ -16,5 +16,5 @@
                 modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)
                 modus-themes-variable-pitch-ui t)
    
-  (load-theme 'modus-vivendi)
-  (modus-themes-load-theme 'modus-vivendi-tinted))
+  (load-theme 'modus-operandi-tinted)
+  (modus-themes-load-theme 'modus-operandi-tinted))

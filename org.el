@@ -10,21 +10,17 @@
 
 (use-package org
   :hook ((org-mode . turn-on-org-cdlatex)
+         (org-mode . variable-pitch-mode)
          (org-mode . visual-line-mode))
   :bind (("C-c o l" . org-store-link)
          ("C-c o a" . org-agenda)
          ("C-c o c" . org-capture)
          ("C-c b x" . org-babel-execute-src-block)
          ("C-c b h" . org-babel-hide-result-toggle))
-  :config
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((scheme . t)
-     (python . t)
-     (shell . t)))
-  (setq org-babel-python-command "python3")
-  (setq org-babel-default-header-args
-      '((:session . "my-session")))
+  :custom-face
+  (variable-pitch ((t (:family "ETBembo" :height 120 :weight thin))))
+  (fixed-pitch ((t (:family "Fira Code" :height 100))))
+  
   :custom
   ;; Use RET on keyboard to go to a specified link
   ((org-return-follows-link t)
@@ -32,6 +28,8 @@
    (org-startup-folded nil)
    ;; Use indentation for all org files
    (org-startup-indented t)
+   ;; Hide all the emphasis markup like /.../ for italics, *...* for bold, etc.
+   (org-hide-emphasis-markers t)
    ;; Default note types for org-mode
    (org-defaults-notes-file (relative-org-dir "tasks/default.org"))
    (org-capture-templates '(("w" "Work-related Task" entry
@@ -42,7 +40,55 @@
                             "* %?\nEntered on %U\n %i\n %a")
                            ("t" "Personal Task" entry
                             (file org-default-notes-file)
-                            "* TODO %?" :empty-lines 1)))))
+                            "* TODO %?" :empty-lines 1))))
+  
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((scheme . t)
+     (python . t)
+     (shell . t)))
+  (setq org-babel-python-command "python3")
+  (setq org-babel-default-header-args
+        '((:session . "my-session")))
+
+  ;; Set the dot character for bullet points
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-+]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+  
+  
+  (let* ((base-font-color (face-foreground 'default nil 'default))
+       (headline `(:inherit default :weight bold :foreground ,base-font-color))
+       (et-font '(:font "ETBembo" :height 180 :weight thin))
+       (fixed-font '(:family "Fira Code" :height 160)))
+  (custom-theme-set-faces
+   'user
+   '(org-block ((t (:inherit fixed-pitch))))
+   '(org-block-begin-line ((t (:inherit fixed-pitch :background "#cab9b2" :foreground "#4a0b4a"))))
+   '(org-drawer ((t (:inherit fixed-pitch))))
+   '(org-code ((t (:inherit (shadow fixed-pitch) :foreground "#2e2d2d" :weight medium))))
+   '(org-document-info ((t (:foreground "dark orange"))))
+   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+   '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+   '(org-link ((t (:foreground "royal blue" :underline t))))
+   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-property-value ((t (:inherit fixed-pitch))) t)
+   '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+   '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+
+   `(org-level-8 ((t (,@headline ,@et-font))))
+   `(org-level-7 ((t (,@headline ,@et-font))))
+   `(org-level-6 ((t (,@headline ,@et-font))))
+   `(org-level-5 ((t (,@headline ,@et-font))))
+   `(org-level-4 ((t (,@headline ,@et-font :height 1.1))))
+   `(org-level-3 ((t (,@headline ,@et-font :height 1.125))))
+   `(org-level-2 ((t (,@headline ,@et-font :height 1.2))))
+   `(org-level-1 ((t (,@headline ,@et-font :height 1.3))))
+   `(org-document-title ((t (,@headline ,@et-font :height 1.5 :underline nil)))))))
+
 
 (use-package cdlatex)
 
@@ -57,7 +103,7 @@
                                                              "#+title: %<%m-%d-%Y>\n"))))
    (org-roam-capture-templates '(("d" "main" plain "%?"
                                   :if-new (file+head "main/${slug}.org"
-                                                     "#+title: ${title}\n")
+                                                     "#+title: ${title}\n#+STARTUP: latexpreview\n")
                                   :unarrowed t)
                                  ("r" "reference" plain "%?"
                                   :if-new (file+head "reference/${slug}.org"

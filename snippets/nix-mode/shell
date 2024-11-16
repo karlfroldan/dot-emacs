@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: shell
+# key: shell
+# --
+{ pkgs ? import <nixpkgs> { } }:
+
+pkgs.mkShell {
+  name = $1;
+  buildInputs = with pkgs; [
+    $2
+  ];
+}
+$0

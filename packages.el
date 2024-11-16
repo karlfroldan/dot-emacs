@@ -20,7 +20,7 @@
 (use-package smart-mode-line
   :custom ((sml/extra-filler -6)
            (sml/mode-width 'full))
-  :config
+  :config  
   (sml/setup))
 
 ;; Frog-jump buffer will let us jump between multiple
@@ -29,9 +29,9 @@
   :bind ("C-x C-b" . frog-jump-buffer)
   :config
   (setq-default
-   frog-jump-buffer-use-all-the-icons-ivy t
-   frog-jump-buffer-posframe-parameters '((foreground-color . "#e9e9e9")
-                                          (background-color . "#3a3a3a")))
+   frog-jump-buffer-use-all-the-icons-ivy t)
+   ;; frog-jump-buffer-posframe-parameters '((foreground-color . "#e9e9e9")
+   ;;                                        (background-color . "#3a3a3a")))
   ;; Ignore some buffers that I'm not interested in. For reference, instead
   ;; of C-x C-b, I can open these buffers using C-x b.
   (dolist (regexp '("TAGS" "^\\*Compile-log" "-debug\\*$"
@@ -109,9 +109,9 @@
            (mu4e-use-fancy-chars t)
            (mu4e-compose-crypto-policy '(sign-all-messages))))
 
-(use-package bash-completion
-  :config
-  (bash-completion-setup))
+;; (use-package bash-completion
+;;   :config
+;;   (bash-completion-setup))
 
 (use-package avy
   :custom
@@ -142,9 +142,15 @@
 (use-package buffer-env
   :hook ((comint-mode . hack-dir-local-variables-non-file-buffer)
          (hack-local-variables . buffer-env-update))
-  :custom ((buffer-env-script-name '( ".env" "manifest.scm" "guix.scm"))))
+  :custom ((buffer-env-script-name '( ".env" "shell.nix" "flake.nix"))))
 
 (use-package annotate)
+
+(use-package ace-window
+  :bind ("M-o" . ace-window))
+
+(use-package windresize
+  :bind ("C-c C-w" . windresize))
 
 (provide 'packages)
 ;;; packages.el ends here
