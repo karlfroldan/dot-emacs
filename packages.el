@@ -142,7 +142,7 @@
 (use-package buffer-env
   :hook ((comint-mode . hack-dir-local-variables-non-file-buffer)
          (hack-local-variables . buffer-env-update))
-  :custom ((buffer-env-script-name '( ".env" "shell.nix" "flake.nix"))))
+  :custom ((buffer-env-script-name '( ".env" "flake.nix"))))
 
 (use-package annotate)
 
