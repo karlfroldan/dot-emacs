@@ -61,6 +61,9 @@
 (global-set-key (kbd "C->") 'scroll-up-line)
 (global-set-key (kbd "C-<") 'scroll-down-line)
 
+;; goto-line binding
+(add-hook 'prog-mode-hook (lambda () (local-set-key (kbd "C-c :") #'goto-line)))
+
 ;; Set linum-mode for line numbers. Note that for newer versions of emacs,
 ;; we no longer use linum-mode.
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
@@ -96,6 +99,10 @@
 
 ;;; Allow colors in comint buffers:
 ;;; https://stackoverflow.com/questions/13397737/ansi-coloring-in-compilation-mode
+
+;; Default size of emacs frames
+(add-to-list 'default-frame-alist '(width . 24))
+(add-to-list 'default-frame-alist '(height . 24))
 
 (provide 'default)
 ;;; defaults.el ends here

@@ -18,7 +18,7 @@
          ("C-c b x" . org-babel-execute-src-block)
          ("C-c b h" . org-babel-hide-result-toggle))
   :custom-face
-  (variable-pitch ((t (:family "ETBembo" :height 120 :weight thin))))
+  (variable-pitch ((t (:family "Linux Libertine O" :height 120 :weight thin))))
   (fixed-pitch ((t (:family "Fira Code" :height 100))))
   
   :custom
@@ -60,7 +60,7 @@
   
   (let* ((base-font-color (face-foreground 'default nil 'default))
        (headline `(:inherit default :weight bold :foreground ,base-font-color))
-       (et-font '(:font "ETBembo" :height 180 :weight thin))
+       (variable-pitch '(:font "Linux Libertine O" :height 180 :weight thin))
        (fixed-font '(:family "Fira Code" :height 160)))
   (custom-theme-set-faces
    'user
@@ -79,15 +79,15 @@
    '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
    '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
 
-   `(org-level-8 ((t (,@headline ,@et-font))))
-   `(org-level-7 ((t (,@headline ,@et-font))))
-   `(org-level-6 ((t (,@headline ,@et-font))))
-   `(org-level-5 ((t (,@headline ,@et-font))))
-   `(org-level-4 ((t (,@headline ,@et-font :height 1.1))))
-   `(org-level-3 ((t (,@headline ,@et-font :height 1.125))))
-   `(org-level-2 ((t (,@headline ,@et-font :height 1.2))))
-   `(org-level-1 ((t (,@headline ,@et-font :height 1.3))))
-   `(org-document-title ((t (,@headline ,@et-font :height 1.5 :underline nil)))))))
+   `(org-level-8 ((t (,@headline ,@variable-pitch))))
+   `(org-level-7 ((t (,@headline ,@variable-pitch))))
+   `(org-level-6 ((t (,@headline ,@variable-pitch))))
+   `(org-level-5 ((t (,@headline ,@variable-pitch))))
+   `(org-level-4 ((t (,@headline ,@variable-pitch :height 1.1))))
+   `(org-level-3 ((t (,@headline ,@variable-pitch :height 1.125))))
+   `(org-level-2 ((t (,@headline ,@variable-pitch :height 1.2))))
+   `(org-level-1 ((t (,@headline ,@variable-pitch :height 1.3))))
+   `(org-document-title ((t (,@headline ,@variable-pitch :height 1.5 :underline nil)))))))
 
 
 (use-package cdlatex)

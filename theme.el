@@ -18,3 +18,4 @@
    
   (load-theme 'modus-operandi-tinted)
   (modus-themes-load-theme 'modus-operandi-tinted))
+

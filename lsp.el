@@ -1,39 +1,28 @@
 ;;; lsp --- Summary
 ;;; Commentary:
-;;; Set up LSP using eglot
+;;; Set up LSP using lsp-mode
 ;;; Code:
 
-;; Automatically enable eglot for these programming languages
-(defmacro mode/eglot-ensure (mode)
-  """Ensure that eglot will start automatically for the given MODE"""
-  `(add-hook (quote ,(intern (concat (symbol-name mode) "-mode-hook"))) 'eglot-ensure))
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap
+  (setq lsp-keymap-prefix "C-c l")
+  :hook ((rust-mode . lsp)
+         (haskell-mode . lsp))
+         ;; (nix-mode . lsp))
+  :commands lsp)
 
-(defmacro define-keys-for-mode (keymode key-list)
-  `(let ((keymap (intern (concat (symbol-name ',keymode) "-map"))))
-     (dolist (key-val ,key-list)
-       (define-key (symbol-value keymap) (kbd (car key-val)) (cdr key-val)))))
+;; lsp-mode integration for emacs
+(use-package lsp-nix
+  :after (lsp-mode)
+  :custom
+  (lsp-nix-nil-formatter ["nixfmt"]))
 
-(use-package flymake
-  :config
-  (define-keys-for-mode flymake-mode
-                        '(("C-c f d" . flymake-show-buffer-diagnostics)
-                          ("C-c f D" . flymake-show-project-diagnostics))))
-
-(use-package eglot
-  :config
-  (define-keys-for-mode eglot-mode
-                        '(("C-c C-e R" . eglot-reconnect)
-                          ("C-c C-e r" . eglot-rename)
-                          ("C-c C-e f" . eglot-format)
-                          ("C-c C-e c a" . eglot-code-actions)
-                          ("C-c C-e c q" . eglot-code-action-quickfix)
-                          ("C-c C-e c i" . eglot-code-actions-inline)
-                          ("C-c C-e c r" . eglot-code-actions-rewrite)
-                          ("C-c C-e c o" . eglot-code-actions-organize-imports)))
-  (mode/eglot-ensure haskell))
-  ;; For c-mode, we want eglot to start on a per-project basis
-  ; (mode/eglot-ensure c)
-                                        ; (mode/eglot-ensure c++))
+(use-package ggtags
+  :hook (c-mode . ggtags-mode)
+  :bind (("C-c g d" . ggtags-find-definition)
+         ("C-c g r" . ggtags-find-references)
+         ("C-c g R" . ggtags-query-replace)))
 
 (use-package company
   :custom ((company-tooltip-align-annotations t)
