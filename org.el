@@ -8,24 +8,31 @@
 (define-key minibuffer-local-completion-map "\M- "
             (lambda () (interactive) (insert " ")))
 
+(defun my/org-mode-faces ()
+  "Set custom faces for org-mode"
+  (let ((my/variable-pitch '(:family "Linux Libertine O" :height 120 :weight thin))
+        (my/fixed-pitch '(:family "Fira Code" :height 100)))
+    (face-remap-add-relative 'variable-pitch my/variable-pitch)
+    (face-remap-add-relative 'fixed-pitch my/fixed-pitch)))
+
 (use-package org
   :hook ((org-mode . turn-on-org-cdlatex)
          (org-mode . variable-pitch-mode)
-         (org-mode . visual-line-mode))
+         (org-mode . visual-line-mode)
+         (org-mode . my/org-mode-faces))
   :bind (("C-c o l" . org-store-link)
          ("C-c o a" . org-agenda)
          ("C-c o c" . org-capture)
          ("C-c b x" . org-babel-execute-src-block)
          ("C-c b h" . org-babel-hide-result-toggle))
-  :custom-face
-  (variable-pitch ((t (:family "Linux Libertine O" :height 120 :weight thin))))
-  (fixed-pitch ((t (:family "Fira Code" :height 100))))
   
   :custom
   ;; Use RET on keyboard to go to a specified link
   ((org-return-follows-link t)
    ;; I want to see everything unfolded
    (org-startup-folded nil)
+   ;; Hide the stars in asterisks
+   (org-hide-leading-stars t)
    ;; Use indentation for all org files
    (org-startup-indented t)
    ;; Hide all the emphasis markup like /.../ for italics, *...* for bold, etc.

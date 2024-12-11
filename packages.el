@@ -20,7 +20,7 @@
 (use-package smart-mode-line
   :custom ((sml/extra-filler -6)
            (sml/mode-width 'full))
-  :config  
+  :config
   (sml/setup))
 
 ;; Frog-jump buffer will let us jump between multiple
@@ -29,9 +29,9 @@
   :bind ("C-x C-b" . frog-jump-buffer)
   :config
   (setq-default
-   frog-jump-buffer-use-all-the-icons-ivy t)
-   ;; frog-jump-buffer-posframe-parameters '((foreground-color . "#e9e9e9")
-   ;;                                        (background-color . "#3a3a3a")))
+   frog-jump-buffer-use-all-the-icons-ivy t
+   frog-jump-buffer-posframe-parameters '((foreground-color . "#262626")
+                                          (background-color . "#f1f1f1")))
   ;; Ignore some buffers that I'm not interested in. For reference, instead
   ;; of C-x C-b, I can open these buffers using C-x b.
   (dolist (regexp '("TAGS" "^\\*Compile-log" "-debug\\*$"

@@ -7,10 +7,31 @@
   :init
   ;; set prefix for lsp-command-keymap
   (setq lsp-keymap-prefix "C-c l")
-  :hook ((rust-mode . lsp)
-         (haskell-mode . lsp))
-         ;; (nix-mode . lsp))
+  :hook ((rust-mode . lsp-deferred)
+         (haskell-mode . lsp-deferred)
+         (nix-mode . lsp-deferred))
+  :config
+  (progn
+    (lsp-register-client
+     (make-lsp-client :new-connection (lsp-tramp-connection "clangd")
+                      :major-modes '(c-mode c++-mode)
+                      :remote? t
+                      :server-id 'clangd-remote)))
   :commands lsp)
+
+(use-package lsp-ui
+  :custom
+  ((lsp-ui-doc-enable t)
+   (lsp-ui-doc-delay 1)
+   (lsp-ui-doc-position 'at-point)
+   (lsp-ui-doc-show-with-cursor t)
+   (lsp-ui-doc-show-with-mouse t)
+
+   ;; Sideline
+   (lsp-ui-sideline-show-diagnostics t)
+   (lsp-ui-sideline-show-hover t)
+   (lsp-ui-sideline-show-code-actions t)
+   (lsp-ui-sideline-delay 0.7)))
 
 ;; lsp-mode integration for emacs
 (use-package lsp-nix

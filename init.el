@@ -34,10 +34,4 @@
 (load-elisp-file "languages.el")
 (load-elisp-file "lsp.el")
 
-;; Corfu support.
-(use-package emacs
-  :custom
-  ;; Enable indentation+completion using TAB
-  (tab-always-indent 'complete)
-  ;; Hide commands in M-x which do not apply to the current mode.
-  (read-extended-command-predicate #'command-completion-default-include-p))
+

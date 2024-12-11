@@ -9,13 +9,32 @@
  (set-face-attribute 'default nil
                      :font (font-candidate '"Fira Code:size=13")))
 
-(use-package modus-themes
-  :config
-  (setq-default modus-themes-italic-constructs t
-                modus-themes-prompts '(italic)
-                modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)
-                modus-themes-variable-pitch-ui t)
-   
-  (load-theme 'modus-operandi-tinted)
-  (modus-themes-load-theme 'modus-operandi-tinted))
+(setq modus-themes-italic-constructs t ; Allow italics in code
+      modus-themes-mode-line '(borderless)
+      modus-themes-variable-pitch-ui nil
+      modus-themes-disable-other-themes t
+      modus-themes-prompts '(italic)
 
+      ;; Keep mode-line border but make it the same color as the background
+      ;; we also wanna keep the fringe invisible
+      modus-themes-common-palette-overrides
+      '((bg-mode-line-active bg-blue-intense)
+        (fg-mode-line-active fg-main)
+        (border-mode-line-active cyan-subtle)
+
+        ;; Invisible fringe
+        (fringe unspecified)
+
+        ;; Inactive border themes
+        (bg-mode-line-inactifve bg-cyan-subtle)
+        (fg-mode-line-inactive fg-main)
+        (border-mode-line-inactive blue-subtle)
+
+        ;; Line numbers
+        (bg-line-number-active bg-cyan-intense)
+
+        ;; Mouse highlights
+        (cursor fg-main)
+        (bg-hover bg-blue-subtle)))
+
+(load-theme 'modus-operandi)
