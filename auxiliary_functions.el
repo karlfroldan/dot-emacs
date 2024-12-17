@@ -3,6 +3,8 @@
 ;;; Helper functions and macros I use for general Emacs stuff.
 ;;; Code:
 
+(require 'seq)
+
 (defun relative-emacs-dir (dir)
   "Return the absolute DIR from a path relative to emacs.d."
   (concat user-emacs-directory dir))
@@ -40,24 +42,37 @@
        (progn ,@fns))))
 
 (cl-defmacro defsshserver (name
-                             username
-                             host
-                             ; &optional (port "22")
-                             &optional (directory "~")
-                             &key (load-path '()))
+                           username
+                           host
+                           &key (port nil)
+                           &key (directory "~")
+                           &key (shell "/bin/sh")
+                           &key (load-path '()))
   "Define an SSH server that can be called using ssh-name as specified by NAME.
 The server will connect to USERNAME to HOST on the specified PORT.
 The default DIRECTORY is the user's home."
   (let ((proto (if (eq system-type 'windows-nt)
                    "plink"
                  "ssh")))
-    `(defun ,(intern (format "ssh-%s" name)) () ;(filename)
-       (interactive)
-             ;; (interactive "P\nFfile: ")
-       ;; (let ((selected-file (if filename
-       ;;                          filename
-       ;;                        ,directory)))
-         (dired (format "/%s:%s@%s:%s" ,proto ,username ,host ,directory)))))
+
+    `(progn
+       (defun ,(intern (format "ssh-%s" name)) ()
+         "Start a dired ssh session"
+         (interactive)
+         (dired (format "/%s:%s@%s:%s" ,proto ,username ,host ,directory)))
+
+       (defun ,(intern (format "shell-%s" name)) (new-buffer-name)
+         "Start a tramp shell session"
+         (interactive (list (read-string "buffer name: " (concat "*shell-" ,name "*"))))
+         (let* ((default-directory (format "/%s:%s@%s:~" ,proto ,username ,host))
+                ;; Create a new buffer that we can rename later.
+                (new-shell-buffer (generate-new-buffer new-buffer-name))
+                (explicit-shell-file-name ,shell))
+           (with-current-buffer  new-shell-buffer
+             (shell new-shell-buffer)
+             (rename-buffer new-buffer-name t)))))))
+       
+
 
 (provide 'auxiliary_functions)
 ;;; auxiliary_functions.el ends here

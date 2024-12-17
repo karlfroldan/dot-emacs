@@ -141,8 +141,7 @@
 
 (use-package buffer-env
   :hook ((comint-mode . hack-dir-local-variables-non-file-buffer)
-         (hack-local-variables . buffer-env-update)
-         (rust-mode . buffer-env-update))
+         (hack-local-variables . buffer-env-update))
   :custom ((buffer-env-script-name '("flake.nix"))
            (buffer-env-verbose t)))
 

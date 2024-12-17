@@ -20,7 +20,9 @@
   :if (treesit-language-available-p 'c)
   :custom
   ((c-ts-mode-indent-offset 4))
-   ;(c-ts-mode-indent-style "K&R"))
+  :bind
+  (:map c-ts-mode-map
+        ("C-c C-q" . compile))
   :config
   (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
   (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
