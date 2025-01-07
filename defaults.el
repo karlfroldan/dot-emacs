@@ -27,7 +27,10 @@
    (tab-width 4)
 
    ;; Allow tramp to use .dir-locals.el
-   (enable-remote-dir-locals t)
+   (enable-remote-dir-locals nil)
+
+   ;; Disable vc-mode entirely
+   (vc-handled-backends nil)
 
    ;; LSP MODE Stuff
    ;; Increase gc-threshhold for LSP

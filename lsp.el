@@ -9,7 +9,9 @@
   (setq lsp-keymap-prefix "C-c l")
   :hook ((rust-mode . lsp-deferred)
          (haskell-mode . lsp-deferred)
-         (nix-mode . lsp-deferred))
+         (c-mode . lsp-deferred)
+         (nix-mode . lsp-deferred)
+         (ts-mode . lsp-deferred))
   :config
   (progn
     (lsp-register-client

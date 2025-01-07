@@ -22,11 +22,6 @@
 ;; Load all download packages from GNU elpa and melpa
 (load-elisp-file "packages.el")
 
-;; On some machines, I need to SSH but the IP addresses needed
-;; to SSH may be different depending on the purpose of the machine.
-(if (file-exists-p (relative-emacs-dir "ssh.el"))
-    (load-elisp-file "ssh.el"))
-
 ;; Load org-mode stuff
 (load-elisp-file "org.el")
 (load-elisp-file "irc.el")
@@ -34,4 +29,8 @@
 (load-elisp-file "languages.el")
 (load-elisp-file "lsp.el")
 
+;; On some machines, I need to SSH but the IP addresses needed
+;; to SSH may be different depending on the purpose of the machine.
+(if (file-exists-p (relative-emacs-dir "ssh.el"))
+    (load-elisp-file "ssh.el"))
 
