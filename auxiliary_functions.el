@@ -42,6 +42,7 @@
        (progn ,@fns))))
 
 (defun my/ssh--get-address (protocol username host port directory)
+  "Get the canonical address used to connect to a remote host via SSH"
   (if port
       (format "/%s:%s@%s#%d:%s" protocol username host port directory)
     (format "/%s:%s@%s:%s" protocol username host directory)))
@@ -55,6 +56,12 @@
     (with-current-buffer new-eat-buffer
       (rename-buffer buffer-name t))))
 
+(defun my/ssh--ssh-protocol ()
+  "Determine the SSH protocol to use to connect to the remote server."
+  (if (eq system-type 'windows-nt)
+      "plink"
+    "ssh"))
+
 (cl-defmacro defsshserver (name
                            username
                            host
@@ -65,9 +72,7 @@
   "Define an SSH server that can be called using ssh-name as specified by NAME.
 The server will connect to USERNAME to HOST on the specified PORT.
 The default DIRECTORY is the user's home."
-  (let ((proto (if (eq system-type 'windows-nt)
-                   "plink"
-                 "ssh")))
+  (let ((proto (my/ssh--ssh-protocol)))
     `(progn
        (defun ,(intern (format "ssh-%s" name)) (dir)
          "Start a dired ssh session"
@@ -79,6 +84,15 @@ The default DIRECTORY is the user's home."
          "Start a tramp shell session"
          (interactive (list (read-string "buffer name: " (concat "*shell-" ,name "*"))))
          (my/ssh--enter-shell ,proto ,username ,host ,port ,default-directory ,shell-program new-buffer-name)))))
+
+(defun my/shell-open-remote (username host)
+  "Open an eat shell to HOST with user USERNAME."
+  (interactive
+   (list (read-string "username: ")
+         (read-string "ssh host: ")))
+  (let ((buffer-name (format "*shell:%s@%s*" username host))
+        (protocol (my/ssh--ssh-protocol)))
+    (my/ssh--enter-shell protocol username host 22 "~" "/bin/bash" buffer-name)))
 
 (provide 'auxiliary_functions)
 ;;; auxiliary_functions.el ends here

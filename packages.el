@@ -77,18 +77,7 @@
 (use-package projectile
   :init
   (setq projectile-keymap-prefix (kbd "C-c C-p"))
-  ;; :custom ((projectile-mode-line "Projectile"))
   :config
-  ;; (defadvice projectile-project-root (around ignore-remote first activate)
-  ;;   (unless (file-remote-p default-directory) ad-do-it))
-  ;; (defadvice my/add-projectile-project-root (orig-fun &optional dir)
-  ;;   "This should disable projectile when visiting files with TRAMP"
-  ;;   (let ((dir (file-truename (or dir default-directory))))
-  ;;     (unless (file-remote-p dir)
-  ;;       (funcall orig-fun dir))))
-  ;; (advice-add 'projectile-project-root :around #'my/add-projectile-project-root)
-  ;; (setq projectile-project-search-path '("~/projects/"
-  ;;                                        "~/sources/"))
   (projectile-global-mode))
 
 (use-package yasnippet
@@ -100,7 +89,10 @@
 ;;; EAT Terminal Emulator
 (use-package eat
   :hook ((eshell-load . eat-eshell-mode)
-         (eshell-load . eat-eshell-visual-command-mode)))
+         (eshell-load . eat-eshell-visual-command-mode))
+  :config
+  (define-key eat-semi-char-mode-map (kbd "M-o") nil))
+  
 
 (use-package tramp
   :config
