@@ -12,10 +12,14 @@
 
 (use-package all-the-icons)
 
-
 (use-package all-the-icons-dired
   :after all-the-icons
+  :custom ((all-the-icons-dired-monochrome nil))
   :hook (dired-mode . all-the-icons-dired-mode))
+  ;; :config
+  ;; (advice-add 'all-the-icons-dired--put-icon :before-while
+  ;;             (lambda (&optional dir)
+  ;;               (not (file-remote-p (or dir default-directory))))))
 
 (use-package smart-mode-line
   :custom ((sml/extra-filler -6)
@@ -76,9 +80,21 @@
 ;; instead of individual files (like vim)
 (use-package projectile
   :init
-  (setq projectile-keymap-prefix (kbd "C-c C-p"))
+  (setq projectile-keymap-prefix (kbd "C-c p"))
   :config
-  (projectile-global-mode))
+  (projectile-global-mode)
+  (defvar my/projectile-project-root-remote-disable '())
+
+  ;; Advice projectile to disable projectile-project-root if
+  ;; we don't use this on the remote host
+  (advice-add 'projectile-project-root :before-while
+              (lambda (&optional dir)
+                (let ((d (or dir default-directory)))
+                  ;; Execute if the file is not remote OR if it is remote, if it's not included in
+                  ;; MY/PROJECTILE-PROJECT-ROOT-REMOTE-DISABLE variable
+                  (or (not (file-remote-p d))
+                      (and (file-remote-p d) (not (member (substring (file-remote-p d) 0 -1)
+                                                          my/projectile-project-root-remote-disable))))))))
 
 (use-package yasnippet
   :custom (yas-snippet-dirs '("~/.emacs.d/snippets"))

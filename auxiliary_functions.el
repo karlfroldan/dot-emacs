@@ -18,8 +18,6 @@
   "Load an Emacs Lisp FILE-NAME that resides in the Emacs config directory."
   (load (relative-emacs-dir file-name)))
 
-
-
 (defun my/fetch-password (&rest params)
   (require 'auth-source)
   (let ((match (car (apply 'auth-source-search params))))
@@ -41,11 +39,15 @@
      (when (display-graphic-p)
        (progn ,@fns))))
 
+(defun my/ssh--host-address (protocol username host &optional port)
+  (if port
+      (format "/%s:%s@%s#%d" protocol username host port)
+    (format "/%s:%s@%s" protocol username host)))
+
 (defun my/ssh--get-address (protocol username host port directory)
   "Get the canonical address used to connect to a remote host via SSH"
-  (if port
-      (format "/%s:%s@%s#%d:%s" protocol username host port directory)
-    (format "/%s:%s@%s:%s" protocol username host directory)))
+  (let ((host-addr (my/ssh--host-address protocol username host port)))
+    (format "%s:%s" host-addr directory)))
 
 (defun my/ssh--enter-dired (protocol username host port directory)
   (dired (my/ssh--get-address protocol username host port directory)))
@@ -68,7 +70,8 @@
                            &key (port nil)
                            &key (default-directory "~/")
                            &key (shell-program "/bin/sh")
-                           &key (load-path '()))
+                           &key (load-path '())
+                           &key (enable-projectile-project-root t))
   "Define an SSH server that can be called using ssh-name as specified by NAME.
 The server will connect to USERNAME to HOST on the specified PORT.
 The default DIRECTORY is the user's home."
@@ -77,13 +80,25 @@ The default DIRECTORY is the user's home."
        (defun ,(intern (format "ssh-%s" name)) (dir)
          "Start a dired ssh session"
          (interactive
-          (list (read-directory-name "Directory: " (my/ssh--get-address ,proto ,username ,host ,port ,default-directory))))
-         (my/ssh--enter-dired ,proto ,username ,host ,port (file-remote-p dir 'localname)))
+          (list
+           (read-directory-name "Directory: "
+                                (my/ssh--get-address ,proto ,username ,host ,port ,default-directory))))
+         (progn
+           (let ((ssh-host (my/ssh--host-address ,proto ,username ,host ,port)))
+             (if (and (not ,enable-projectile-project-root)
+                      (not (member ssh-host my/projectile-project-root-remote-disable)))
+                 (push ssh-host my/projectile-project-root-remote-disable)))
+           (my/ssh--enter-dired ,proto ,username ,host ,port (file-remote-p dir 'localname))))
 
        (defun ,(intern (format "shell-%s" name)) (new-buffer-name)
          "Start a tramp shell session"
          (interactive (list (read-string "buffer name: " (concat "*shell-" ,name "*"))))
-         (my/ssh--enter-shell ,proto ,username ,host ,port ,default-directory ,shell-program new-buffer-name)))))
+         (my/ssh--enter-shell ,proto
+                              ,username
+                              ,host
+                              ,port
+                              ,default-directory
+                              ,shell-program new-buffer-name)))))
 
 (defun my/shell-open-remote (username host)
   "Open an eat shell to HOST with user USERNAME."

@@ -66,6 +66,9 @@
   (set-charset-priority 'unicode)
   (prefer-coding-system 'utf-8-unix)
 
+  ;; Use ssh controlmaster for some hosts by using ~/.ssh/config
+  (customize-set-variable 'tramp-use-connection-share nil)
+
   :bind
   (("C->" . scroll-up-line)
    ("C-<" . scroll-down-line))
