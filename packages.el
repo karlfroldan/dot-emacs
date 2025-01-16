@@ -18,6 +18,7 @@
   :hook (dired-mode . all-the-icons-dired-mode))
   ;; :config
   ;; (advice-add 'all-the-icons-dired--put-icon :before-while
+
   ;;             (lambda (&optional dir)
   ;;               (not (file-remote-p (or dir default-directory))))))
 
@@ -82,6 +83,18 @@
   :init
   (setq projectile-keymap-prefix (kbd "C-c p"))
   :config
+  (defun my/projectile-compile-subproject ()
+    "Compile a dz3 subproject and prompt for additional parameters."
+    (interactive)
+    (let* ((root-project-dir (magit-toplevel))
+           (project-name (projectile-project-name))
+           (build-script-name "karl-build.sh")
+           (command (format "sh -c '%s/%s %s'"
+                            root-project-dir
+                            build-script-name
+                            project-name)))
+      (compile command)))
+  
   (projectile-global-mode)
   (defvar my/projectile-project-root-remote-disable '())
 
@@ -169,6 +182,14 @@
 
 (use-package windresize
   :bind ("C-c C-w" . windresize))
+
+(use-package age
+  :demand t
+  :config
+  (age-file-enable)
+  (add-to-list 'auth-sources "~/.authinfo.age")
+  :custom ((age-default-identity "~/.ssh/id_ed25519")
+           (age-default-recipient "~/.ssh/id_ed25519.pub")))
 
 (provide 'packages)
 ;;; packages.el ends here

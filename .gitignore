@@ -29,3 +29,4 @@ custom.el
 annotations
 .dap-breakpoints
 %backup%~
+*.cache

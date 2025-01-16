@@ -47,6 +47,7 @@
    ;; Unicode ellipses are better
    (truncate-string-ellipsis "…")
    ;; Backup directory
+   (backup-inhibited t) ; Don't allow backups
    (backup-directory-alist '(("." . "~/.bak.emacs"))))
 
   :config
@@ -74,9 +75,7 @@
    ("C-<" . scroll-down-line))
 
   :hook
-  ((prog-mode . (lambda () (local-set-key (kbd "C-c :") #'goto-line)))
-   ;; Set linum-mode for line numbers.
-   (prog-mode . display-line-numbers-mode)
+  ((prog-mode . display-line-numbers-mode)
    (prog-mode . hl-line-mode)))
 
 ;;; Add different binary directories for exec-path
