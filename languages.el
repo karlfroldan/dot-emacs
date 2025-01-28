@@ -38,7 +38,8 @@
 
 (use-package typescript-ts-mode
   :if (treesit-language-available-p 'typescript)
-  :custom (typescript-indent-level 4)
+  :custom ((typescript-indent-level 4)
+           (typescript-ts-mode-indent-offset 4))
   :defer t)
 
 (use-package c-ts-mode

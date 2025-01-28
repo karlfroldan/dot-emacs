@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: checknull
+# key: checknull
+# --
+if ($1 == NULL) {
+    $0
+}
