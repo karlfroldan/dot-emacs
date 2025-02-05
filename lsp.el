@@ -12,6 +12,7 @@
          (c-mode . lsp-deferred)
          (nix-mode . lsp-deferred)
          (ts-mode . lsp-deferred)
+         (slint-mode . lsp-deferred)
          (typescript-ts-mode . lsp-deferred))
   :config
   (progn
