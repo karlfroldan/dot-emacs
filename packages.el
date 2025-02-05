@@ -16,11 +16,6 @@
   :after all-the-icons
   :custom ((all-the-icons-dired-monochrome nil))
   :hook (dired-mode . all-the-icons-dired-mode))
-  ;; :config
-  ;; (advice-add 'all-the-icons-dired--put-icon :before-while
-
-  ;;             (lambda (&optional dir)
-  ;;               (not (file-remote-p (or dir default-directory))))))
 
 (use-package smart-mode-line
   :custom ((sml/extra-filler -6)
@@ -139,10 +134,6 @@
            (mu4e-use-fancy-chars t)
            (mu4e-compose-crypto-policy '(sign-all-messages))))
 
-;; (use-package bash-completion
-;;   :config
-;;   (bash-completion-setup))
-
 (use-package avy
   :custom
   ;; Set the avy timeout for avy-goto-char-timer to 0.8 seconds
@@ -167,7 +158,6 @@
   (add-to-list 'rm-blacklist " yas")
   (add-to-list 'rm-blacklist " company")
   (add-to-list 'rm-blacklist " all-the-icons-dired-mode"))
-
 
 (use-package buffer-env
   :hook ((comint-mode . hack-dir-local-variables-non-file-buffer)
