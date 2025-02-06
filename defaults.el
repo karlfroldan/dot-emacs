@@ -44,6 +44,7 @@
                       (other . "k&r")))
    ;; C programming should have 4 spaces
    (c-basic-offset 4)
+
    ;; Unicode ellipses are better
    (truncate-string-ellipsis "…")
    ;; Backup directory
@@ -69,6 +70,43 @@
 
   ;; Use ssh controlmaster for some hosts by using ~/.ssh/config
   (customize-set-variable 'tramp-use-connection-share nil)
+
+  ;; Desktop.el
+
+  (setq desktop-buffers-not-to-save (concat "\\("
+                                            "^nn\\.a[0-9]+"
+                                            "\\|\\.log"
+                                            "\\|(ftp)"
+                                            "\\|^tags"
+                                            "\\|^TAGS"
+                                            "\\|\\.emacs.*"
+                                            "\\|\\.diary"
+                                            "\\|\\.newsrc-dribble"
+                                            "\\|\\.bbdb"
+                                            "\\|^\\*Compile-log"
+                                            "\\|-debug\\*$"
+                                            "\\|errors\\*$"
+                                            "\\|^\\*Backtrace"
+                                            "\\|-ls\\*$"
+                                            "\\|stderr\\*$"
+                                            "\\|^\\*Flymake"
+                                            "\\|^\\*vc"
+                                            "\\|^\\*Warnings"
+                                            "\\|^\\*eldoc"
+                                            "\\|\\^*Shell Command"
+                                            "\\|\\*lsp-log\\*"
+                                            "\\|\\*Completions\\*"
+                                            "\\|-compile-Log\\*$"
+                                            "\\|\\*clangd\\*"
+                                            "\\)$"))
+  (let ((do-not-save-modes-list
+         (list 'dired-mode
+               'Info-mode
+               'info-lookup-mode
+               'fundamental-mode)))
+    (mapc (lambda (mode)
+            (add-to-list 'desktop-modes-not-to-save mode))
+          do-not-save-modes-list))
 
   :bind
   (("C->" . scroll-up-line)
