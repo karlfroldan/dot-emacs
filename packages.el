@@ -116,7 +116,6 @@
          (eshell-load . eat-eshell-visual-command-mode))
   :config
   (define-key eat-semi-char-mode-map (kbd "M-o") nil))
-  
 
 (use-package tramp
   :config
@@ -124,15 +123,6 @@
   ;; Haskell stuff
   (add-to-list 'tramp-remote-path "~/.cabal/bin")
   (add-to-list 'tramp-remote-path "~/.ghcup/bin"))
-
-(use-package mu4e
-  :custom ((mu4e-sent-folder "/Sent")
-           (mu4e-drafts-folder "/Drafts")
-           (mu4e-trash-folder "/Trash")
-           (mu4e-refile-folder "/Starred")
-           (mu4e-get-mail-command "mbsync -L gmail")
-           (mu4e-use-fancy-chars t)
-           (mu4e-compose-crypto-policy '(sign-all-messages))))
 
 (use-package avy
   :custom
