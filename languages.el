@@ -13,6 +13,10 @@
   :if (treesit-language-available-p 'cmake)
   :defer t)
 
+(use-package python-ts-mode
+  :if (treesit-language-available-p 'python)
+  :defer t)
+
 (use-package rust-ts-mode
   :if (treesit-language-available-p 'rust)
   :mode "\\.rs\\'"

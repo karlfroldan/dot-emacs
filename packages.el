@@ -30,8 +30,8 @@
   :config
   (setq-default
    frog-jump-buffer-use-all-the-icons-ivy t
-   frog-jump-buffer-posframe-parameters '((foreground-color . "#262626")
-                                          (background-color . "#f1f1f1")))
+   frog-jump-buffer-posframe-parameters '((foreground-color . "#f1f1f1")
+                                          (background-color . "#2a2a2a")))
   ;; Ignore some buffers that I'm not interested in. For reference, instead
   ;; of C-x C-b, I can open these buffers using C-x b.
   (dolist (regexp '("TAGS" "^\\*Compile-log" "-debug\\*$"

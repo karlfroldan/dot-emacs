@@ -9,32 +9,35 @@
  (set-face-attribute 'default nil
                      :font (font-candidate '"Fira Code:size=13")))
 
-(setq modus-themes-italic-constructs t ; Allow italics in code
-      modus-themes-mode-line '(borderless)
-      modus-themes-variable-pitch-ui nil
-      modus-themes-disable-other-themes t
-      modus-themes-prompts '(italic)
+(setq catppuccin-flavor 'mocha)
+(load-theme 'catppuccin :no-confirm)
 
-      ;; Keep mode-line border but make it the same color as the background
-      ;; we also wanna keep the fringe invisible
-      modus-themes-common-palette-overrides
-      '((bg-mode-line-active bg-blue-intense)
-        (fg-mode-line-active fg-main)
-        (border-mode-line-active cyan-subtle)
+;; (setq modus-themes-italic-constructs t ; Allow italics in code
+;;       modus-themes-mode-line '(borderless)
+;;       modus-themes-variable-pitch-ui nil
+;;       modus-themes-disable-other-themes t
+;;       modus-themes-prompts '(italic)
 
-        ;; Invisible fringe
-        (fringe unspecified)
+;;       ;; Keep mode-line border but make it the same color as the background
+;;       ;; we also wanna keep the fringe invisible
+;;       modus-themes-common-palette-overrides
+;;       '((bg-mode-line-active bg-blue-intense)
+;;         (fg-mode-line-active fg-main)
+;;         (border-mode-line-active cyan-subtle)
 
-        ;; Inactive border themes
-        (bg-mode-line-inactifve bg-cyan-subtle)
-        (fg-mode-line-inactive fg-main)
-        (border-mode-line-inactive blue-subtle)
+;;         ;; Invisible fringe
+;;         (fringe unspecified)
 
-        ;; Line numbers
-        (bg-line-number-active bg-cyan-intense)
+;;         ;; Inactive border themes
+;;         (bg-mode-line-inactifve bg-cyan-subtle)
+;;         (fg-mode-line-inactive fg-main)
+;;         (border-mode-line-inactive blue-subtle)
 
-        ;; Mouse highlights
-        (cursor fg-main)
-        (bg-hover bg-blue-subtle)))
+;;         ;; Line numbers
+;;         (bg-line-number-active bg-cyan-intense)
 
-(load-theme 'modus-operandi)
+;;         ;; Mouse highlights
+;;         (cursor fg-main)
+;;         (bg-hover bg-blue-subtle)))
+
+;; (load-theme 'modus-vivendi-tinted)

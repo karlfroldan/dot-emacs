@@ -61,6 +61,7 @@
 
   ;; Remove the toolbar
   (tool-bar-mode -1)
+  (menu-bar-mode -1)
 
   ;; DIRED BEHAVIOR
   (put 'dired-find-alternate-file 'disabled nil)
