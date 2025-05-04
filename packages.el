@@ -171,6 +171,20 @@
   :custom ((age-default-identity "~/.ssh/id_ed25519")
            (age-default-recipient "~/.ssh/id_ed25519.pub")))
 
+(use-package copilot
+  ;; I don't want it to always appear.
+  ;; :hook ((prog-mode . copilot-mode))
+  :bind (("C-<return>" . copilot-accept-completion)
+         ("C-c C d" . copilot-clear-overlay)
+         ("C-c C n" . copilot-next-completion)
+         ("C-c C p" . copilot-previous-completion)))
+
+;; (use-package nix
+;;   :config
+;;   (defun my/nix-mode--home-manager-switch ()
+;;     (interactive)
+;;   (defun my/nix-mode-keymap ()
+;;     (local-set-key (kbd "M-n h s") 
+
 (provide 'packages)
 ;;; packages.el ends here
-

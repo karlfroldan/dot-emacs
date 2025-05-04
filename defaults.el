@@ -26,6 +26,9 @@
    ;; Set tab to 4 spaces
    (tab-width 4)
 
+   ;; Call man program on remote systems
+   (Man-support-remote-systems t)
+
    ;; Allow tramp to use .dir-locals.el
    (enable-remote-dir-locals nil)
 
