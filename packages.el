@@ -78,31 +78,7 @@
   :init
   (setq projectile-keymap-prefix (kbd "C-c p"))
   :config
-  (defun my/projectile-compile-subproject ()
-    "Compile a dz3 subproject and prompt for additional parameters."
-    (interactive)
-    (let* ((root-project-dir (magit-toplevel))
-           (project-name (projectile-project-name))
-           (build-script-name "karl-build.sh")
-           (command (format "sh -c '%s/%s %s'"
-                            root-project-dir
-                            build-script-name
-                            project-name)))
-      (compile command)))
-  
-  (projectile-global-mode)
-  (defvar my/projectile-project-root-remote-disable '())
-
-  ;; Advice projectile to disable projectile-project-root if
-  ;; we don't use this on the remote host
-  (advice-add 'projectile-project-root :before-while
-              (lambda (&optional dir)
-                (let ((d (or dir default-directory)))
-                  ;; Execute if the file is not remote OR if it is remote, if it's not included in
-                  ;; MY/PROJECTILE-PROJECT-ROOT-REMOTE-DISABLE variable
-                  (or (not (file-remote-p d))
-                      (and (file-remote-p d) (not (member (substring (file-remote-p d) 0 -1)
-                                                          my/projectile-project-root-remote-disable))))))))
+  (projectile-global-mode))
 
 (use-package yasnippet
   :custom (yas-snippet-dirs '("~/.emacs.d/snippets"))
@@ -184,7 +160,21 @@
 ;;   (defun my/nix-mode--home-manager-switch ()
 ;;     (interactive)
 ;;   (defun my/nix-mode-keymap ()
-;;     (local-set-key (kbd "M-n h s") 
+;;     (local-set-key (kbd "M-n h s")
+
+;; (use-package conda
+;;   :ensure t
+;;   ;; Interactive shell support
+;;   :config
+;;   (conda-env-initialize-interactive-shells)
+;;   ;; Eshell support
+;;   (conda-env-initialize-eshell)
+;;   ;; auto-activate
+;;   (conda-env-autoactivate-mode -1)
+;;   ;; Automatically activate a conda environment on the opening
+;;   (add-hook 'find-file-hook (lambda ()
+;;                               (when (bound-and-true-p conda-project-env-path)
+;;                                 (conda-env-activate-for-buffer)))))
 
 (provide 'packages)
 ;;; packages.el ends here

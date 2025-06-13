@@ -9,6 +9,18 @@
   "Return the absolute DIR from a path relative to emacs.d."
   (concat user-emacs-directory dir))
 
+(defun ensure-directory-exists (dir)
+  "Create the directory DIR if it doesn't exist. Return an error if it does exists but not a directory"
+  (cond ((file-directory-p dir)
+         ;; Directory already exists - do nothing
+         nil)
+        ((file-exists-p dir)
+         ;; Exists, but not a directory - error
+         (error "Path exists but is not a directory: %s" dir))
+        (t
+         ;; Doesn't exist - create it
+         (make-directory dir :parents))))
+
 (defun package-recompile-all ()
   "Refresh and reinstall all activated packages."
   (interactive)

@@ -30,7 +30,7 @@
    (Man-support-remote-systems t)
 
    ;; Allow tramp to use .dir-locals.el
-   (enable-remote-dir-locals nil)
+   (enable-remote-dir-locals t)
 
    ;; Disable vc-mode entirely
    (vc-handled-backends nil)
@@ -103,14 +103,14 @@
                                             "\\|-compile-Log\\*$"
                                             "\\|\\*clangd\\*"
                                             "\\)$"))
-  (let ((do-not-save-modes-list
-         (list 'dired-mode
-               'Info-mode
-               'info-lookup-mode
-               'fundamental-mode)))
-    (mapc (lambda (mode)
-            (add-to-list 'desktop-modes-not-to-save mode))
-          do-not-save-modes-list))
+  ;; (let ((do-not-save-modes-list
+  ;;        (list 'dired-mode
+  ;;              'Info-mode
+  ;;              'info-lookup-mode
+  ;;              'fundamental-mode)))
+  ;;   (mapc (lambda (mode)
+  ;;           (add-to-list 'desktop-modes-not-to-save mode))
+  ;;         do-not-save-modes-list))
 
   :bind
   (("C->" . scroll-up-line)

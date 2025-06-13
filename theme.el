@@ -7,7 +7,7 @@
 
 (my/load-make-after-frame
  (set-face-attribute 'default nil
-                     :font (font-candidate '"Fira Code:size=13")))
+                     :font (font-candidate '"Source Code Pro:size=13")))
 
 (setq catppuccin-flavor 'mocha)
 (load-theme 'catppuccin :no-confirm)

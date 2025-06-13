@@ -31,10 +31,10 @@
 ;;   :if (treesit-language-available-p 'nix)
 ;;   :defer t)
 
-(use-package haskell-ts-mode
-  :if (treesit-language-available-p 'haskell)
-  :mode "\\.hs\\'"
-  :defer t)
+;; (use-package haskell-ts-mode
+;;   :if (treesit-language-available-p 'haskell)
+;;   :mode "\\.hs\\'"
+;;   :defer t)
 
 (use-package bash-ts-mode
   :if (treesit-language-available-p 'bash)
@@ -55,13 +55,6 @@
   (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
   (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
   (add-to-list 'major-mode-remap-alist '(c-or-c++-mode . c-or-c++-ts-mode)))
-
-;; Enable ggtags-mode for C mode and C++ mode
-(use-package ggtags
-  :hook
-  ((c-mode-common . (lambda ()
-                      (when (derived-mode-p 'c-mode 'c-ts-mode 'c++-mode 'c++-ts-mode 'java-mode)
-                        (ggtags-mode 1))))))
 
 (setq major-mode-remap-alist
       '((c-mode . c-ts-mode)

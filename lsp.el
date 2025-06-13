@@ -43,12 +43,6 @@
   :custom
   (lsp-nix-nil-formatter ["nixfmt"]))
 
-(use-package ggtags
-  ;; :hook (c-ts-mode . ggtags-mode)
-  :bind (("C-c g d" . ggtags-find-definition)
-         ("C-c g r" . ggtags-find-references)
-         ("C-c g R" . ggtags-query-replace)))
-
 (use-package company
   :custom ((company-tooltip-align-annotations t)
            (company-tooltip-limit 6)

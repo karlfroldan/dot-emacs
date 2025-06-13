@@ -1,7 +1,10 @@
+(defvar my/base-org-dir (concat (getenv "HOME") "/Documents/Notes")
+  "The root org-mode directory")
+
 (defun relative-org-dir (name)
   "Return a string that's supposed to be a file
    relative to the org-mode notes directory"
-  (concat (getenv "HOME") "/Notes/" name))
+  (concat my/base-org-dir "/" name))
 
 ;; https://stackoverflow.com/questions/17473478/how-to-enter-a-space-in-the-minibuffer-instead-of-completing-a-word
 ;; I need to use this for org-mode
@@ -50,6 +53,8 @@
                             "* TODO %?" :empty-lines 1))))
   
   :config
+  (ensure-directory-exists my/base-org-dir)
+
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((scheme . t)
