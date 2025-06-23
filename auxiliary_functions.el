@@ -9,6 +9,15 @@
   "Return the absolute DIR from a path relative to emacs.d."
   (concat user-emacs-directory dir))
 
+;; Add support for loading packages that do not play nice with Nix.
+(defmacro use-package-with-load-path (pkg path &rest body)
+  "Load PKG from the specified PATH."
+  `(if (file-directory-p ,path)
+     (use-package ,pkg
+       :load-path ,path
+       ,@body)
+     (warn "use-package: load-path %s for package %s not found" ,path ,'pkg)))
+
 (defun ensure-directory-exists (dir)
   "Create the directory DIR if it doesn't exist. Return an error if it does exists but not a directory"
   (cond ((file-directory-p dir)

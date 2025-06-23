@@ -1,128 +1,91 @@
-(defvar my/base-org-dir (concat (getenv "HOME") "/Documents/Notes")
-  "The root org-mode directory")
+(defvar my/base-org-dir (concat (getenv "HOME") "/Documents/Notes"))
 
-(defun relative-org-dir (name)
-  "Return a string that's supposed to be a file
-   relative to the org-mode notes directory"
+(defun org-dir (name)
+  "Return a string that's supposed to be the file NAME
+   relative to the org-mode notes directory."
   (concat my/base-org-dir "/" name))
 
 ;; https://stackoverflow.com/questions/17473478/how-to-enter-a-space-in-the-minibuffer-instead-of-completing-a-word
 ;; I need to use this for org-mode
+;; Insert space while in the mini-buffer
 (define-key minibuffer-local-completion-map "\M- "
-            (lambda () (interactive) (insert " ")))
+            (lambda () (interactive (insert " "))))
 
-(defun my/org-mode-faces ()
-  "Set custom faces for org-mode"
-  (let ((my/variable-pitch '(:family "Linux Libertine O" :height 120 :weight thin))
-        (my/fixed-pitch '(:family "Fira Code" :height 100)))
-    (face-remap-add-relative 'variable-pitch my/variable-pitch)
-    (face-remap-add-relative 'fixed-pitch my/fixed-pitch)))
+(use-package cdlatex)
 
 (use-package org
   :hook ((org-mode . turn-on-org-cdlatex)
-         (org-mode . variable-pitch-mode)
-         (org-mode . visual-line-mode)
-         (org-mode . my/org-mode-faces))
+         ;; (org-mode . variable-pitch-mode)
+         (org-mode . visual-line-mode))
   :bind (("C-c o l" . org-store-link)
          ("C-c o a" . org-agenda)
          ("C-c o c" . org-capture)
          ("C-c b x" . org-babel-execute-src-block)
          ("C-c b h" . org-babel-hide-result-toggle))
-  
   :custom
-  ;; Use RET on keyboard to go to a specified link
+  ;; Use RET on keyboard to go to a specific link
   ((org-return-follows-link t)
    ;; I want to see everything unfolded
    (org-startup-folded nil)
-   ;; Hide the stars in asterisks
+   ;; Hide the stars in the asterisks
    (org-hide-leading-stars t)
-   ;; Use indentation for all org files
+   ;; Use indentation for all org-files
    (org-startup-indented t)
    ;; Hide all the emphasis markup like /.../ for italics, *...* for bold, etc.
    (org-hide-emphasis-markers t)
    ;; Default note types for org-mode
-   (org-defaults-notes-file (relative-org-dir "tasks/default.org"))
-   (org-capture-templates '(("w" "Work-related Task" entry
-                            (file (relative-org-dir "tasks/work.org"))
-                            "* TODO %?" :empty-lines 1)
-                           ("j" "Journal" entry
-                            (file+datetree (relative-org-dir "tasks/journal.org"))
-                            "* %?\nEntered on %U\n %i\n %a")
-                           ("t" "Personal Task" entry
-                            (file org-default-notes-file)
-                            "* TODO %?" :empty-lines 1))))
-  
+   (org-default-notes-file (org-dir "tasks/default.org")))
+
   :config
   (ensure-directory-exists my/base-org-dir)
 
   (org-babel-do-load-languages
-   'org-babel-load-languages
+   'org-babel-do-load-languages
    '((scheme . t)
      (python . t)
+     (julia . t)
      (shell . t)))
   (setq org-babel-python-command "python3")
-  (setq org-babel-default-header-args
-        '((:session . "my-session")))
-
-  ;; Set the dot character for bullet points
-  (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-+]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-  
-  
-  (let* ((base-font-color (face-foreground 'default nil 'default))
-       (headline `(:inherit default :weight bold :foreground ,base-font-color))
-       (variable-pitch '(:font "Linux Libertine O" :height 180 :weight thin))
-       (fixed-font '(:family "Fira Code" :height 160)))
-  (custom-theme-set-faces
-   'user
-   '(org-block ((t (:inherit fixed-pitch))))
-   '(org-block-begin-line ((t (:inherit fixed-pitch :background "#cab9b2" :foreground "#4a0b4a"))))
-   '(org-drawer ((t (:inherit fixed-pitch))))
-   '(org-code ((t (:inherit (shadow fixed-pitch) :foreground "#2e2d2d" :weight medium))))
-   '(org-document-info ((t (:foreground "dark orange"))))
-   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-   '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
-   '(org-link ((t (:foreground "royal blue" :underline t))))
-   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-property-value ((t (:inherit fixed-pitch))) t)
-   '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
-   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
-   '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
-
-   `(org-level-8 ((t (,@headline ,@variable-pitch))))
-   `(org-level-7 ((t (,@headline ,@variable-pitch))))
-   `(org-level-6 ((t (,@headline ,@variable-pitch))))
-   `(org-level-5 ((t (,@headline ,@variable-pitch))))
-   `(org-level-4 ((t (,@headline ,@variable-pitch :height 1.1))))
-   `(org-level-3 ((t (,@headline ,@variable-pitch :height 1.125))))
-   `(org-level-2 ((t (,@headline ,@variable-pitch :height 1.2))))
-   `(org-level-1 ((t (,@headline ,@variable-pitch :height 1.3))))
-   `(org-document-title ((t (,@headline ,@variable-pitch :height 1.5 :underline nil)))))))
-
-
-(use-package cdlatex)
+  (setq org-babel-default-header-args '((:session . "my-session"))))
 
 (use-package org-roam
-  :custom
-  ((org-roam-directory (relative-org-dir "roam"))
-   (org-roam-v2-ack t)
-   (org-roam-dailies-directory "daily/")
-   (org-roam-dailies-capture-templates '(("d" "default" entry
-                                          "* %?"
-                                          :target (file+head "%<%Y-%m-%d>.org"
-                                                             "#+title: %<%m-%d-%Y>\n"))))
-   (org-roam-capture-templates '(("d" "main" plain "%?"
-                                  :if-new (file+head "main/${slug}.org"
-                                                     "#+title: ${title}\n#+STARTUP: latexpreview\n")
-                                  :unarrowed t)
-                                 ("r" "reference" plain "%?"
-                                  :if-new (file+head "reference/${slug}.org"
-                                                     "#+title: ${title}\n"))
-                                 ("l" "literature" plain "%?"
-                                  :if-new (file+head "literature/${slug}.org"
-                                                     "#+title: ${title}\n")))))
+  :custom ((org-roam-directory (org-dir "roam"))
+           (org-roam-v2-ack t)
+           (org-roam-dailies-directory "daily/")
+           (org-roam-dailies-capture-templates
+            '(("d" "default" entry
+               "* %<%H:%M> %?"
+               :if-new (file+head "%<%Y-%m-%d>.org"
+                                  "#+title: %<%Y-%m-%d>\n#+filetags: :daily:")
+               :unarrowed t)
+              ("s" "Study Session" entry
+               "* Study: %^{Topic}\n:PROPERTIES:\n:Time: %U\n:END:\n\nResources:\n- \n\nNotes:\n%?"
+               :if-new (file+head+olp "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+filetags: :daily:\n#+STARTUP: latexpreview" ("Study Sessions")))
+              ("r" "Reading Session" entry
+               "* Reading: %^{Title}\n:PROPERTIES:\n:Source: %^{Source}\n:Time: %U\n:END:\n\nWhat I learned:\n%?"
+               :if-new (file+head+olp "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+STARTUP: latexpreview" ("Readings")))
+              ("w" "Work Log" entry
+               "* %U - %^{Task} \n%?"
+               :if-new (file+head+olp "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+STARTUP: latexpreview" ("Research")))
+
+              ("i" "Idea" entry
+               "* Idea: %^{Title}\n%?\n\nRelated: [[id:]]"
+               :if-new (file+head+olp "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+STARTUP: latexpreview" ("Ideas")))))
+           (org-roam-capture-templates
+            '(("l" "Literature Note" plain
+               "* Title: ${title}\n + Authors: ${authors}\n + Source: ${source}\n + Year: ${year}\n + Keywords: ${keywords}\n\n* Summary\n${summary}\n\n* Key Points\n +\n\n* My Thoughts\n +\n\n* Related Papers\n +"
+               :target (file+head "literature/${slug}.org" "#+title: ${title}\n#+STARTUP: latexpreview")
+               :unarrowed t)
+
+              ("r" "Research Log" plain
+               "* Date: %U\n* Focus Area: ${area}\n* What I did today\n +\n\n* Problems\n +\n\n* Next Steps\n + \n\n* Notes\n +\n\n* References\n +"
+               :target (file+datetree "research/research-log.org")
+               :unarrowed t)
+
+              ("d" "Definition / Concept" plain
+               "* Definition\n${definition}\n\n* Examples\n +\n\n* Related Concepts\n +"
+               :target (file+head "concepts/${slug}.org" "#+title: ${title}\n#+STARTUP: latexpreview")
+               :unarrowed t))))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
@@ -137,5 +100,7 @@
   (org-roam-setup))
 
 (use-package org-roam-bibtex
-  :after org-roam
-  :config)
+  :after org-roam)
+
+           
+           

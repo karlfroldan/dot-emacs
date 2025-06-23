@@ -76,9 +76,10 @@
 ;; instead of individual files (like vim)
 (use-package projectile
   :init
-  (setq projectile-keymap-prefix (kbd "C-c p"))
+  (setq projectile-keymap-prefix (kbd "C-c p")
+        projectile-project-search-path '("~/Documents/Projects/"))
   :config
-  (projectile-global-mode))
+  (projectile-mode +1))
 
 (use-package yasnippet
   :custom (yas-snippet-dirs '("~/.emacs.d/snippets"))

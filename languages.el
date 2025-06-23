@@ -27,15 +27,6 @@
   :mode "\\.toml\\'"
   :defer t)
 
-;; (use-package nix-ts-mode
-;;   :if (treesit-language-available-p 'nix)
-;;   :defer t)
-
-;; (use-package haskell-ts-mode
-;;   :if (treesit-language-available-p 'haskell)
-;;   :mode "\\.hs\\'"
-;;   :defer t)
-
 (use-package bash-ts-mode
   :if (treesit-language-available-p 'bash)
   :defer t)
@@ -65,4 +56,18 @@
         (shell-script-mode . bash-ts-mode)
         (typescript-mode . typescript-ts-mode)
         (toml-mode . toml-ts-mode)))
-        ;; (nix-mode . nix-ts-mode)))
+
+(defun my/julia-snail-activate-project-root ()
+  """Activate a Julia project based on the Projectile root"""
+  (interactive)
+  (julia-snail-package-activate (projectile-project-root)))
+
+(use-package-with-load-path julia-snail "~/.julia-emacs/julia-snail"
+  :custom
+  (julia-snail-terminal-type :eat)
+  :bind
+  (:map julia-snail-mode-map
+        ("C-c A" . my/julia-snail-activate-project-root))
+  :hook
+  (julia-mode . julia-snail-mode))
+

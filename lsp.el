@@ -13,7 +13,8 @@
          (nix-mode . lsp-deferred)
          (ts-mode . lsp-deferred)
          (slint-mode . lsp-deferred)
-         (typescript-ts-mode . lsp-deferred))
+         (typescript-ts-mode . lsp-deferred)
+         (julia-mode . lsp-deferred))
   :config
   (progn
     (lsp-register-client
@@ -22,6 +23,15 @@
                       :remote? t
                       :server-id 'clangd-remote)))
   :commands lsp)
+
+(use-package-with-load-path
+ lsp-julia "~/.julia-emacs/lsp-julia"
+ :after lsp-mode
+ :hook (julia-mode . (lambda ()
+                       (when (eq (projectile-project-type) 'julia)
+                         (setq-local lsp-julia-default-environment (projectile-project-root)))))
+ :config
+ (setq lsp-julia-default-environment "~/.julia/environments/v1.11"))
 
 (use-package lsp-ui
   :custom
