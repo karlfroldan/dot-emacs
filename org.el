@@ -17,11 +17,14 @@
   :hook ((org-mode . turn-on-org-cdlatex)
          ;; (org-mode . variable-pitch-mode)
          (org-mode . visual-line-mode))
-  :bind (("C-c o l" . org-store-link)
-         ("C-c o a" . org-agenda)
-         ("C-c o c" . org-capture)
-         ("C-c b x" . org-babel-execute-src-block)
-         ("C-c b h" . org-babel-hide-result-toggle))
+  :bind (:map org-mode-map
+              ("C-c &" . nil) ; Unbind in org-buffers to use yasnippet
+              ;; Original bindings
+              ("C-c o l" . org-store-link)
+              ("C-c o a" . org-agenda)
+              ("C-c o c" . org-capture)
+              ("C-c b x" . org-babel-execute-src-block)
+              ("C-c b h" . org-babel-hide-result-toggle))
   :custom
   ;; Use RET on keyboard to go to a specific link
   ((org-return-follows-link t)

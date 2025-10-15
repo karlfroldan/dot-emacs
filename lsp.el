@@ -14,6 +14,7 @@
          (ts-mode . lsp-deferred)
          (slint-mode . lsp-deferred)
          (typescript-ts-mode . lsp-deferred)
+         (tsx-ts-mode . lsp-deferred)
          (julia-mode . lsp-deferred))
   :config
   (progn

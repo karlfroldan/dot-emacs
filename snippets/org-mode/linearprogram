@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: linearprogram
+# key: linearprogram
+# --
+\\begin{equation*}
+\\begin{aligned}
+\\min\\; & $1\\\\[4pt]
+\\text{s.t.}\\; & $2 \\le $3\\\\
+& $0\\\\
+\\end{aligned}
+\\end{equation*}

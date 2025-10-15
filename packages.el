@@ -83,7 +83,8 @@
 
 (use-package yasnippet
   :custom (yas-snippet-dirs '("~/.emacs.d/snippets"))
-  :hook (prog-mode . yas-minor-mode)
+  :hook ((prog-mode . yas-minor-mode)
+         (org-mode . yas-minor-mode))
   :config
   (yas-reload-all))
 
@@ -147,35 +148,6 @@
   (add-to-list 'auth-sources "~/.authinfo.age")
   :custom ((age-default-identity "~/.ssh/id_ed25519")
            (age-default-recipient "~/.ssh/id_ed25519.pub")))
-
-(use-package copilot
-  ;; I don't want it to always appear.
-  ;; :hook ((prog-mode . copilot-mode))
-  :bind (("C-<return>" . copilot-accept-completion)
-         ("C-c C d" . copilot-clear-overlay)
-         ("C-c C n" . copilot-next-completion)
-         ("C-c C p" . copilot-previous-completion)))
-
-;; (use-package nix
-;;   :config
-;;   (defun my/nix-mode--home-manager-switch ()
-;;     (interactive)
-;;   (defun my/nix-mode-keymap ()
-;;     (local-set-key (kbd "M-n h s")
-
-;; (use-package conda
-;;   :ensure t
-;;   ;; Interactive shell support
-;;   :config
-;;   (conda-env-initialize-interactive-shells)
-;;   ;; Eshell support
-;;   (conda-env-initialize-eshell)
-;;   ;; auto-activate
-;;   (conda-env-autoactivate-mode -1)
-;;   ;; Automatically activate a conda environment on the opening
-;;   (add-hook 'find-file-hook (lambda ()
-;;                               (when (bound-and-true-p conda-project-env-path)
-;;                                 (conda-env-activate-for-buffer)))))
 
 (provide 'packages)
 ;;; packages.el ends here

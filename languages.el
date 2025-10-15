@@ -31,10 +31,18 @@
   :if (treesit-language-available-p 'bash)
   :defer t)
 
+(use-package tsx-ts-mode
+  :if (treesit-language-available-p 'tsx)
+  :custom (tsx-ts-mode-indent-offset 2)
+  :mode ("\\.tsx\\'" . tsx-ts-mode)
+  :defer t)
+
+
 (use-package typescript-ts-mode
   :if (treesit-language-available-p 'typescript)
-  :custom ((typescript-indent-level 4)
-           (typescript-ts-mode-indent-offset 4))
+  :custom ((typescript-indent-level 2)
+           (typescript-ts-mode-indent-offset 2))
+  :mode "\\.ts\\'"
   :defer t)
 
 (use-package c-ts-mode
