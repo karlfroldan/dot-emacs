@@ -23,8 +23,8 @@
 (load-elisp-file "packages.el")
 
 ;; Load org-mode stuff
-(load-elisp-file "org.el")
-(load-elisp-file "irc.el")
+; (load-elisp-file "org.el")
+; (load-elisp-file "irc.el")
 (load-elisp-file "my-funs.el")
 (load-elisp-file "languages.el")
 (load-elisp-file "lsp.el")

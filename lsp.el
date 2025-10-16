@@ -4,6 +4,7 @@
 ;;; Code:
 
 (use-package lsp-mode
+  :ensure t
   :init
   ;; set prefix for lsp-command-keymap
   (setq lsp-keymap-prefix "C-c l")
@@ -25,16 +26,17 @@
                       :server-id 'clangd-remote)))
   :commands lsp)
 
-(use-package-with-load-path
- lsp-julia "~/.julia-emacs/lsp-julia"
- :after lsp-mode
- :hook (julia-mode . (lambda ()
-                       (when (eq (projectile-project-type) 'julia)
-                         (setq-local lsp-julia-default-environment (projectile-project-root)))))
- :config
- (setq lsp-julia-default-environment "~/.julia/environments/v1.11"))
+(use-package lsp-julia
+  :ensure t
+  :after lsp-mode
+  :hook (julia-mode . (lambda ()
+                        (when (eq (projectile-project-type) 'julia)
+                          (setq-local lsp-julia-default-environment (projectile-project-root)))))
+  :config
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.12"))
 
 (use-package lsp-ui
+  :ensure t
   :custom
   ((lsp-ui-doc-enable t)
    (lsp-ui-doc-delay 1)
@@ -49,12 +51,13 @@
    (lsp-ui-sideline-delay 0.7)))
 
 ;; lsp-mode integration for emacs
-(use-package lsp-nix
-  :after (lsp-mode)
-  :custom
-  (lsp-nix-nil-formatter ["nixfmt"]))
+;; (use-package lsp-nix
+;;   :after (lsp-mode)
+;;   :custom
+;;   (lsp-nix-nil-formatter ["nixfmt"]))
 
 (use-package company
+  :ensure t
   :custom ((company-tooltip-align-annotations t)
            (company-tooltip-limit 6)
            (company-tooltip-maximum-width 60)
