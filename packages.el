@@ -166,5 +166,15 @@
   :custom ((age-default-identity "~/.ssh/id_ed25519")
            (age-default-recipient "~/.ssh/id_ed25519.pub")))
 
+(use-package elfeed
+  :ensure t
+  :ensure-system-package curl
+  :custom (elfeed-feeds '("https://sachachua.com/blog/category/emacs-news/feed"
+                          ;; Open Journal of Mathematical Optimization
+                          "https://ojmo.centre-mersenne.org/en/latest/feed/ojmo/"
+                          "https://rss.arxiv.org/rss/cs.GT"
+                          "https://rss.arxiv.org/rss/cs.NI"
+                          "https://rss.arxiv.org/rss/math.OC")))
+
 (provide 'packages)
 ;;; packages.el ends here
