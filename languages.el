@@ -3,9 +3,11 @@
   :custom ((imaxima-use-maxima-mode-flag nil)
            (maxima-display-maxima-buffer nil))
   :init
+  (add-to-list 'load-path "/usr/share/emacs/site-lisp/maxima")
   (add-to-list 'auto-mode-alist '("\\.ma[cx]\\'" . maxima-mode))
   (add-to-list 'interpreter-mode-alist
-               '("maxima" . 'maxima-mode)))
+               '("maxima" . 'maxima-mode))
+  (autoload 'imaxima "imaxima" "Image support for Maxima." t))
 
 ;; BASIC modes for certain programming modes
 (use-package tree-sitter :ensure)
@@ -17,6 +19,15 @@
   :ensure t)
 
 (use-package elisp-mode)
+
+(use-package haskell-mode)
+
+;; (use-package python-mode
+;;   :ensure t
+;;   :custom (python-shell-interpreter "python3"))
+
+(use-package erlang
+  :ensure t)
 
 ;; (use-package cmake-ts-mode
 ;;   :ensure t
@@ -82,9 +93,14 @@
 
 (use-package julia-snail
   :ensure t
-  :custom (julia-snail-terminal-type :eat)
+  :custom ((julia-snail-terminal-type :eat))
+           ;; (julia-snail-executable "~/.juliaup/bin/julia"))
   :bind
   (:map julia-snail-mode-map
         ("C-c A" . my/julia-snail-activate-project-root))
   :hook
   (julia-mode . julia-snail-mode))
+
+(use-package ampl-mode
+  :load-path "~/Documents/Projects/ampl-mode/"
+  :mode ("\\.mod\\'" . ampl-mode))

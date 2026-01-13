@@ -17,6 +17,7 @@
          (typescript-ts-mode . lsp-deferred)
          (tsx-ts-mode . lsp-deferred)
          (julia-mode . lsp-deferred))
+  :custom ((lsp-enable-on-type-formatting nil))
   :config
   (progn
     (lsp-register-client
@@ -34,6 +35,9 @@
                           (setq-local lsp-julia-default-environment (projectile-project-root)))))
   :config
   (setq lsp-julia-default-environment "~/.julia/environments/v1.12"))
+
+(use-package lsp-haskell
+  :ensure t)
 
 (use-package lsp-ui
   :ensure t
@@ -66,6 +70,9 @@
            (company-format-margin-function 'company-text-icons-margin)
            (company-text-icons-add-background t))
   :config (global-company-mode))
+
+(use-package pyvenv
+  :ensure t)
 
 (provide 'lsp)
 ;;; lsp.el ends here

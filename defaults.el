@@ -135,5 +135,9 @@
 (use-package ansi-color
   :hook ((compilation-filter . colorize-compilation-buffer)))
 
+(use-package exec-path-from-shell
+  :ensure t
+  :config (exec-path-from-shell-initialize))
+
 (provide 'default)
 ;;; defaults.el ends here

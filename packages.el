@@ -107,10 +107,7 @@
 (use-package tramp
   :ensure t
   :config
-  (add-to-list 'tramp-remote-path "~/.local/bin")
-  ;; Haskell stuff
-  (add-to-list 'tramp-remote-path "~/.cabal/bin")
-  (add-to-list 'tramp-remote-path "~/.ghcup/bin"))
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
 (use-package avy
   :ensure t
