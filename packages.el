@@ -109,8 +109,6 @@
 
 (use-package tramp
   :ensure t
-  :custom
-  (tramp-encoding-shell . "/bin/bash")
   :config
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
   (add-to-list 'tramp-remote-path "/home/macierz/s207399/.juliaup/bin"))
