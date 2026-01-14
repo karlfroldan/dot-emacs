@@ -26,8 +26,8 @@
 ;;   :ensure t
 ;;   :custom (python-shell-interpreter "python3"))
 
-(use-package erlang
-  :ensure t)
+;; (use-package erlang
+;;   :ensure t)
 
 ;; (use-package cmake-ts-mode
 ;;   :ensure t
@@ -93,7 +93,7 @@
 
 (use-package julia-snail
   :ensure t
-  :custom ((julia-snail-terminal-type :eat))
+  :custom ((julia-snail-terminal-type :vterm))
            ;; (julia-snail-executable "~/.juliaup/bin/julia"))
   :bind
   (:map julia-snail-mode-map

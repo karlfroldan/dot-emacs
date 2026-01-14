@@ -96,6 +96,9 @@
   :config
   (yas-reload-all))
 
+(use-package vterm
+  :ensure t)
+
 ;;; EAT Terminal Emulator
 (use-package eat
   :ensure t
@@ -106,8 +109,11 @@
 
 (use-package tramp
   :ensure t
+  :custom
+  (tramp-encoding-shell . "/bin/bash")
   :config
-  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+  (add-to-list 'tramp-remote-path "/home/macierz/s207399/.juliaup/bin"))
 
 (use-package avy
   :ensure t
