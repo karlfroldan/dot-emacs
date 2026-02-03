@@ -15,89 +15,45 @@
   :ensure t
   :config
   (global-tree-sitter-mode))
+
 (use-package yaml-mode
   :ensure t)
 
-(use-package elisp-mode)
+(use-package haskell-mode
+  :ensure t)
 
-(use-package haskell-mode)
+(use-package rust-mode
+  :ensure t)
 
-;; (use-package python-mode
-;;   :ensure t
-;;   :custom (python-shell-interpreter "python3"))
+(use-package slint-mode
+  :ensure t)
 
-;; (use-package erlang
-;;   :ensure t)
+(defun my/julia-snail-start ()
+  "Start Julia Snail in a non-active window with Projectile root."
+  (interactive)
+  (let ((root (projectile-project-root)))
+    (unless root
+      (error "Not in a Projectile project"))
+    (let ((default-directory root))
+      (if (one-window-p)
+          (split-window-sensibly)
+        (other-window 1))
+      (julia-snail))))
 
-;; (use-package cmake-ts-mode
-;;   :ensure t
-;;   :if (treesit-language-available-p 'cmake)
-;;   :defer t)
-
-;; (use-package python-ts-mode
-;;   :if (treesit-language-available-p 'python)
-;;   :defer t)
-
-;; (use-package rust-ts-mode
-;;   :if (treesit-language-available-p 'rust)
-;;   :mode "\\.rs\\'"
-;;   :defer t)
-
-;; (use-package toml-ts-mode
-;;   :if (treesit-language-available-p 'toml)
-;;   :mode "\\.toml\\'"
-;;   :defer t)
-
-;; (use-package bash-ts-mode
-;;   :if (treesit-language-available-p 'bash)
-;;   :defer t)
-
-;; (use-package tsx-ts-mode
-;;   :if (treesit-language-available-p 'tsx)
-;;   :custom (tsx-ts-mode-indent-offset 2)
-;;   :mode ("\\.tsx\\'" . tsx-ts-mode)
-;;   :defer t)
-
-
-;; (use-package typescript-ts-mode
-;;   :if (treesit-language-available-p 'typescript)
-;;   :custom ((typescript-indent-level 2)
-;;            (typescript-ts-mode-indent-offset 2))
-;;   :mode "\\.ts\\'"
-;;   :defer t)
-
-;; (use-package c-ts-mode
-;;   :if (treesit-language-available-p 'c)
-;;   :custom
-;;   ((c-ts-mode-indent-offset 4))
-;;   :bind
-;;   :config
-;;   (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
-;;   (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
-;;   (add-to-list 'major-mode-remap-alist '(c-or-c++-mode . c-or-c++-ts-mode)))
-
-;; (setq major-mode-remap-alist
-;;       '((c-mode . c-ts-mode)
-;;         (c++-mode . c++-ts-mode)
-;;         (c-or-c++-mode . c-or-c++-ts-mode)
-;;         (rust-mode . rust-ts-mode)
-;;         (cmake-mode . cmake-ts-mode)
-;;         (shell-script-mode . bash-ts-mode)
-;;         (typescript-mode . typescript-ts-mode)
-;;         (toml-mode . toml-ts-mode)))
 
 (defun my/julia-snail-activate-project-root ()
-  """Activate a Julia project based on the Projectile root"""
+  "Activate a Julia project based on the Projectile root"
   (interactive)
   (julia-snail-package-activate (projectile-project-root)))
 
 (use-package julia-snail
   :ensure t
-  :custom ((julia-snail-terminal-type :vterm))
+  :custom ((julia-snail-terminal-type :eat))
            ;; (julia-snail-executable "~/.juliaup/bin/julia"))
   :bind
   (:map julia-snail-mode-map
-        ("C-c A" . my/julia-snail-activate-project-root))
+        ("C-c A" . my/julia-snail-activate-project-root)
+        ("C-c C-s" . my/julia-snail-start))
   :hook
   (julia-mode . julia-snail-mode))
 

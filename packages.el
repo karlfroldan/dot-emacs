@@ -45,7 +45,21 @@
                     "-compile-Log\\*$" "\\*clangd\\*"))
     (push regexp frog-jump-buffer-ignore-buffers)))
 
-(use-package auctex :ensure t)
+(use-package auctex
+  :ensure t
+  :defer t
+  :init
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq TeX-PDF-mode t)
+  (setq-default TeX-master "Main.tex")
+  :hook
+  ;; Spell check
+  (LaTeX-mode . flyspell-mode)
+  ;; Enable RefTeX
+  (LaTeX-mode . turn-on-reftex)
+  ;; Enable math shortcuts
+  (LaTeX-mode . LaTeX-math-mode))
 
 ;; Quick browsing, filtering, searching, and indexing of plain text files.
 ;; We use this for our own org-mode notes.

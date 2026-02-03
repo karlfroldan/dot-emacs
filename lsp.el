@@ -11,9 +11,9 @@
   :hook ((rust-ts-mode . lsp-deferred)
          (haskell-ts-mode . lsp-deferred)
          (c-mode . lsp-deferred)
-         ;; (nix-mode . lsp-deferred)
-         ;; (ts-mode . lsp-deferred)
-         ;; (slint-mode . lsp-deferred)
+         (python-mode . lsp-deferred)
+         (slint-mode . lsp-deferred)
+         (rust-mode . lsp-deferred)
          (julia-mode . lsp-deferred))
   :custom ((lsp-enable-on-type-formatting nil))
   :config
@@ -51,12 +51,6 @@
    (lsp-ui-sideline-show-hover t)
    (lsp-ui-sideline-show-code-actions t)
    (lsp-ui-sideline-delay 0.7)))
-
-;; lsp-mode integration for emacs
-;; (use-package lsp-nix
-;;   :after (lsp-mode)
-;;   :custom
-;;   (lsp-nix-nil-formatter ["nixfmt"]))
 
 (use-package company
   :ensure t
