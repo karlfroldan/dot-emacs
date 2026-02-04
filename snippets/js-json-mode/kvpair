@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: kvpair
+# key: kvpair
+# --
+"$1": "$2"$0

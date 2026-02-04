@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: dictpair
+# key: dictpair
+# --
+"$1": {
+    $0
+}
