@@ -130,6 +130,22 @@ The default DIRECTORY is the user's home."
         (protocol (my/ssh--ssh-protocol)))
     (my/ssh--enter-shell protocol username host 22 "~" "/bin/bash" buffer-name)))
 
+
+;; TIME STUFF
+(defun time-to-minutes (hour mins)
+  (+ (* hour 60) mins))
+
+(defun time-worked (begin end)
+  (let ((time-begin (apply #'time-to-minutes (parse-time begin)))
+        (time-end   (apply #'time-to-minutes (parse-time end))))
+    (- time-end time-begin)))
+
+(defun mins-to-hours (mins)
+  (list (/ mins 60) (mod mins 60)))
+
+(defun parse-time (time)
+  (mapcar #'string-to-number (split-string time ":")))
+
 (provide 'auxiliary_functions)
 ;;; auxiliary_functions.el ends here
 
