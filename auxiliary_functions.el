@@ -37,7 +37,9 @@
 
 (defun load-elisp-file (file-name)
   "Load an Emacs Lisp FILE-NAME that resides in the Emacs config directory."
-  (load (relative-emacs-dir file-name)))
+  (if (file-exists-p file-name)
+      (load (relative-emacs-dir file-name))
+    (warn "File %s does not exist." file-name)))
 
 (defun my/fetch-password (&rest params)
   (require 'auth-source)
@@ -61,19 +63,25 @@
        (progn ,@fns))))
 
 (defun my/ssh--host-address (protocol username host &optional port)
+  "Return a canonical host address string for SSH.
+Format is "/PROTOCOL:USERNAME@HOST" or "/PROTOCOL:USERNAME@HOST#PORT" when PORT is provided."
   (if port
       (format "/%s:%s@%s#%d" protocol username host port)
     (format "/%s:%s@%s" protocol username host)))
 
 (defun my/ssh--get-address (protocol username host port directory)
-  "Get the canonical address used to connect to a remote host via SSH"
+  "Build the full remote address including DIRECTORY for remote access.
+Uses `my/ssh--host-address' and returns "HOST-ADDR:DIRECTORY"."
   (let ((host-addr (my/ssh--host-address protocol username host port)))
     (format "%s:%s" host-addr directory)))
 
 (defun my/ssh--enter-dired (protocol username host port directory)
+  "Open Dired on a remote DIRECTORY specified by PROTOCOL, USERNAME, HOST and PORT."
   (dired (my/ssh--get-address protocol username host port directory)))
 
 (defun my/ssh--enter-shell (protocol username host port directory shell-program buffer-name)
+  "Start a shell via SHELL-PROGRAM with default-directory set to the remote DIRECTORY.
+The new shell buffer is renamed to BUFFER-NAME."
   (let* ((default-directory (my/ssh--get-address protocol username host port directory))
          (new-eat-buffer (eat shell-program)))
     (with-current-buffer new-eat-buffer
