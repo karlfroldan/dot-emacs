@@ -114,7 +114,8 @@
 
   :bind
   (("C->" . scroll-up-line)
-   ("C-<" . scroll-down-line))
+   ("C-<" . scroll-down-line)
+   ("C-c |" . toggle-window-split))
 
   :hook
   ((prog-mode . display-line-numbers-mode)

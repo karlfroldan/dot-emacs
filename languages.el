@@ -10,11 +10,17 @@
   (autoload 'imaxima "imaxima" "Image support for Maxima." t))
 
 ;; BASIC modes for certain programming modes
-(use-package tree-sitter :ensure)
-(use-package tree-sitter-langs
+(use-package tree-sitter
   :ensure t
-  :config
-  (global-tree-sitter-mode))
+  :hook ((rust-mode . tree-sitter-mode)
+         (c-mode . tree-sitter-mode)
+         (c++-mode . tree-sitter-mode)
+         (python-mode . tree-sitter-mode)))
+
+(use-package tree-sitter-langs
+  :ensure t)
+  ;; :config
+  ;; (global-tree-sitter-mode))
 
 (use-package yaml-mode
   :ensure t)
@@ -27,6 +33,10 @@
 
 (use-package slint-mode
   :ensure t)
+
+(use-package uv-mode
+  :ensure t
+  :hook (python-mode . uv-mode-auto-activate-hook))
 
 (defun my/julia-snail-start ()
   "Start Julia Snail in a non-active window with Projectile root."
