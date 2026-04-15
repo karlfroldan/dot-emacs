@@ -1,14 +1,3 @@
-(use-package maxima
-  :ensure t
-  :custom ((imaxima-use-maxima-mode-flag nil)
-           (maxima-display-maxima-buffer nil))
-  :init
-  (add-to-list 'load-path "/usr/share/emacs/site-lisp/maxima")
-  (add-to-list 'auto-mode-alist '("\\.ma[cx]\\'" . maxima-mode))
-  (add-to-list 'interpreter-mode-alist
-               '("maxima" . 'maxima-mode))
-  (autoload 'imaxima "imaxima" "Image support for Maxima." t))
-
 ;; BASIC modes for certain programming modes
 (use-package tree-sitter
   :ensure t
@@ -32,6 +21,9 @@
   :ensure t)
 
 (use-package slint-mode
+  :ensure t)
+
+(use-package dockerfile-mode
   :ensure t)
 
 (use-package uv-mode

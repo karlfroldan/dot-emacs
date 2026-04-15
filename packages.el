@@ -75,7 +75,12 @@
   (deft-directory org-roam-directory))
 
 ;; Emacs git client
-(use-package magit :ensure t)
+(use-package magit
+  :ensure t
+  :config
+  ;; Add signoff.
+  (transient-append-suffix 'magit-commit "-S"
+    '("-s" "Signoff" "--signoff")))
 
 ;; Completion suggestions in the minibuffer
 (use-package which-key
@@ -191,26 +196,26 @@
                           "https://rss.arxiv.org/rss/cs.NI"
                           "https://rss.arxiv.org/rss/math.OC")))
 
-(use-package centaur-tabs
-  :ensure t
-  :demand
-  :config
-  (centaur-tabs-mode t)
-  (centaur-tabs-group-by-projectile-project)
-  :custom ((centaur-tabs-set-icons t)
-           (centaur-tabs-icon-type 'all-the-icons)
-           (centaur-tabs-gray-out-icons 'buffer)
-           (centaur-tabs-set-bar 'left)
-           (centaur-tabs-cycle-scope 'tabs)
-           (centaur-tabs-label-fixed-length 8))
-  :hook
-  ((dired-mode . centaur-tabs-local-mode)
-   (eshell-mode . centaur-tabs-local-mode)
-   (shell-mode . centaur-tabs-local-mode)
-   (eat-mode . centaur-tabs-local-mode))
-  :bind
-  ("C-c C->" . centaur-tabs-forward)
-  ("C-c C-<" . centaur-tabs-backward))
+;; (use-package centaur-tabs
+;;   :ensure t
+;;   :demand
+;;   :config
+;;   (centaur-tabs-mode t)
+;;   (centaur-tabs-group-by-projectile-project)
+;;   :custom ((centaur-tabs-set-icons t)
+;;            (centaur-tabs-icon-type 'all-the-icons)
+;;            (centaur-tabs-gray-out-icons 'buffer)
+;;            (centaur-tabs-set-bar 'left)
+;;            (centaur-tabs-cycle-scope 'tabs)
+;;            (centaur-tabs-label-fixed-length 8))
+;;   :hook
+;;   ((dired-mode . centaur-tabs-local-mode)
+;;    (eshell-mode . centaur-tabs-local-mode)
+;;    (shell-mode . centaur-tabs-local-mode)
+;;    (eat-mode . centaur-tabs-local-mode))
+;;   :bind
+;;   ("C-c C->" . centaur-tabs-forward)
+;;   ("C-c C-<" . centaur-tabs-backward))
 
 (provide 'packages)
 ;;; packages.el ends here

@@ -13,9 +13,9 @@
 (defmacro use-package-with-load-path (pkg path &rest body)
   "Load PKG from the specified PATH."
   `(if (file-directory-p ,path)
-     (use-package ,pkg
-       :load-path ,path
-       ,@body)
+       (use-package ,pkg
+         :load-path ,path
+         ,@body)
      (warn "use-package: load-path %s for package %s not found" ,path ,'pkg)))
 
 (defun ensure-directory-exists (dir)
@@ -69,7 +69,7 @@
 
 (defun my/ssh--get-address (protocol username host port directory)
   "Build the full remote address including DIRECTORY for remote access.
-Uses `my/ssh--host-address' and returns "HOST-ADDR:DIRECTORY"."
+Uses `my/ssh--host-address' and returns \"HOST-ADDR:DIRECTORY\"."
   (let ((host-addr (my/ssh--host-address protocol username host port)))
     (format "%s:%s" host-addr directory)))
 
@@ -94,7 +94,7 @@ The new shell buffer is renamed to BUFFER-NAME."
 (cl-defmacro defsshserver (name
                            username
                            host
-                           &key (port nil)
+                           &key (port 22)
                            &key (default-directory "~/")
                            &key (shell-program "/bin/sh")
                            &key (load-path '())
@@ -176,6 +176,19 @@ The default DIRECTORY is the user's home."
 
 (defun parse-time (time)
   (mapcar #'string-to-number (split-string time ":")))
+
+(defmacro sum (&rest args)
+  "Return code that reduces ARGS with `+' using cl-reduce."
+  `(cl-reduce #'+ ,@args))
+
+(defun calculate-time-worked (time-list)
+  "Given TIME-LIST of (BEGIN END) pairs as strings \"HH:MM\", return total minutes worked.
+Example: (calculate-time-worked '(\"09:00\" \"12:30\" \"13:30\" \"17:00\")) => 480"
+  (mins-to-hours (let ((pairs (cl-loop for (a b) on time-list by #'cddr collect (list a b))))
+                   (cl-reduce #'+
+                              (mapcar (lambda (pair)
+                                        (apply #'time-worked pair))
+                                      pairs)))))
 
 (provide 'auxiliary_functions)
 ;;; auxiliary_functions.el ends here
