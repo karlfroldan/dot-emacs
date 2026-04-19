@@ -30,6 +30,10 @@
   :ensure t
   :hook (python-mode . uv-mode-auto-activate-hook))
 
+(use-package julia-mode
+  :ensure t
+  :custom ((julia-latexsub-greedy . nil)))
+
 (defun my/julia-snail-start ()
   "Start Julia Snail in a non-active window with Projectile root."
   (interactive)
