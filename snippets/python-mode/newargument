@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: newargument
+# key: newargument
+# --
+"$1": {
+    "argparse_name": "--$2",
+    "description": "$3",
+    "type": $4,
+    "default": $5,
+    $0,
+},
