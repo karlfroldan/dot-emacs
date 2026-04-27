@@ -8,8 +8,6 @@
 
 (use-package tree-sitter-langs
   :ensure t)
-  ;; :config
-  ;; (global-tree-sitter-mode))
 
 (use-package yaml-mode
   :ensure t)
@@ -18,9 +16,6 @@
   :ensure t)
 
 (use-package rust-mode
-  :ensure t)
-
-(use-package slint-mode
   :ensure t)
 
 (use-package dockerfile-mode
@@ -62,7 +57,3 @@
         ("C-c C-s" . my/julia-snail-start))
   :hook
   (julia-mode . julia-snail-mode))
-
-(use-package ampl-mode
-  :load-path "~/Documents/Projects/ampl-mode/"
-  :mode ("\\.mod\\'" . ampl-mode))

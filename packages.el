@@ -61,19 +61,6 @@
   ;; Enable math shortcuts
   (LaTeX-mode . LaTeX-math-mode))
 
-;; Quick browsing, filtering, searching, and indexing of plain text files.
-;; We use this for our own org-mode notes.
-(use-package deft
-  :ensure t
-  :after org
-  :bind
-  ("C-c n s" . deft)
-  :custom
-  (deft-recursive t)
-  (deft-use-filter-string-for-filename t)
-  (deft-default-extension "org")
-  (deft-directory org-roam-directory))
-
 ;; Emacs git client
 (use-package magit
   :ensure t
@@ -114,9 +101,6 @@
          (org-mode . yas-minor-mode))
   :config
   (yas-reload-all))
-
-(use-package vterm
-  :ensure t)
 
 ;;; EAT Terminal Emulator
 (use-package eat
@@ -159,13 +143,6 @@
   (add-to-list 'rm-blacklist " company")
   (add-to-list 'rm-blacklist " all-the-icons-dired-mode"))
 
-;; (use-package buffer-env
-;;   :ensure t
-;;   :hook ((comint-mode . hack-dir-local-variables-non-file-buffer)
-;;          (hack-local-variables . buffer-env-update))
-;;   :custom ((buffer-env-script-name '("flake.nix"))
-;;            (buffer-env-verbose t)))
-
 (use-package annotate :ensure t)
 
 (use-package ace-window
@@ -195,27 +172,6 @@
                           "https://rss.arxiv.org/rss/cs.GT"
                           "https://rss.arxiv.org/rss/cs.NI"
                           "https://rss.arxiv.org/rss/math.OC")))
-
-;; (use-package centaur-tabs
-;;   :ensure t
-;;   :demand
-;;   :config
-;;   (centaur-tabs-mode t)
-;;   (centaur-tabs-group-by-projectile-project)
-;;   :custom ((centaur-tabs-set-icons t)
-;;            (centaur-tabs-icon-type 'all-the-icons)
-;;            (centaur-tabs-gray-out-icons 'buffer)
-;;            (centaur-tabs-set-bar 'left)
-;;            (centaur-tabs-cycle-scope 'tabs)
-;;            (centaur-tabs-label-fixed-length 8))
-;;   :hook
-;;   ((dired-mode . centaur-tabs-local-mode)
-;;    (eshell-mode . centaur-tabs-local-mode)
-;;    (shell-mode . centaur-tabs-local-mode)
-;;    (eat-mode . centaur-tabs-local-mode))
-;;   :bind
-;;   ("C-c C->" . centaur-tabs-forward)
-;;   ("C-c C-<" . centaur-tabs-backward))
 
 (provide 'packages)
 ;;; packages.el ends here
